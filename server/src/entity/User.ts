@@ -1,13 +1,13 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
-} from "typeorm";
 import { Field, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { Character } from "./Character";
 @ObjectType()
 @Entity()
@@ -32,7 +32,7 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   email!: string;
 
-  @Field(() => [Character])
-  @OneToMany(() => Character, (character) => character)
-  character: Character[];
+  @Field(() => [Number])
+  @OneToMany(() => Character, (character) => Number)
+  character: Character["id"][];
 }

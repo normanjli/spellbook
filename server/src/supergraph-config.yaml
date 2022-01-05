@@ -1,9 +1,0 @@
-subgraphs:
-  local:
-    routing_url: http://localhost:4000/graphql
-    schema:
-      file: ./localspellbook.graphql
-  dndexternal:
-    routing_url: https://www.dnd5eapi.co/graphql
-    schema:
-      file: ./5edndschema.graphql

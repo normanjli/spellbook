@@ -1,12 +1,14 @@
+import { Field, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Field, ObjectType } from "type-graphql";
+import { Char_Spell } from "./Char_Spells";
 @ObjectType()
 @Entity()
 export class Note extends BaseEntity {
@@ -22,9 +24,9 @@ export class Note extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Field()
-  @Column()
-  char_spell_id: number;
+  @Field(() => Number)
+  @ManyToOne(() => Char_Spell, () => Number)
+  char_spell: Char_Spell["id"];
 
   @Field()
   @Column()

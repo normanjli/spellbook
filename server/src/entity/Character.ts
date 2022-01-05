@@ -24,9 +24,9 @@ export class Character extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Field()
+  @Field(() => Number)
   @ManyToOne(() => User, () => Number)
-  user: number;
+  user: User["id"];
 
   @Field()
   @Column()
