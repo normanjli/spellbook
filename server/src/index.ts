@@ -1,8 +1,8 @@
+import "reflect-metadata";
 import { HelloResolver } from "./resolvers/hello";
 import { UserResolver } from "./resolvers/user";
 import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
-import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { buildSchema } from "type-graphql";
 import { MyContext } from "./types";
