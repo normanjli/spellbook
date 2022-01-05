@@ -4,10 +4,7 @@ generates:
   src/generated/graphql.tsx:
     schema:
       - "http://localhost:4000/graphql"
-      - "https://www.dnd5eapi.co/graphql"
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-urql"
-    config:
-      federation: true

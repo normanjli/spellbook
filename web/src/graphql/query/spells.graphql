@@ -1,8 +1,0 @@
-query Spells {
-  spells(limit: 20) {
-    name
-    classes {
-      name
-    }
-  }
-}

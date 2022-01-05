@@ -39,7 +39,7 @@ const Login = () => {
   ) => {
     e.preventDefault();
     let res = await signIn(id);
-    console.log(res);
+    // console.log(res);
   };
   return (
     <Box
