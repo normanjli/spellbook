@@ -1,4 +1,3 @@
-import chakraUiTheme from "@chakra-ui/theme";
 import {
   Arg,
   Ctx,
@@ -10,7 +9,7 @@ import {
 } from "type-graphql";
 import { Character } from "../entity/Character";
 import { User } from "../entity/User";
-import { CharObject, MyContext, UserObject } from "../types";
+import { CharObject, MyContext } from "../types";
 
 @ObjectType()
 class CharResponse {

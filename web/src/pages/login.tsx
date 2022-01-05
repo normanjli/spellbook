@@ -38,7 +38,7 @@ const Login = () => {
     id: "github" | "google" | "discord"
   ) => {
     e.preventDefault();
-    let res = await signIn(id);
+    await signIn(id);
     // console.log(res);
   };
   return (
