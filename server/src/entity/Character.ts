@@ -1,14 +1,15 @@
+import { Field, ObjectType } from "type-graphql";
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  UpdateDateColumn,
-  CreateDateColumn,
   BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { User } from "./User";
-import { Field } from "type-graphql";
+@ObjectType()
 @Entity()
 export class Character extends BaseEntity {
   @Field()
@@ -24,14 +25,14 @@ export class Character extends BaseEntity {
   updatedAt: Date;
 
   @Field()
-  @ManyToOne(() => User, (user) => user.id)
-  user: User;
+  @ManyToOne(() => User, () => Number)
+  user: number;
 
   @Field()
   @Column()
-  char_name: string;
+  name!: string;
 
   @Field()
   @Column()
-  class: string;
+  class!: string;
 }

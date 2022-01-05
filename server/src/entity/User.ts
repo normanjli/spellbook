@@ -7,10 +7,12 @@ import {
   UpdateDateColumn,
   BaseEntity,
 } from "typeorm";
-import { Field } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 import { Character } from "./Character";
+@ObjectType()
 @Entity()
 export class User extends BaseEntity {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,20 +26,13 @@ export class User extends BaseEntity {
 
   @Field()
   @Column()
-  firstName: string;
+  name: string;
 
   @Field()
-  @Column()
-  lastName: string;
-
-  @Field()
-  @Column()
-  email: string;
-
-  @Column()
-  accessToken: string;
+  @Column({ unique: true })
+  email!: string;
 
   @Field(() => [Character])
-  @OneToMany(() => Character, (character) => character.user)
-  characters: Character[];
+  @OneToMany(() => Character, (character) => character)
+  character: Character[];
 }

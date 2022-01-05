@@ -9,7 +9,7 @@ import {
 import { Field, ObjectType } from "type-graphql";
 @ObjectType()
 @Entity()
-export class Char_Spell extends BaseEntity {
+export class Note extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,9 +24,13 @@ export class Char_Spell extends BaseEntity {
 
   @Field()
   @Column()
-  character_id!: number;
+  char_spell_id: number;
 
   @Field()
   @Column()
-  spell_id!: number;
+  title: string;
+
+  @Field()
+  @Column()
+  text: string;
 }
