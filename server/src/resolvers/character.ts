@@ -1,12 +1,4 @@
-import {
-  Arg,
-  Ctx,
-  Field,
-  Mutation,
-  ObjectType,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Ctx, Field, Mutation, ObjectType, Resolver } from "type-graphql";
 import { Character } from "../entity/Character";
 import { User } from "../entity/User";
 import { CharObject, MyContext } from "../types";
@@ -21,11 +13,12 @@ class CharResponse {
 
 @Resolver()
 export class CharResolver {
-  @Query(() => [Character], { nullable: true })
-  async charMe(@Arg("options") options: String, @Ctx() { req }: MyContext) {
-    const user = await User.findOne({ where: { email: options } });
+  @Mutation(() => [Character], { nullable: true })
+  async charMe(@Arg("email") email: String, @Ctx() { req }: MyContext) {
+    const user = await User.findOne({ where: { email: email } });
     if (user) {
       const char = await Character.find({ where: { user: user.id } });
+      console.log(char);
       return char;
     } else {
       return null;

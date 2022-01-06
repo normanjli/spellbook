@@ -42,6 +42,7 @@ export type Character = {
 export type Mutation = {
   __typename?: 'Mutation';
   addChar?: Maybe<CharResponse>;
+  charMe?: Maybe<Array<Character>>;
   register?: Maybe<UserResponse>;
 };
 
@@ -51,20 +52,18 @@ export type MutationAddCharArgs = {
 };
 
 
+export type MutationCharMeArgs = {
+  email: Scalars['String'];
+};
+
+
 export type MutationRegisterArgs = {
   options: UserObject;
 };
 
 export type Query = {
   __typename?: 'Query';
-  charMe?: Maybe<Array<Character>>;
-  hello: Scalars['String'];
   me?: Maybe<User>;
-};
-
-
-export type QueryCharMeArgs = {
-  options: CharObject;
 };
 
 export type User = {
@@ -104,6 +103,13 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'UserResponse', errors?: string | null | undefined, user?: { __typename?: 'User', id: number, name: string, email: string } | null | undefined } | null | undefined };
 
+export type CharMeMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type CharMeMutation = { __typename?: 'Mutation', charMe?: Array<{ __typename?: 'Character', name: string, class: string }> | null | undefined };
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
@@ -140,4 +146,16 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const CharMeDocument = gql`
+    mutation CharMe($email: String!) {
+  charMe(email: $email) {
+    name
+    class
+  }
+}
+    `;
+
+export function useCharMeMutation() {
+  return Urql.useMutation<CharMeMutation, CharMeMutationVariables>(CharMeDocument);
 };

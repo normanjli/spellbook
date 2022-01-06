@@ -1,0 +1,6 @@
+mutation CharMe($email: String!) {
+  charMe(email: $email) {
+    name
+    class
+  }
+}

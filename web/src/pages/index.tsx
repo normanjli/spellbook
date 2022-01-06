@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 const Index: NextPage = () => {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar location="Home"></Navbar>
       <Center flexDir={"column"} bg={"gray.100"} h={"100vh"} w={"100%"}>
         <Heading mt="1em" size={"md"}>
           This is a DND 5th Edition spellbook tracking app.
@@ -15,8 +15,8 @@ const Index: NextPage = () => {
         <Box textAlign={"center"} mt="1em">
           This app is built with Nextjs, React, TypeScript, graphql, typeorm,
           Apollo, Urql, and Chakra-UI.
-          <br /> It queries the external graphql endpoint for the DND 5th
-          Edition API for data.
+          <br /> It queries an external endpoint for the DND 5th Edition API for
+          data.
         </Box>
       </Center>
     </>
