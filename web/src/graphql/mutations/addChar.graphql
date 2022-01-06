@@ -1,0 +1,10 @@
+mutation AddChar($options: CharObject!) {
+  addChar(options: $options) {
+    errors
+    character {
+      user
+      name
+      class
+    }
+  }
+}

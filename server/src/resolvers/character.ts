@@ -22,26 +22,27 @@ class CharResponse {
 @Resolver()
 export class CharResolver {
   @Query(() => [Character], { nullable: true })
-  async me(@Arg("options") options: CharObject, @Ctx() { req }: MyContext) {
-    const user = await User.findOne({ id: options.id });
+  async charMe(@Arg("options") options: String, @Ctx() { req }: MyContext) {
+    const user = await User.findOne({ where: { email: options } });
     if (user) {
-      return user;
+      const char = await Character.find({ where: { user: user.id } });
+      return char;
     } else {
       return null;
     }
   }
   @Mutation(() => CharResponse, { nullable: true })
-  async register(
+  async addChar(
     @Arg("options") options: CharObject,
     @Ctx() { req }: MyContext
   ): Promise<CharResponse> {
-    const user = await User.findOne({ id: options.id });
+    const user = await User.findOne({ where: { email: options.user } });
     if (user) {
       try {
         const char = new Character();
         char.name = options.name;
         char.class = options.class;
-        char.user = options.id;
+        char.user = user.id;
         char.save();
         return { errors: undefined, character: char };
       } catch (err) {

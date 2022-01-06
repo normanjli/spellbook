@@ -25,6 +25,7 @@ export class UserResolver {
   async me(@Ctx() { req }: MyContext) {
     const user = await User.findOne();
     if (user) {
+      console.log(user);
       return user;
     } else {
       return null;

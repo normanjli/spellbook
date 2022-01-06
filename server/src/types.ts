@@ -1,6 +1,5 @@
-import { Field, InputType } from "type-graphql";
 import { Request, Response } from "express";
-import { User } from "./entity/User";
+import { Field, InputType } from "type-graphql";
 
 export type MyContext = {
   req: Request;
@@ -24,6 +23,6 @@ export class CharObject {
   name: string;
   @Field()
   class: string;
-  @Field()
-  id: User["id"];
+  @Field(() => String)
+  user: String;
 }

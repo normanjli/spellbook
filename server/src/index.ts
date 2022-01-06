@@ -1,10 +1,10 @@
-import "reflect-metadata";
-import { HelloResolver } from "./resolvers/hello";
-import { UserResolver } from "./resolvers/user";
 import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
-import { createConnection } from "typeorm";
+import "reflect-metadata";
 import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
+import { CharResolver } from "./resolvers/character";
+import { UserResolver } from "./resolvers/user";
 import { MyContext } from "./types";
 import express = require("express");
 
@@ -19,7 +19,7 @@ const main = async () => {
   );
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, UserResolver],
+      resolvers: [UserResolver, CharResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({
