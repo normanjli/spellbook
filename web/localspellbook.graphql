@@ -1,0 +1,53 @@
+type Query {
+  me: User
+}
+
+type User {
+  id: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String!
+  character: [Float!]!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type Mutation {
+  charMe(email: String!): [Character!]
+  addChar(options: CharObject!): CharResponse
+  register(options: UserObject!): UserResponse
+}
+
+type Character {
+  id: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: Float!
+  name: String!
+  class: String!
+}
+
+type CharResponse {
+  errors: String
+  character: Character
+}
+
+input CharObject {
+  name: String!
+  class: String!
+  user: String!
+}
+
+type UserResponse {
+  errors: String
+  user: User
+}
+
+input UserObject {
+  email: String!
+  name: String!
+}

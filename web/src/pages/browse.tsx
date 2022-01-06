@@ -23,7 +23,7 @@ const BrowseSpells: NextPage = () => {
         size="lg"
         align="center"
         position={"absolute"}
-        Left="0"
+        left="0"
         top="5em"
         variant={"unstyled"}
         isFitted={true}
