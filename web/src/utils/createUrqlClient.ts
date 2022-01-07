@@ -4,7 +4,7 @@ import { dedupExchange, fetchExchange } from "urql";
 // import { betterUpdateQuery } from "./betterUpdateQuery";
 export const createUrqlClient = (ssrExchange: any) => {
   return {
-    url: "http://localhost:4000/graphql",
+    url: "http://localhost:3000/api/graphql",
     fetchOptions: { credentials: "include" } as const,
     exchanges: [
       dedupExchange,

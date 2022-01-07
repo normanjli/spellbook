@@ -39,7 +39,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/pages/api/schemas/schema.js", "src/pages/api/resolvers/index.js", "src/pages/api/graphql.ts"  ],
   "exclude": [
     "node_modules"
   ],

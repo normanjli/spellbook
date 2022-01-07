@@ -15,9 +15,8 @@ class CharResponse {
 export class CharResolver {
   @Mutation(() => [Character], { nullable: true })
   async charMe(@Arg("email") email: String, @Ctx() { req }: MyContext) {
-    const user = await User.findOne({ where: { email: email } });
-    if (user) {
-      const char = await Character.find({ where: { user: user.id } });
+    const char = await Character.find({ where: { userId: email } });
+    if (char) {
       console.log(char);
       return char;
     } else {
@@ -35,7 +34,7 @@ export class CharResolver {
         const char = new Character();
         char.name = options.name;
         char.class = options.class;
-        char.user = user.id;
+        char.user = user.email;
         char.save();
         return { errors: undefined, character: char };
       } catch (err) {

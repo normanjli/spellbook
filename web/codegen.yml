@@ -2,9 +2,10 @@ overwrite: true
 documents: "src/graphql/**/*.graphql"
 generates:
   src/generated/graphql.tsx:
-    schema:
-      - "http://localhost:4000/graphql"
+    schema: "http://localhost:3000/api/graphql"
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-urql"
+    config:
+      federation: true
