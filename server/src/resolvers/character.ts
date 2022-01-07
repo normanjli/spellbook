@@ -1,4 +1,12 @@
-import { Arg, Ctx, Field, Mutation, ObjectType, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  Field,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { Character } from "../entity/Character";
 import { User } from "../entity/User";
 import { CharObject, MyContext } from "../types";
@@ -13,14 +21,18 @@ class CharResponse {
 
 @Resolver()
 export class CharResolver {
-  @Mutation(() => [Character], { nullable: true })
-  async charMe(@Arg("email") email: String, @Ctx() { req }: MyContext) {
-    const char = await Character.find({ where: { userId: email } });
-    if (char) {
-      console.log(char);
-      return char;
-    } else {
-      return null;
+  @Query(() => CharResponse, { nullable: true })
+  async myChars(@Arg("email") email: String, @Ctx() { req }: MyContext) {
+    try {
+      const char = await Character.find({ where: { userId: email } });
+      if (char) {
+        console.log(char);
+        return { errors: null, character: char };
+      } else {
+        return { errors: "Add some Characters", character: null };
+      }
+    } catch (err) {
+      return { errors: err?.message, character: undefined };
     }
   }
   @Mutation(() => CharResponse, { nullable: true })
@@ -28,20 +40,20 @@ export class CharResolver {
     @Arg("options") options: CharObject,
     @Ctx() { req }: MyContext
   ): Promise<CharResponse> {
-    const user = await User.findOne({ where: { email: options.user } });
-    if (user) {
-      try {
+    try {
+      const user = await User.findOne({ where: { email: options.user } });
+      if (user) {
         const char = new Character();
         char.name = options.name;
         char.class = options.class;
         char.user = user.email;
         char.save();
         return { errors: undefined, character: char };
-      } catch (err) {
-        return { errors: err?.message, character: undefined };
+      } else {
+        return { errors: "something went wrong", character: undefined };
       }
-    } else {
-      return { errors: "something went wrong", character: undefined };
+    } catch (err) {
+      return { errors: err?.message, character: undefined };
     }
   }
 }

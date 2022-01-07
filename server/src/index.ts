@@ -7,6 +7,8 @@ import { CharResolver } from "./resolvers/character";
 import { UserResolver } from "./resolvers/user";
 import { MyContext } from "./types";
 import express = require("express");
+import { NoteResolver } from "./resolvers/notes";
+import { Char_SpellResolver } from "./resolvers/char_spells";
 
 const main = async () => {
   await createConnection();
@@ -20,7 +22,7 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     introspection: true,
     schema: await buildSchema({
-      resolvers: [UserResolver, CharResolver],
+      resolvers: [UserResolver, CharResolver, NoteResolver, Char_SpellResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({

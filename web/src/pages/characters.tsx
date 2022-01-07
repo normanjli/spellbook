@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { withUrqlClient } from "next-urql";
 import { useEffect, useState } from "react";
-import { useCharMeMutation } from "src/generated/graphql";
+import { useMyCharsQuery } from "src/generated/graphql";
 import { createUrqlClient } from "src/utils/createUrqlClient";
 import Navbar from "../components/Navbar";
 interface chars {
@@ -12,15 +12,18 @@ interface chars {
 }
 const Characters: NextPage = () => {
   const { data, status } = useSession();
-  const [, getChars] = useCharMeMutation();
+  const [, getChars] = useMyCharsQuery({
+    variables: { email: data?.user?.email as string },
+    pause: true,
+  });
   const [chars, setChars] = useState<chars[]>();
   useEffect(() => {
     console.log(status);
     if (status === "authenticated") {
       (async () => {
         console.log(data?.user?.email);
-        const charlist = await getChars({ email: "normanjli@gmail.com" });
-        setChars(charlist.data?.charMe as chars[]);
+        getChars();
+        setChars(data?.charMe as chars[]);
       })();
     }
   }, [status]);

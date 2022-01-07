@@ -23,6 +23,24 @@ export class CharObject {
   name: string;
   @Field()
   class: string;
-  @Field(() => String)
-  user: String;
+  @Field()
+  user: string;
+}
+
+@InputType()
+export class Char_SpellObject {
+  @Field()
+  charId: number;
+  @Field()
+  spellName: string;
+}
+
+@InputType()
+export class NoteObject {
+  @Field()
+  char_spellId: number;
+  @Field()
+  text: string;
+  @Field()
+  title: string;
 }

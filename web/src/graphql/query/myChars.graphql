@@ -1,0 +1,8 @@
+query MyChars($email: String!) {
+  myChars(email: $email) {
+    errors
+    character {
+      ...RegularChar
+    }
+  }
+}

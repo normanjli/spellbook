@@ -1,0 +1,11 @@
+mutation CreateNote($options: NoteObject!) {
+  createNote(options: $options) {
+    errors
+    note {
+      id
+      char_spell
+      title
+      text
+    }
+  }
+}

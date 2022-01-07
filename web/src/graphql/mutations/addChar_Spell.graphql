@@ -1,0 +1,8 @@
+mutation AddChar_Spell($options: Char_SpellObject!) {
+  addChar_Spell(options: $options) {
+    errors
+    char_spell {
+      ...RegularChar_Spell
+    }
+  }
+}

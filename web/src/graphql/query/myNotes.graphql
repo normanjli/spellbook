@@ -1,0 +1,11 @@
+query MyNotes($options: NoteObject!) {
+  myNotes(options: $options) {
+    errors
+    note {
+      id
+      char_spell
+      title
+      text
+    }
+  }
+}

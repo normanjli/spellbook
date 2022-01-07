@@ -182,6 +182,26 @@ export type CharResponse = {
   errors?: Maybe<Scalars['String']>;
 };
 
+export type Char_Spell = {
+  __typename?: 'Char_Spell';
+  character: Scalars['Float'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['Float'];
+  spell_id: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+};
+
+export type Char_SpellObject = {
+  charId: Scalars['Float'];
+  spellName: Scalars['String'];
+};
+
+export type Char_SpellResponse = {
+  __typename?: 'Char_SpellResponse';
+  char_spell?: Maybe<Char_Spell>;
+  errors?: Maybe<Scalars['String']>;
+};
+
 export type Character = {
   __typename?: 'Character';
   class: Scalars['String'];
@@ -12640,7 +12660,8 @@ export type MonsterSpeed = {
 export type Mutation = {
   __typename?: 'Mutation';
   addChar?: Maybe<CharResponse>;
-  charMe?: Maybe<Array<Character>>;
+  addChar_Spell?: Maybe<Char_SpellResponse>;
+  createNote?: Maybe<NoteResponse>;
   register?: Maybe<UserResponse>;
 };
 
@@ -12650,13 +12671,40 @@ export type MutationAddCharArgs = {
 };
 
 
-export type MutationCharMeArgs = {
-  email: Scalars['String'];
+export type MutationAddChar_SpellArgs = {
+  options: Char_SpellObject;
+};
+
+
+export type MutationCreateNoteArgs = {
+  options: NoteObject;
 };
 
 
 export type MutationRegisterArgs = {
   options: UserObject;
+};
+
+export type Note = {
+  __typename?: 'Note';
+  char_spell: Scalars['Float'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['Float'];
+  text: Scalars['String'];
+  title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+};
+
+export type NoteObject = {
+  char_spellId: Scalars['Float'];
+  text: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type NoteResponse = {
+  __typename?: 'NoteResponse';
+  errors?: Maybe<Scalars['String']>;
+  note?: Maybe<Note>;
 };
 
 export type Proficiency = {
@@ -12718,6 +12766,7 @@ export type Query = {
   feats: Array<Feat>;
   feature?: Maybe<Feature>;
   features: Array<Feature>;
+  getCharSpells?: Maybe<Char_SpellResponse>;
   language?: Maybe<Language>;
   languages: Array<Language>;
   level?: Maybe<Level>;
@@ -12729,6 +12778,8 @@ export type Query = {
   me?: Maybe<User>;
   monster?: Maybe<Monster>;
   monsters: Array<Monster>;
+  myChars?: Maybe<CharResponse>;
+  myNotes?: Maybe<NoteResponse>;
   proficiencies: Array<Proficiency>;
   proficiency?: Maybe<Proficiency>;
   race?: Maybe<Race>;
@@ -12902,6 +12953,11 @@ export type QueryFeaturesArgs = {
 };
 
 
+export type QueryGetCharSpellsArgs = {
+  options: Char_SpellObject;
+};
+
+
 export type QueryLanguageArgs = {
   filter?: InputMaybe<FilterFindOneLanguageInput>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -12962,6 +13018,11 @@ export type QueryMagicSchoolsArgs = {
 };
 
 
+export type QueryMeArgs = {
+  email: Scalars['String'];
+};
+
+
 export type QueryMonsterArgs = {
   filter?: InputMaybe<FilterFindOneMonsterInput>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -12974,6 +13035,16 @@ export type QueryMonstersArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<SortFindManyMonsterInput>;
+};
+
+
+export type QueryMyCharsArgs = {
+  email: Scalars['String'];
+};
+
+
+export type QueryMyNotesArgs = {
+  options: NoteObject;
 };
 
 
@@ -15130,6 +15201,10 @@ export type WeaponProperty = {
   url?: Maybe<Scalars['String']>;
 };
 
+export type RegularChar_SpellFragment = { __typename?: 'Char_Spell', id: number, character: number, spell_id: string };
+
+export type RegularCharFragment = { __typename?: 'Character', id: number, name: string, class: string };
+
 export type RegularUserFragment = { __typename?: 'User', name: string, email: string };
 
 export type AddCharMutationVariables = Exact<{
@@ -15137,14 +15212,21 @@ export type AddCharMutationVariables = Exact<{
 }>;
 
 
-export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', user: string, name: string, class: string } | null | undefined } | null | undefined };
+export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', id: number, name: string, class: string } | null | undefined } | null | undefined };
 
-export type CharMeMutationVariables = Exact<{
-  email: Scalars['String'];
+export type AddChar_SpellMutationVariables = Exact<{
+  options: Char_SpellObject;
 }>;
 
 
-export type CharMeMutation = { __typename?: 'Mutation', charMe?: Array<{ __typename?: 'Character', name: string, class: string }> | null | undefined };
+export type AddChar_SpellMutation = { __typename?: 'Mutation', addChar_Spell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: { __typename?: 'Char_Spell', id: number, character: number, spell_id: string } | null | undefined } | null | undefined };
+
+export type CreateNoteMutationVariables = Exact<{
+  options: NoteObject;
+}>;
+
+
+export type CreateNoteMutation = { __typename?: 'Mutation', createNote?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: { __typename?: 'Note', id: number, char_spell: number, title: string, text: string } | null | undefined } | null | undefined };
 
 export type RegisterMutationVariables = Exact<{
   options: UserObject;
@@ -15160,6 +15242,34 @@ export type GetClassQueryVariables = Exact<{
 
 export type GetClassQuery = { __typename?: 'Query', class?: { __typename?: 'Class', name?: string | null | undefined, spells: Array<{ __typename?: 'Spell', name?: string | null | undefined, attack_type?: string | null | undefined, casting_time?: string | null | undefined, components?: Array<string | null | undefined> | null | undefined, concentration?: boolean | null | undefined, desc?: Array<string | null | undefined> | null | undefined, duration?: string | null | undefined, heal_at_slot_level?: any | null | undefined, higher_level?: Array<string | null | undefined> | null | undefined, level?: number | null | undefined, material?: string | null | undefined, range?: string | null | undefined, ritual?: boolean | null | undefined, area_of_effect?: { __typename?: 'SpellArea_of_effect', size?: number | null | undefined, type?: string | null | undefined } | null | undefined, damage?: { __typename?: 'SpellDamage', damage_at_character_level?: any | null | undefined, damage_at_slot_level?: any | null | undefined, damage_type?: { __typename?: 'SpellDamageDamage_type', name?: string | null | undefined } | null | undefined } | null | undefined, dc?: { __typename?: 'SpellDc', dc_success?: string | null | undefined, desc?: string | null | undefined, dc_type?: { __typename?: 'SpellDcDc_type', name?: string | null | undefined } | null | undefined } | null | undefined, school?: { __typename?: 'MagicSchool', name?: string | null | undefined } | null | undefined, subclasses?: Array<{ __typename?: 'SpellSubclasses', name?: string | null | undefined } | null | undefined> | null | undefined }> } | null | undefined };
 
+export type MyCharsQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type MyCharsQuery = { __typename?: 'Query', myChars?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', id: number, name: string, class: string } | null | undefined } | null | undefined };
+
+export type MyNotesQueryVariables = Exact<{
+  options: NoteObject;
+}>;
+
+
+export type MyNotesQuery = { __typename?: 'Query', myNotes?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: { __typename?: 'Note', id: number, char_spell: number, title: string, text: string } | null | undefined } | null | undefined };
+
+export const RegularChar_SpellFragmentDoc = gql`
+    fragment RegularChar_Spell on Char_Spell {
+  id
+  character
+  spell_id
+}
+    `;
+export const RegularCharFragmentDoc = gql`
+    fragment RegularChar on Character {
+  id
+  name
+  class
+}
+    `;
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   name
@@ -15171,28 +15281,45 @@ export const AddCharDocument = gql`
   addChar(options: $options) {
     errors
     character {
-      user
-      name
-      class
+      ...RegularChar
+    }
+  }
+}
+    ${RegularCharFragmentDoc}`;
+
+export function useAddCharMutation() {
+  return Urql.useMutation<AddCharMutation, AddCharMutationVariables>(AddCharDocument);
+};
+export const AddChar_SpellDocument = gql`
+    mutation AddChar_Spell($options: Char_SpellObject!) {
+  addChar_Spell(options: $options) {
+    errors
+    char_spell {
+      ...RegularChar_Spell
+    }
+  }
+}
+    ${RegularChar_SpellFragmentDoc}`;
+
+export function useAddChar_SpellMutation() {
+  return Urql.useMutation<AddChar_SpellMutation, AddChar_SpellMutationVariables>(AddChar_SpellDocument);
+};
+export const CreateNoteDocument = gql`
+    mutation CreateNote($options: NoteObject!) {
+  createNote(options: $options) {
+    errors
+    note {
+      id
+      char_spell
+      title
+      text
     }
   }
 }
     `;
 
-export function useAddCharMutation() {
-  return Urql.useMutation<AddCharMutation, AddCharMutationVariables>(AddCharDocument);
-};
-export const CharMeDocument = gql`
-    mutation CharMe($email: String!) {
-  charMe(email: $email) {
-    name
-    class
-  }
-}
-    `;
-
-export function useCharMeMutation() {
-  return Urql.useMutation<CharMeMutation, CharMeMutationVariables>(CharMeDocument);
+export function useCreateNoteMutation() {
+  return Urql.useMutation<CreateNoteMutation, CreateNoteMutationVariables>(CreateNoteDocument);
 };
 export const RegisterDocument = gql`
     mutation Register($options: UserObject!) {
@@ -15257,4 +15384,35 @@ export const GetClassDocument = gql`
 
 export function useGetClassQuery(options: Omit<Urql.UseQueryArgs<GetClassQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetClassQuery>({ query: GetClassDocument, ...options });
+};
+export const MyCharsDocument = gql`
+    query MyChars($email: String!) {
+  myChars(email: $email) {
+    errors
+    character {
+      ...RegularChar
+    }
+  }
+}
+    ${RegularCharFragmentDoc}`;
+
+export function useMyCharsQuery(options: Omit<Urql.UseQueryArgs<MyCharsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MyCharsQuery>({ query: MyCharsDocument, ...options });
+};
+export const MyNotesDocument = gql`
+    query MyNotes($options: NoteObject!) {
+  myNotes(options: $options) {
+    errors
+    note {
+      id
+      char_spell
+      title
+      text
+    }
+  }
+}
+    `;
+
+export function useMyNotesQuery(options: Omit<Urql.UseQueryArgs<MyNotesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MyNotesQuery>({ query: MyNotesDocument, ...options });
 };

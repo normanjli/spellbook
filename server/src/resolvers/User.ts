@@ -22,13 +22,17 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => User, { nullable: true })
-  async me(@Ctx() { req }: MyContext) {
-    const user = await User.findOne();
-    if (user) {
-      console.log(user);
-      return user;
-    } else {
-      return null;
+  async me(@Arg("email") email: string, @Ctx() { req }: MyContext) {
+    try {
+      const user = await User.find({ where: { email: email } });
+      if (user) {
+        console.log(user);
+        return user;
+      } else {
+        return null;
+      }
+    } catch (err) {
+      return err;
     }
   }
   @Mutation(() => UserResponse, { nullable: true })
@@ -36,16 +40,17 @@ export class UserResolver {
     @Arg("options") options: UserObject,
     @Ctx() { req }: MyContext
   ): Promise<UserResponse> {
-    const user = await User.findOne({ where: { email: options.email } });
-    if (user) {
-      return { errors: "user exists", user: user };
-    }
     try {
-      let user = new User();
-      user.name = options.name;
-      user.email = options.email;
-      await user.save();
-      return { errors: undefined, user: user };
+      const user = await User.findOne({ where: { email: options.email } });
+      if (user) {
+        return { errors: "user exists", user: user };
+      } else {
+        let user = new User();
+        user.name = options.name;
+        user.email = options.email;
+        await user.save();
+        return { errors: undefined, user: user };
+      }
     } catch (err) {
       return { errors: err?.message, user: undefined };
     }

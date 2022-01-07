@@ -1,0 +1,5 @@
+fragment RegularChar on Character {
+  id
+  name
+  class
+}
