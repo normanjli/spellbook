@@ -3,12 +3,11 @@ type Query {
 }
 
 type User {
-  id: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
   name: String!
   email: String!
   character: [Float!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
@@ -26,7 +25,7 @@ type Character {
   id: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
-  user: Float!
+  user: String!
   name: String!
   class: String!
 }

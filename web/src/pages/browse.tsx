@@ -1,5 +1,7 @@
 import {
   Center,
+  Skeleton,
+  Stack,
   Tab,
   TabList,
   TabPanel,
@@ -8,29 +10,51 @@ import {
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { withUrqlClient } from "next-urql";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useGetClassQuery } from "src/generated/graphql";
 import { createUrqlClient } from "src/utils/createUrqlClient";
+import { spellHandler } from "src/utils/spellOrder";
 import Navbar from "../components/Navbar";
 
 const BrowseSpells: NextPage = () => {
-  useEffect(() => {});
+  const [dndClass, setDndClass] = useState("Bard");
+  const [{ data, fetching }, getClass] = useGetClassQuery({
+    variables: { filter: { name: dndClass } },
+  });
+  useEffect(() => {
+    if (data) {
+      getClass();
+      spellHandler(data);
+    }
+  }, [dndClass]);
   return (
     <>
       <Navbar location="Browsing Spells"></Navbar>
       <Center></Center>
       <Tabs
-        orientation="vertical"
+        // orientation="vertical"
         size="lg"
         align="center"
-        position={"absolute"}
-        left="0"
+        position={"relative"}
         top="5em"
-        variant={"unstyled"}
+        variant={"enclosed"}
         isFitted={true}
       >
         <TabList>
-          <Tab>Bard</Tab>
-          <Tab>Cleric</Tab>
+          <Tab
+            onClick={async () => {
+              setDndClass("Bard");
+            }}
+          >
+            Bard
+          </Tab>
+          <Tab
+            onClick={async () => {
+              setDndClass("Cleric");
+            }}
+          >
+            Cleric
+          </Tab>
           <Tab>Druid</Tab>
           <Tab>Paladin</Tab>
           <Tab>Ranger</Tab>
@@ -40,10 +64,26 @@ const BrowseSpells: NextPage = () => {
 
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            {!fetching ? (
+              data?.class?.spells.map((e) => <p key={e.name}>{e.name}</p>)
+            ) : (
+              <Stack>
+                <Skeleton height="20px" />
+                <Skeleton height="20px" />
+                <Skeleton height="20px" />
+              </Stack>
+            )}
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            {!fetching ? (
+              data?.class?.spells.map((e) => <p key={e.name}>{e.name}</p>)
+            ) : (
+              <Stack>
+                <Skeleton height="20px" />
+                <Skeleton height="20px" />
+                <Skeleton height="20px" />
+              </Stack>
+            )}
           </TabPanel>
           <TabPanel>
             <p>three!</p>

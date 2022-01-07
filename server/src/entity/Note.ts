@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -25,7 +26,8 @@ export class Note extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => Number)
-  @ManyToOne(() => Char_Spell, () => Number)
+  @ManyToOne(() => Char_Spell, (char_spell) => char_spell.id)
+  @JoinColumn()
   char_spell: Char_Spell["id"];
 
   @Field()

@@ -4,7 +4,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToOne,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -25,10 +26,11 @@ export class Char_Spell extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => Number)
-  @OneToOne(() => Character, () => Number)
+  @ManyToOne(() => Character, () => Number)
+  @JoinColumn()
   character: Character["id"];
 
   @Field()
   @Column()
-  spell_id!: number;
+  spell_id!: string;
 }

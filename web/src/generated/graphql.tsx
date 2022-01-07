@@ -16,11 +16,8 @@ export type Scalars = {
   _FieldSet: any;
   /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
   DateTime: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `ID` scalar type represents a unique MongoDB identifier in collection. MongoDB by default use 12-byte ObjectId value (https://docs.mongodb.com/manual/reference/bson-types/#objectid). But MongoDB also may accepts string or integer as correct values for _id field. */
   MongoID: any;
-  /** The string representation of JavaScript regexp. You may provide it with flags "/^abc.*\/i" or without flags like "^abc.*". More info about RegExp characters and flags: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions */
   RegExpAsString: any;
 };
 
@@ -192,7 +189,7 @@ export type Character = {
   id: Scalars['Float'];
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
-  user: Scalars['Float'];
+  user: Scalars['String'];
 };
 
 export type Class = {
@@ -707,7 +704,6 @@ export type FilterFindManyAbilityScoreInput = {
   AND?: InputMaybe<Array<FilterFindManyAbilityScoreInput>>;
   OR?: InputMaybe<Array<FilterFindManyAbilityScoreInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyAbilityScoreOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   full_name?: InputMaybe<Scalars['String']>;
@@ -729,7 +725,6 @@ export type FilterFindManyAbilityScoreNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyAbilityScoreOperatorsInput = {
   _id?: InputMaybe<FilterFindManyAbilityScore_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyAbilityScoreDescOperatorsInput>;
@@ -810,7 +805,6 @@ export type FilterFindManyAlignmentInput = {
   AND?: InputMaybe<Array<FilterFindManyAlignmentInput>>;
   OR?: InputMaybe<Array<FilterFindManyAlignmentInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyAlignmentOperatorsInput>;
   abbreviation?: InputMaybe<Scalars['String']>;
   desc?: InputMaybe<Scalars['String']>;
@@ -831,7 +825,6 @@ export type FilterFindManyAlignmentNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyAlignmentOperatorsInput = {
   _id?: InputMaybe<FilterFindManyAlignment_IdOperatorsInput>;
   abbreviation?: InputMaybe<FilterFindManyAlignmentAbbreviationOperatorsInput>;
@@ -1056,7 +1049,6 @@ export type FilterFindManyBackgroundInput = {
   AND?: InputMaybe<Array<FilterFindManyBackgroundInput>>;
   OR?: InputMaybe<Array<FilterFindManyBackgroundInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyBackgroundOperatorsInput>;
   bonds?: InputMaybe<FilterFindManyBackgroundBondsInput>;
   feature?: InputMaybe<FilterFindManyBackgroundFeatureInput>;
@@ -1125,7 +1117,6 @@ export type FilterFindManyBackgroundNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyBackgroundOperatorsInput = {
   _id?: InputMaybe<FilterFindManyBackground_IdOperatorsInput>;
   bonds?: InputMaybe<FilterFindManyBackgroundBondsOperatorsInput>;
@@ -1284,7 +1275,6 @@ export type FilterFindManyClassInput = {
   AND?: InputMaybe<Array<FilterFindManyClassInput>>;
   OR?: InputMaybe<Array<FilterFindManyClassInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyClassOperatorsInput>;
   class_levels?: InputMaybe<Scalars['String']>;
   hit_die?: InputMaybe<Scalars['Float']>;
@@ -1404,7 +1394,6 @@ export type FilterFindManyClassNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyClassOperatorsInput = {
   _id?: InputMaybe<FilterFindManyClass_IdOperatorsInput>;
   class_levels?: InputMaybe<FilterFindManyClassClass_LevelsOperatorsInput>;
@@ -1623,7 +1612,6 @@ export type FilterFindManyConditionInput = {
   AND?: InputMaybe<Array<FilterFindManyConditionInput>>;
   OR?: InputMaybe<Array<FilterFindManyConditionInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyConditionOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -1643,7 +1631,6 @@ export type FilterFindManyConditionNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyConditionOperatorsInput = {
   _id?: InputMaybe<FilterFindManyCondition_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyConditionDescOperatorsInput>;
@@ -1704,7 +1691,6 @@ export type FilterFindManyDamageTypeInput = {
   AND?: InputMaybe<Array<FilterFindManyDamageTypeInput>>;
   OR?: InputMaybe<Array<FilterFindManyDamageTypeInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyDamageTypeOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -1724,7 +1710,6 @@ export type FilterFindManyDamageTypeNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyDamageTypeOperatorsInput = {
   _id?: InputMaybe<FilterFindManyDamageType_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyDamageTypeDescOperatorsInput>;
@@ -1849,7 +1834,6 @@ export type FilterFindManyEquipmentCategoryInput = {
   AND?: InputMaybe<Array<FilterFindManyEquipmentCategoryInput>>;
   OR?: InputMaybe<Array<FilterFindManyEquipmentCategoryInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyEquipmentCategoryOperatorsInput>;
   equipment?: InputMaybe<Array<InputMaybe<FilterFindManyEquipmentCategoryEquipmentInput>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -1869,7 +1853,6 @@ export type FilterFindManyEquipmentCategoryNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyEquipmentCategoryOperatorsInput = {
   _id?: InputMaybe<FilterFindManyEquipmentCategory_IdOperatorsInput>;
   index?: InputMaybe<FilterFindManyEquipmentCategoryIndexOperatorsInput>;
@@ -2152,7 +2135,6 @@ export type FilterFindManyEquipmentInput = {
   AND?: InputMaybe<Array<FilterFindManyEquipmentInput>>;
   OR?: InputMaybe<Array<FilterFindManyEquipmentInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyEquipmentOperatorsInput>;
   armor_category?: InputMaybe<Scalars['String']>;
   armor_class?: InputMaybe<FilterFindManyEquipmentArmor_ClassInput>;
@@ -2195,7 +2177,6 @@ export type FilterFindManyEquipmentNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyEquipmentOperatorsInput = {
   _id?: InputMaybe<FilterFindManyEquipment_IdOperatorsInput>;
   armor_category?: InputMaybe<FilterFindManyEquipmentArmor_CategoryOperatorsInput>;
@@ -2555,7 +2536,6 @@ export type FilterFindManyFeatInput = {
   AND?: InputMaybe<Array<FilterFindManyFeatInput>>;
   OR?: InputMaybe<Array<FilterFindManyFeatInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyFeatOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -2576,7 +2556,6 @@ export type FilterFindManyFeatNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyFeatOperatorsInput = {
   _id?: InputMaybe<FilterFindManyFeat_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyFeatDescOperatorsInput>;
@@ -2830,7 +2809,6 @@ export type FilterFindManyFeatureInput = {
   AND?: InputMaybe<Array<FilterFindManyFeatureInput>>;
   OR?: InputMaybe<Array<FilterFindManyFeatureInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyFeatureOperatorsInput>;
   choice?: InputMaybe<FilterFindManyFeatureChoiceInput>;
   class?: InputMaybe<FilterFindManyFeatureClassInput>;
@@ -2869,7 +2847,6 @@ export type FilterFindManyFeatureNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyFeatureOperatorsInput = {
   _id?: InputMaybe<FilterFindManyFeature_IdOperatorsInput>;
   choice?: InputMaybe<FilterFindManyFeatureChoiceOperatorsInput>;
@@ -3051,7 +3028,6 @@ export type FilterFindManyLanguageInput = {
   AND?: InputMaybe<Array<FilterFindManyLanguageInput>>;
   OR?: InputMaybe<Array<FilterFindManyLanguageInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyLanguageOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -3074,7 +3050,6 @@ export type FilterFindManyLanguageNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyLanguageOperatorsInput = {
   _id?: InputMaybe<FilterFindManyLanguage_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyLanguageDescOperatorsInput>;
@@ -3686,7 +3661,6 @@ export type FilterFindManyLevelInput = {
   AND?: InputMaybe<Array<FilterFindManyLevelInput>>;
   OR?: InputMaybe<Array<FilterFindManyLevelInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyLevelOperatorsInput>;
   ability_score_bonuses?: InputMaybe<Scalars['Float']>;
   class?: InputMaybe<FilterFindManyLevelClassInput>;
@@ -3712,7 +3686,6 @@ export type FilterFindManyLevelLevelOperatorsInput = {
   nin?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyLevelOperatorsInput = {
   _id?: InputMaybe<FilterFindManyLevel_IdOperatorsInput>;
   ability_score_bonuses?: InputMaybe<FilterFindManyLevelAbility_Score_BonusesOperatorsInput>;
@@ -4067,7 +4040,6 @@ export type FilterFindManyMagicItemInput = {
   AND?: InputMaybe<Array<FilterFindManyMagicItemInput>>;
   OR?: InputMaybe<Array<FilterFindManyMagicItemInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyMagicItemOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   equipment_category?: InputMaybe<FilterFindManyMagicItemEquipment_CategoryInput>;
@@ -4088,7 +4060,6 @@ export type FilterFindManyMagicItemNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyMagicItemOperatorsInput = {
   _id?: InputMaybe<FilterFindManyMagicItem_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyMagicItemDescOperatorsInput>;
@@ -4150,7 +4121,6 @@ export type FilterFindManyMagicSchoolInput = {
   AND?: InputMaybe<Array<FilterFindManyMagicSchoolInput>>;
   OR?: InputMaybe<Array<FilterFindManyMagicSchoolInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyMagicSchoolOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -4170,7 +4140,6 @@ export type FilterFindManyMagicSchoolNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyMagicSchoolOperatorsInput = {
   _id?: InputMaybe<FilterFindManyMagicSchool_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyMagicSchoolDescOperatorsInput>;
@@ -4343,7 +4312,6 @@ export type FilterFindManyMonsterInput = {
   AND?: InputMaybe<Array<FilterFindManyMonsterInput>>;
   OR?: InputMaybe<Array<FilterFindManyMonsterInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyMonsterOperatorsInput>;
   actions?: InputMaybe<Array<InputMaybe<FilterFindManyMonsterActionsInput>>>;
   alignment?: InputMaybe<Scalars['String']>;
@@ -4420,7 +4388,6 @@ export type FilterFindManyMonsterNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyMonsterOperatorsInput = {
   _id?: InputMaybe<FilterFindManyMonster_IdOperatorsInput>;
   alignment?: InputMaybe<FilterFindManyMonsterAlignmentOperatorsInput>;
@@ -4750,7 +4717,6 @@ export type FilterFindManyProficiencyInput = {
   AND?: InputMaybe<Array<FilterFindManyProficiencyInput>>;
   OR?: InputMaybe<Array<FilterFindManyProficiencyInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyProficiencyOperatorsInput>;
   classes?: InputMaybe<Array<InputMaybe<FilterFindManyProficiencyClassesInput>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -4773,7 +4739,6 @@ export type FilterFindManyProficiencyNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyProficiencyOperatorsInput = {
   _id?: InputMaybe<FilterFindManyProficiency_IdOperatorsInput>;
   index?: InputMaybe<FilterFindManyProficiencyIndexOperatorsInput>;
@@ -4931,7 +4896,6 @@ export type FilterFindManyRaceInput = {
   AND?: InputMaybe<Array<FilterFindManyRaceInput>>;
   OR?: InputMaybe<Array<FilterFindManyRaceInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyRaceOperatorsInput>;
   ability_bonus_options?: InputMaybe<FilterFindManyRaceAbility_Bonus_OptionsInput>;
   ability_bonuses?: InputMaybe<Array<InputMaybe<FilterFindManyRaceAbility_BonusesInput>>>;
@@ -5024,7 +4988,6 @@ export type FilterFindManyRaceNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyRaceOperatorsInput = {
   _id?: InputMaybe<FilterFindManyRace_IdOperatorsInput>;
   ability_bonus_options?: InputMaybe<FilterFindManyRaceAbility_Bonus_OptionsOperatorsInput>;
@@ -5190,7 +5153,6 @@ export type FilterFindManyRuleInput = {
   AND?: InputMaybe<Array<FilterFindManyRuleInput>>;
   OR?: InputMaybe<Array<FilterFindManyRuleInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyRuleOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -5211,7 +5173,6 @@ export type FilterFindManyRuleNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyRuleOperatorsInput = {
   _id?: InputMaybe<FilterFindManyRule_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyRuleDescOperatorsInput>;
@@ -5248,7 +5209,6 @@ export type FilterFindManyRuleSectionInput = {
   AND?: InputMaybe<Array<FilterFindManyRuleSectionInput>>;
   OR?: InputMaybe<Array<FilterFindManyRuleSectionInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyRuleSectionOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -5268,7 +5228,6 @@ export type FilterFindManyRuleSectionNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyRuleSectionOperatorsInput = {
   _id?: InputMaybe<FilterFindManyRuleSection_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyRuleSectionDescOperatorsInput>;
@@ -5408,7 +5367,6 @@ export type FilterFindManySkillInput = {
   AND?: InputMaybe<Array<FilterFindManySkillInput>>;
   OR?: InputMaybe<Array<FilterFindManySkillInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManySkillOperatorsInput>;
   ability_score?: InputMaybe<FilterFindManySkillAbility_ScoreInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -5429,7 +5387,6 @@ export type FilterFindManySkillNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManySkillOperatorsInput = {
   _id?: InputMaybe<FilterFindManySkill_IdOperatorsInput>;
   ability_score?: InputMaybe<FilterFindManySkillAbility_ScoreOperatorsInput>;
@@ -5503,7 +5460,6 @@ export type FilterFindManySpellInput = {
   AND?: InputMaybe<Array<FilterFindManySpellInput>>;
   OR?: InputMaybe<Array<FilterFindManySpellInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManySpellOperatorsInput>;
   area_of_effect?: InputMaybe<FilterFindManySpellArea_Of_EffectInput>;
   attack_type?: InputMaybe<Scalars['String']>;
@@ -5528,7 +5484,6 @@ export type FilterFindManySpellInput = {
   url?: InputMaybe<Scalars['String']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManySpellOperatorsInput = {
   _id?: InputMaybe<FilterFindManySpell_IdOperatorsInput>;
   school?: InputMaybe<FilterFindManySpellSchoolOperatorsInput>;
@@ -5677,7 +5632,6 @@ export type FilterFindManySubclassInput = {
   AND?: InputMaybe<Array<FilterFindManySubclassInput>>;
   OR?: InputMaybe<Array<FilterFindManySubclassInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManySubclassOperatorsInput>;
   class?: InputMaybe<FilterFindManySubclassClassInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -5701,7 +5655,6 @@ export type FilterFindManySubclassNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManySubclassOperatorsInput = {
   _id?: InputMaybe<FilterFindManySubclass_IdOperatorsInput>;
   class?: InputMaybe<FilterFindManySubclassClassOperatorsInput>;
@@ -5821,7 +5774,6 @@ export type FilterFindManySubraceInput = {
   AND?: InputMaybe<Array<FilterFindManySubraceInput>>;
   OR?: InputMaybe<Array<FilterFindManySubraceInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManySubraceOperatorsInput>;
   ability_bonuses?: InputMaybe<Array<InputMaybe<FilterFindManySubraceAbility_BonusesInput>>>;
   desc?: InputMaybe<Scalars['String']>;
@@ -5887,7 +5839,6 @@ export type FilterFindManySubraceNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManySubraceOperatorsInput = {
   _id?: InputMaybe<FilterFindManySubrace_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManySubraceDescOperatorsInput>;
@@ -6012,7 +5963,6 @@ export type FilterFindManyTraitInput = {
   AND?: InputMaybe<Array<FilterFindManyTraitInput>>;
   OR?: InputMaybe<Array<FilterFindManyTraitInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyTraitOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -6038,7 +5988,6 @@ export type FilterFindManyTraitNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyTraitOperatorsInput = {
   _id?: InputMaybe<FilterFindManyTrait_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyTraitDescOperatorsInput>;
@@ -6510,7 +6459,6 @@ export type FilterFindManyWeaponPropertyInput = {
   AND?: InputMaybe<Array<FilterFindManyWeaponPropertyInput>>;
   OR?: InputMaybe<Array<FilterFindManyWeaponPropertyInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindManyWeaponPropertyOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -6530,7 +6478,6 @@ export type FilterFindManyWeaponPropertyNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindManyWeaponPropertyOperatorsInput = {
   _id?: InputMaybe<FilterFindManyWeaponProperty_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindManyWeaponPropertyDescOperatorsInput>;
@@ -6603,7 +6550,6 @@ export type FilterFindOneAbilityScoreInput = {
   AND?: InputMaybe<Array<FilterFindOneAbilityScoreInput>>;
   OR?: InputMaybe<Array<FilterFindOneAbilityScoreInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneAbilityScoreOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   full_name?: InputMaybe<Scalars['String']>;
@@ -6625,7 +6571,6 @@ export type FilterFindOneAbilityScoreNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneAbilityScoreOperatorsInput = {
   _id?: InputMaybe<FilterFindOneAbilityScore_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneAbilityScoreDescOperatorsInput>;
@@ -6706,7 +6651,6 @@ export type FilterFindOneAlignmentInput = {
   AND?: InputMaybe<Array<FilterFindOneAlignmentInput>>;
   OR?: InputMaybe<Array<FilterFindOneAlignmentInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneAlignmentOperatorsInput>;
   abbreviation?: InputMaybe<Scalars['String']>;
   desc?: InputMaybe<Scalars['String']>;
@@ -6727,7 +6671,6 @@ export type FilterFindOneAlignmentNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneAlignmentOperatorsInput = {
   _id?: InputMaybe<FilterFindOneAlignment_IdOperatorsInput>;
   abbreviation?: InputMaybe<FilterFindOneAlignmentAbbreviationOperatorsInput>;
@@ -6952,7 +6895,6 @@ export type FilterFindOneBackgroundInput = {
   AND?: InputMaybe<Array<FilterFindOneBackgroundInput>>;
   OR?: InputMaybe<Array<FilterFindOneBackgroundInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneBackgroundOperatorsInput>;
   bonds?: InputMaybe<FilterFindOneBackgroundBondsInput>;
   feature?: InputMaybe<FilterFindOneBackgroundFeatureInput>;
@@ -7021,7 +6963,6 @@ export type FilterFindOneBackgroundNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneBackgroundOperatorsInput = {
   _id?: InputMaybe<FilterFindOneBackground_IdOperatorsInput>;
   bonds?: InputMaybe<FilterFindOneBackgroundBondsOperatorsInput>;
@@ -7180,7 +7121,6 @@ export type FilterFindOneClassInput = {
   AND?: InputMaybe<Array<FilterFindOneClassInput>>;
   OR?: InputMaybe<Array<FilterFindOneClassInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneClassOperatorsInput>;
   class_levels?: InputMaybe<Scalars['String']>;
   hit_die?: InputMaybe<Scalars['Float']>;
@@ -7300,7 +7240,6 @@ export type FilterFindOneClassNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneClassOperatorsInput = {
   _id?: InputMaybe<FilterFindOneClass_IdOperatorsInput>;
   class_levels?: InputMaybe<FilterFindOneClassClass_LevelsOperatorsInput>;
@@ -7519,7 +7458,6 @@ export type FilterFindOneConditionInput = {
   AND?: InputMaybe<Array<FilterFindOneConditionInput>>;
   OR?: InputMaybe<Array<FilterFindOneConditionInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneConditionOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -7539,7 +7477,6 @@ export type FilterFindOneConditionNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneConditionOperatorsInput = {
   _id?: InputMaybe<FilterFindOneCondition_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneConditionDescOperatorsInput>;
@@ -7600,7 +7537,6 @@ export type FilterFindOneDamageTypeInput = {
   AND?: InputMaybe<Array<FilterFindOneDamageTypeInput>>;
   OR?: InputMaybe<Array<FilterFindOneDamageTypeInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneDamageTypeOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -7620,7 +7556,6 @@ export type FilterFindOneDamageTypeNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneDamageTypeOperatorsInput = {
   _id?: InputMaybe<FilterFindOneDamageType_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneDamageTypeDescOperatorsInput>;
@@ -7745,7 +7680,6 @@ export type FilterFindOneEquipmentCategoryInput = {
   AND?: InputMaybe<Array<FilterFindOneEquipmentCategoryInput>>;
   OR?: InputMaybe<Array<FilterFindOneEquipmentCategoryInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneEquipmentCategoryOperatorsInput>;
   equipment?: InputMaybe<Array<InputMaybe<FilterFindOneEquipmentCategoryEquipmentInput>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -7765,7 +7699,6 @@ export type FilterFindOneEquipmentCategoryNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneEquipmentCategoryOperatorsInput = {
   _id?: InputMaybe<FilterFindOneEquipmentCategory_IdOperatorsInput>;
   index?: InputMaybe<FilterFindOneEquipmentCategoryIndexOperatorsInput>;
@@ -8048,7 +7981,6 @@ export type FilterFindOneEquipmentInput = {
   AND?: InputMaybe<Array<FilterFindOneEquipmentInput>>;
   OR?: InputMaybe<Array<FilterFindOneEquipmentInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneEquipmentOperatorsInput>;
   armor_category?: InputMaybe<Scalars['String']>;
   armor_class?: InputMaybe<FilterFindOneEquipmentArmor_ClassInput>;
@@ -8091,7 +8023,6 @@ export type FilterFindOneEquipmentNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneEquipmentOperatorsInput = {
   _id?: InputMaybe<FilterFindOneEquipment_IdOperatorsInput>;
   armor_category?: InputMaybe<FilterFindOneEquipmentArmor_CategoryOperatorsInput>;
@@ -8451,7 +8382,6 @@ export type FilterFindOneFeatInput = {
   AND?: InputMaybe<Array<FilterFindOneFeatInput>>;
   OR?: InputMaybe<Array<FilterFindOneFeatInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneFeatOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -8472,7 +8402,6 @@ export type FilterFindOneFeatNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneFeatOperatorsInput = {
   _id?: InputMaybe<FilterFindOneFeat_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneFeatDescOperatorsInput>;
@@ -8726,7 +8655,6 @@ export type FilterFindOneFeatureInput = {
   AND?: InputMaybe<Array<FilterFindOneFeatureInput>>;
   OR?: InputMaybe<Array<FilterFindOneFeatureInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneFeatureOperatorsInput>;
   choice?: InputMaybe<FilterFindOneFeatureChoiceInput>;
   class?: InputMaybe<FilterFindOneFeatureClassInput>;
@@ -8765,7 +8693,6 @@ export type FilterFindOneFeatureNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneFeatureOperatorsInput = {
   _id?: InputMaybe<FilterFindOneFeature_IdOperatorsInput>;
   choice?: InputMaybe<FilterFindOneFeatureChoiceOperatorsInput>;
@@ -8947,7 +8874,6 @@ export type FilterFindOneLanguageInput = {
   AND?: InputMaybe<Array<FilterFindOneLanguageInput>>;
   OR?: InputMaybe<Array<FilterFindOneLanguageInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneLanguageOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -8970,7 +8896,6 @@ export type FilterFindOneLanguageNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneLanguageOperatorsInput = {
   _id?: InputMaybe<FilterFindOneLanguage_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneLanguageDescOperatorsInput>;
@@ -9582,7 +9507,6 @@ export type FilterFindOneLevelInput = {
   AND?: InputMaybe<Array<FilterFindOneLevelInput>>;
   OR?: InputMaybe<Array<FilterFindOneLevelInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneLevelOperatorsInput>;
   ability_score_bonuses?: InputMaybe<Scalars['Float']>;
   class?: InputMaybe<FilterFindOneLevelClassInput>;
@@ -9608,7 +9532,6 @@ export type FilterFindOneLevelLevelOperatorsInput = {
   nin?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneLevelOperatorsInput = {
   _id?: InputMaybe<FilterFindOneLevel_IdOperatorsInput>;
   ability_score_bonuses?: InputMaybe<FilterFindOneLevelAbility_Score_BonusesOperatorsInput>;
@@ -9963,7 +9886,6 @@ export type FilterFindOneMagicItemInput = {
   AND?: InputMaybe<Array<FilterFindOneMagicItemInput>>;
   OR?: InputMaybe<Array<FilterFindOneMagicItemInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneMagicItemOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   equipment_category?: InputMaybe<FilterFindOneMagicItemEquipment_CategoryInput>;
@@ -9984,7 +9906,6 @@ export type FilterFindOneMagicItemNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneMagicItemOperatorsInput = {
   _id?: InputMaybe<FilterFindOneMagicItem_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneMagicItemDescOperatorsInput>;
@@ -10046,7 +9967,6 @@ export type FilterFindOneMagicSchoolInput = {
   AND?: InputMaybe<Array<FilterFindOneMagicSchoolInput>>;
   OR?: InputMaybe<Array<FilterFindOneMagicSchoolInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneMagicSchoolOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -10066,7 +9986,6 @@ export type FilterFindOneMagicSchoolNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneMagicSchoolOperatorsInput = {
   _id?: InputMaybe<FilterFindOneMagicSchool_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneMagicSchoolDescOperatorsInput>;
@@ -10239,7 +10158,6 @@ export type FilterFindOneMonsterInput = {
   AND?: InputMaybe<Array<FilterFindOneMonsterInput>>;
   OR?: InputMaybe<Array<FilterFindOneMonsterInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneMonsterOperatorsInput>;
   actions?: InputMaybe<Array<InputMaybe<FilterFindOneMonsterActionsInput>>>;
   alignment?: InputMaybe<Scalars['String']>;
@@ -10316,7 +10234,6 @@ export type FilterFindOneMonsterNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneMonsterOperatorsInput = {
   _id?: InputMaybe<FilterFindOneMonster_IdOperatorsInput>;
   alignment?: InputMaybe<FilterFindOneMonsterAlignmentOperatorsInput>;
@@ -10646,7 +10563,6 @@ export type FilterFindOneProficiencyInput = {
   AND?: InputMaybe<Array<FilterFindOneProficiencyInput>>;
   OR?: InputMaybe<Array<FilterFindOneProficiencyInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneProficiencyOperatorsInput>;
   classes?: InputMaybe<Array<InputMaybe<FilterFindOneProficiencyClassesInput>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -10669,7 +10585,6 @@ export type FilterFindOneProficiencyNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneProficiencyOperatorsInput = {
   _id?: InputMaybe<FilterFindOneProficiency_IdOperatorsInput>;
   index?: InputMaybe<FilterFindOneProficiencyIndexOperatorsInput>;
@@ -10827,7 +10742,6 @@ export type FilterFindOneRaceInput = {
   AND?: InputMaybe<Array<FilterFindOneRaceInput>>;
   OR?: InputMaybe<Array<FilterFindOneRaceInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneRaceOperatorsInput>;
   ability_bonus_options?: InputMaybe<FilterFindOneRaceAbility_Bonus_OptionsInput>;
   ability_bonuses?: InputMaybe<Array<InputMaybe<FilterFindOneRaceAbility_BonusesInput>>>;
@@ -10920,7 +10834,6 @@ export type FilterFindOneRaceNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneRaceOperatorsInput = {
   _id?: InputMaybe<FilterFindOneRace_IdOperatorsInput>;
   ability_bonus_options?: InputMaybe<FilterFindOneRaceAbility_Bonus_OptionsOperatorsInput>;
@@ -11086,7 +10999,6 @@ export type FilterFindOneRuleInput = {
   AND?: InputMaybe<Array<FilterFindOneRuleInput>>;
   OR?: InputMaybe<Array<FilterFindOneRuleInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneRuleOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -11107,7 +11019,6 @@ export type FilterFindOneRuleNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneRuleOperatorsInput = {
   _id?: InputMaybe<FilterFindOneRule_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneRuleDescOperatorsInput>;
@@ -11144,7 +11055,6 @@ export type FilterFindOneRuleSectionInput = {
   AND?: InputMaybe<Array<FilterFindOneRuleSectionInput>>;
   OR?: InputMaybe<Array<FilterFindOneRuleSectionInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneRuleSectionOperatorsInput>;
   desc?: InputMaybe<Scalars['String']>;
   index?: InputMaybe<Scalars['String']>;
@@ -11164,7 +11074,6 @@ export type FilterFindOneRuleSectionNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneRuleSectionOperatorsInput = {
   _id?: InputMaybe<FilterFindOneRuleSection_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneRuleSectionDescOperatorsInput>;
@@ -11304,7 +11213,6 @@ export type FilterFindOneSkillInput = {
   AND?: InputMaybe<Array<FilterFindOneSkillInput>>;
   OR?: InputMaybe<Array<FilterFindOneSkillInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneSkillOperatorsInput>;
   ability_score?: InputMaybe<FilterFindOneSkillAbility_ScoreInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -11325,7 +11233,6 @@ export type FilterFindOneSkillNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneSkillOperatorsInput = {
   _id?: InputMaybe<FilterFindOneSkill_IdOperatorsInput>;
   ability_score?: InputMaybe<FilterFindOneSkillAbility_ScoreOperatorsInput>;
@@ -11399,7 +11306,6 @@ export type FilterFindOneSpellInput = {
   AND?: InputMaybe<Array<FilterFindOneSpellInput>>;
   OR?: InputMaybe<Array<FilterFindOneSpellInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneSpellOperatorsInput>;
   area_of_effect?: InputMaybe<FilterFindOneSpellArea_Of_EffectInput>;
   attack_type?: InputMaybe<Scalars['String']>;
@@ -11424,7 +11330,6 @@ export type FilterFindOneSpellInput = {
   url?: InputMaybe<Scalars['String']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneSpellOperatorsInput = {
   _id?: InputMaybe<FilterFindOneSpell_IdOperatorsInput>;
   school?: InputMaybe<FilterFindOneSpellSchoolOperatorsInput>;
@@ -11573,7 +11478,6 @@ export type FilterFindOneSubclassInput = {
   AND?: InputMaybe<Array<FilterFindOneSubclassInput>>;
   OR?: InputMaybe<Array<FilterFindOneSubclassInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneSubclassOperatorsInput>;
   class?: InputMaybe<FilterFindOneSubclassClassInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -11597,7 +11501,6 @@ export type FilterFindOneSubclassNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneSubclassOperatorsInput = {
   _id?: InputMaybe<FilterFindOneSubclass_IdOperatorsInput>;
   class?: InputMaybe<FilterFindOneSubclassClassOperatorsInput>;
@@ -11717,7 +11620,6 @@ export type FilterFindOneSubraceInput = {
   AND?: InputMaybe<Array<FilterFindOneSubraceInput>>;
   OR?: InputMaybe<Array<FilterFindOneSubraceInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneSubraceOperatorsInput>;
   ability_bonuses?: InputMaybe<Array<InputMaybe<FilterFindOneSubraceAbility_BonusesInput>>>;
   desc?: InputMaybe<Scalars['String']>;
@@ -11783,7 +11685,6 @@ export type FilterFindOneSubraceNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneSubraceOperatorsInput = {
   _id?: InputMaybe<FilterFindOneSubrace_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneSubraceDescOperatorsInput>;
@@ -11908,7 +11809,6 @@ export type FilterFindOneTraitInput = {
   AND?: InputMaybe<Array<FilterFindOneTraitInput>>;
   OR?: InputMaybe<Array<FilterFindOneTraitInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneTraitOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -11934,7 +11834,6 @@ export type FilterFindOneTraitNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneTraitOperatorsInput = {
   _id?: InputMaybe<FilterFindOneTrait_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneTraitDescOperatorsInput>;
@@ -12406,7 +12305,6 @@ export type FilterFindOneWeaponPropertyInput = {
   AND?: InputMaybe<Array<FilterFindOneWeaponPropertyInput>>;
   OR?: InputMaybe<Array<FilterFindOneWeaponPropertyInput>>;
   _id?: InputMaybe<Scalars['String']>;
-  /** List of *indexed* fields that can be filtered via operators. */
   _operators?: InputMaybe<FilterFindOneWeaponPropertyOperatorsInput>;
   desc?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   index?: InputMaybe<Scalars['String']>;
@@ -12426,7 +12324,6 @@ export type FilterFindOneWeaponPropertyNameOperatorsInput = {
   regex?: InputMaybe<Scalars['RegExpAsString']>;
 };
 
-/** For performance reason this type contains only *indexed* fields. */
 export type FilterFindOneWeaponPropertyOperatorsInput = {
   _id?: InputMaybe<FilterFindOneWeaponProperty_IdOperatorsInput>;
   desc?: InputMaybe<FilterFindOneWeaponPropertyDescOperatorsInput>;
@@ -15209,7 +15106,6 @@ export type User = {
   character: Array<Scalars['Float']>;
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
-  id: Scalars['Float'];
   name: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -15234,21 +15130,14 @@ export type WeaponProperty = {
   url?: Maybe<Scalars['String']>;
 };
 
-export type RegularUserFragment = { __typename?: 'User', id: number, name: string, email: string };
+export type RegularUserFragment = { __typename?: 'User', name: string, email: string };
 
 export type AddCharMutationVariables = Exact<{
   options: CharObject;
 }>;
 
 
-export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', user: number, name: string, class: string } | null | undefined } | null | undefined };
-
-export type RegisterMutationVariables = Exact<{
-  options: UserObject;
-}>;
-
-
-export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'UserResponse', errors?: string | null | undefined, user?: { __typename?: 'User', id: number, name: string, email: string } | null | undefined } | null | undefined };
+export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', user: string, name: string, class: string } | null | undefined } | null | undefined };
 
 export type CharMeMutationVariables = Exact<{
   email: Scalars['String'];
@@ -15257,9 +15146,22 @@ export type CharMeMutationVariables = Exact<{
 
 export type CharMeMutation = { __typename?: 'Mutation', charMe?: Array<{ __typename?: 'Character', name: string, class: string }> | null | undefined };
 
+export type RegisterMutationVariables = Exact<{
+  options: UserObject;
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'UserResponse', errors?: string | null | undefined, user?: { __typename?: 'User', name: string, email: string } | null | undefined } | null | undefined };
+
+export type GetClassQueryVariables = Exact<{
+  filter?: InputMaybe<FilterFindOneClassInput>;
+}>;
+
+
+export type GetClassQuery = { __typename?: 'Query', class?: { __typename?: 'Class', name?: string | null | undefined, spells: Array<{ __typename?: 'Spell', name?: string | null | undefined, attack_type?: string | null | undefined, casting_time?: string | null | undefined, components?: Array<string | null | undefined> | null | undefined, concentration?: boolean | null | undefined, desc?: Array<string | null | undefined> | null | undefined, duration?: string | null | undefined, heal_at_slot_level?: any | null | undefined, higher_level?: Array<string | null | undefined> | null | undefined, level?: number | null | undefined, material?: string | null | undefined, range?: string | null | undefined, ritual?: boolean | null | undefined, area_of_effect?: { __typename?: 'SpellArea_of_effect', size?: number | null | undefined, type?: string | null | undefined } | null | undefined, damage?: { __typename?: 'SpellDamage', damage_at_character_level?: any | null | undefined, damage_at_slot_level?: any | null | undefined, damage_type?: { __typename?: 'SpellDamageDamage_type', name?: string | null | undefined } | null | undefined } | null | undefined, dc?: { __typename?: 'SpellDc', dc_success?: string | null | undefined, desc?: string | null | undefined, dc_type?: { __typename?: 'SpellDcDc_type', name?: string | null | undefined } | null | undefined } | null | undefined, school?: { __typename?: 'MagicSchool', name?: string | null | undefined } | null | undefined, subclasses?: Array<{ __typename?: 'SpellSubclasses', name?: string | null | undefined } | null | undefined> | null | undefined }> } | null | undefined };
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
-  id
   name
   email
 }
@@ -15280,6 +15182,18 @@ export const AddCharDocument = gql`
 export function useAddCharMutation() {
   return Urql.useMutation<AddCharMutation, AddCharMutationVariables>(AddCharDocument);
 };
+export const CharMeDocument = gql`
+    mutation CharMe($email: String!) {
+  charMe(email: $email) {
+    name
+    class
+  }
+}
+    `;
+
+export function useCharMeMutation() {
+  return Urql.useMutation<CharMeMutation, CharMeMutationVariables>(CharMeDocument);
+};
 export const RegisterDocument = gql`
     mutation Register($options: UserObject!) {
   register(options: $options) {
@@ -15294,15 +15208,53 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
-export const CharMeDocument = gql`
-    mutation CharMe($email: String!) {
-  charMe(email: $email) {
+export const GetClassDocument = gql`
+    query GetClass($filter: FilterFindOneClassInput) {
+  class(filter: $filter) {
     name
-    class
+    spells(limit: 100000) {
+      name
+      area_of_effect {
+        size
+        type
+      }
+      attack_type
+      casting_time
+      components
+      concentration
+      damage {
+        damage_type {
+          name
+        }
+        damage_at_character_level
+        damage_at_slot_level
+      }
+      dc {
+        dc_success
+        dc_type {
+          name
+        }
+        desc
+      }
+      desc
+      duration
+      heal_at_slot_level
+      higher_level
+      level
+      material
+      range
+      ritual
+      school {
+        name
+      }
+      subclasses {
+        name
+      }
+    }
   }
 }
     `;
 
-export function useCharMeMutation() {
-  return Urql.useMutation<CharMeMutation, CharMeMutationVariables>(CharMeDocument);
+export function useGetClassQuery(options: Omit<Urql.UseQueryArgs<GetClassQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetClassQuery>({ query: GetClassDocument, ...options });
 };

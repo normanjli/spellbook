@@ -151,7 +151,7 @@ type Character {
   id: Float!
   name: String!
   updatedAt: DateTime!
-  user: Float!
+  user: String!
 }
 
 type Class {
@@ -14454,7 +14454,6 @@ type User {
   character: [Float!]!
   createdAt: DateTime!
   email: String!
-  id: Float!
   name: String!
   updatedAt: DateTime!
 }

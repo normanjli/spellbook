@@ -4,8 +4,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Character } from "./Character";
@@ -13,8 +14,17 @@ import { Character } from "./Character";
 @Entity()
 export class User extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Column()
+  name: string;
+
+  @Field()
+  @PrimaryColumn({ unique: true })
+  email!: string;
+
+  @Field(() => [Number])
+  @OneToMany(() => Character, (character) => character.id)
+  @JoinColumn()
+  character: Character["id"][];
 
   @Field()
   @CreateDateColumn()
@@ -23,16 +33,4 @@ export class User extends BaseEntity {
   @Field()
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @Field()
-  @Column()
-  name: string;
-
-  @Field()
-  @Column({ unique: true })
-  email!: string;
-
-  @Field(() => [Number])
-  @OneToMany(() => Character, (character) => Number)
-  character: Character["id"][];
 }

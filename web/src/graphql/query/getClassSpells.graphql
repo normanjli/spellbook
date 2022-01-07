@@ -1,0 +1,44 @@
+query GetClass($filter: FilterFindOneClassInput) {
+  class(filter: $filter) {
+    name
+    spells(limit: 100000) {
+      name
+      area_of_effect {
+        size
+        type
+      }
+      attack_type
+      casting_time
+      components
+      concentration
+      damage {
+        damage_type {
+          name
+        }
+        damage_at_character_level
+        damage_at_slot_level
+      }
+      dc {
+        dc_success
+        dc_type {
+          name
+        }
+        desc
+      }
+      desc
+      duration
+      heal_at_slot_level
+      higher_level
+      level
+      material
+      range
+      ritual
+      school {
+        name
+      }
+      subclasses {
+        name
+      }
+    }
+  }
+}
