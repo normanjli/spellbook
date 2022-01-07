@@ -4,25 +4,7 @@ import { ApolloServer } from "apollo-server-micro";
 import { readFileSync } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import "reflect-metadata";
-// const typeDefs = gql`
-//   type User {
-//     id: ID
-//   }
 
-//   type Query {
-//     getUser: User
-//   }
-// `;
-
-// const resolvers = {
-//   Query: {
-//     getUser: () => {
-//       return {
-//         id: "Foo",
-//       };
-//     },
-//   },
-// };
 const supergraphSdl = readFileSync("./supergraph.graphql").toString();
 
 const apolloServer = new ApolloServer({
