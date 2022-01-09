@@ -11,20 +11,19 @@ interface chars {
   class: string | null | undefined;
 }
 const Characters: NextPage = () => {
-  const { data, status } = useSession();
-  const [, getChars] = useMyCharsQuery({
-    variables: { email: data?.user?.email as string },
+  const { data: session, status } = useSession();
+  const [{ data: charList }, getChars] = useMyCharsQuery({
+    variables: { email: session?.user?.email as string },
     pause: true,
   });
   const [chars, setChars] = useState<chars[]>();
   useEffect(() => {
     console.log(status);
     if (status === "authenticated") {
-      (async () => {
-        console.log(data?.user?.email);
-        getChars();
-        setChars(data?.charMe as chars[]);
-      })();
+      console.log(session?.user?.email);
+      getChars();
+      console.log(charList);
+      setChars(session?.charMe as chars[]);
     }
   }, [status]);
   return (

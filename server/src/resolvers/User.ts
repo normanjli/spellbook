@@ -24,7 +24,7 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async me(@Arg("email") email: string, @Ctx() { req }: MyContext) {
     try {
-      const user = await User.find({ where: { email: email } });
+      const user = await User.findOne({ where: { email: email } });
       if (user) {
         console.log(user);
         return user;

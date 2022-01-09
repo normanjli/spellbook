@@ -12662,6 +12662,8 @@ export type Mutation = {
   addChar?: Maybe<CharResponse>;
   addChar_Spell?: Maybe<Char_SpellResponse>;
   createNote?: Maybe<NoteResponse>;
+  deleteChar?: Maybe<Scalars['String']>;
+  deleteNote?: Maybe<Scalars['String']>;
   register?: Maybe<UserResponse>;
 };
 
@@ -12678,6 +12680,16 @@ export type MutationAddChar_SpellArgs = {
 
 export type MutationCreateNoteArgs = {
   options: NoteObject;
+};
+
+
+export type MutationDeleteCharArgs = {
+  charSpellId: Scalars['Float'];
+};
+
+
+export type MutationDeleteNoteArgs = {
+  noteId: Scalars['Float'];
 };
 
 
@@ -15201,9 +15213,9 @@ export type WeaponProperty = {
   url?: Maybe<Scalars['String']>;
 };
 
-export type RegularChar_SpellFragment = { __typename?: 'Char_Spell', id: number, character: number, spell_id: string };
-
 export type RegularCharFragment = { __typename?: 'Character', id: number, name: string, class: string };
+
+export type RegularChar_SpellFragment = { __typename?: 'Char_Spell', id: number, character: number, spell_id: string };
 
 export type RegularUserFragment = { __typename?: 'User', name: string, email: string };
 
@@ -15256,18 +15268,18 @@ export type MyNotesQueryVariables = Exact<{
 
 export type MyNotesQuery = { __typename?: 'Query', myNotes?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: { __typename?: 'Note', id: number, char_spell: number, title: string, text: string } | null | undefined } | null | undefined };
 
-export const RegularChar_SpellFragmentDoc = gql`
-    fragment RegularChar_Spell on Char_Spell {
-  id
-  character
-  spell_id
-}
-    `;
 export const RegularCharFragmentDoc = gql`
     fragment RegularChar on Character {
   id
   name
   class
+}
+    `;
+export const RegularChar_SpellFragmentDoc = gql`
+    fragment RegularChar_Spell on Char_Spell {
+  id
+  character
+  spell_id
 }
     `;
 export const RegularUserFragmentDoc = gql`

@@ -35,6 +35,6 @@ export class Note extends BaseEntity {
   title: string;
 
   @Field()
-  @Column()
+  @Column("text")
   text: string;
 }

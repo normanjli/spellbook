@@ -44,3 +44,5 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+.5edndschema.graphql
+.supergraph.graphql

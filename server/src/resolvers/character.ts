@@ -14,25 +14,29 @@ import { CharObject, MyContext } from "../types";
 @ObjectType()
 class CharResponse {
   @Field(() => String, { nullable: true })
-  errors?: string;
-  @Field(() => Character, { nullable: true })
-  character?: Character;
+  errors?: string | null;
+  @Field(() => [Character], { nullable: true })
+  character?: Character[] | null;
 }
 
 @Resolver()
 export class CharResolver {
   @Query(() => CharResponse, { nullable: true })
-  async myChars(@Arg("email") email: String, @Ctx() { req }: MyContext) {
+  async myChars(
+    @Arg("email") email: String,
+    @Ctx() { req }: MyContext
+  ): Promise<CharResponse> {
     try {
-      const char = await Character.find({ where: { userId: email } });
-      if (char) {
+      const char = await Character.find({ where: { user: email } });
+      if (char.length > 0) {
         console.log(char);
-        return { errors: null, character: char };
+        return { errors: null, character: [...char] };
       } else {
         return { errors: "Add some Characters", character: null };
       }
     } catch (err) {
-      return { errors: err?.message, character: undefined };
+      console.log(err.message);
+      return { errors: err?.message, character: null };
     }
   }
   @Mutation(() => CharResponse, { nullable: true })
@@ -48,12 +52,24 @@ export class CharResolver {
         char.class = options.class;
         char.user = user.email;
         char.save();
-        return { errors: undefined, character: char };
+        return { errors: null, character: [char] };
       } else {
-        return { errors: "something went wrong", character: undefined };
+        return { errors: "something went wrong", character: null };
       }
     } catch (err) {
-      return { errors: err?.message, character: undefined };
+      return { errors: err?.message, character: null };
+    }
+  }
+  @Mutation(() => String, { nullable: true })
+  async deleteChar(
+    @Arg("charId") charId: number,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      Character.delete(charId);
+      return "Success";
+    } catch (err) {
+      return "Something went wrong";
     }
   }
 }

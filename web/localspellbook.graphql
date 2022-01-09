@@ -1,13 +1,13 @@
 type Query {
   myChars(email: String!): CharResponse
   me(email: String!): User
-  myNotes(options: NoteObject!): NoteResponse
-  getCharSpells(options: Char_SpellObject!): Char_SpellResponse
+  myNotes(options: Float!): NoteResponse
+  getCharSpells(options: Float!): Char_SpellResponse
 }
 
 type CharResponse {
   errors: String
-  character: Character
+  character: [Character!]
 }
 
 type Character {
@@ -34,7 +34,7 @@ type User {
 
 type NoteResponse {
   errors: String
-  note: Note
+  note: [Note!]
 }
 
 type Note {
@@ -46,15 +46,9 @@ type Note {
   text: String!
 }
 
-input NoteObject {
-  char_spellId: Float!
-  text: String!
-  title: String!
-}
-
 type Char_SpellResponse {
   errors: String
-  char_spell: Char_Spell
+  char_spell: [Char_Spell!]
 }
 
 type Char_Spell {
@@ -65,15 +59,12 @@ type Char_Spell {
   spell_id: String!
 }
 
-input Char_SpellObject {
-  charId: Float!
-  spellName: String!
-}
-
 type Mutation {
   addChar(options: CharObject!): CharResponse
+  deleteChar(charSpellId: Float!): String
   register(options: UserObject!): UserResponse
   createNote(options: NoteObject!): NoteResponse
+  deleteNote(noteId: Float!): String
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse
 }
 
@@ -91,4 +82,15 @@ type UserResponse {
 input UserObject {
   email: String!
   name: String!
+}
+
+input NoteObject {
+  char_spellId: Float!
+  text: String!
+  title: String!
+}
+
+input Char_SpellObject {
+  charId: Float!
+  spellName: String!
 }
