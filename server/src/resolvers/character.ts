@@ -28,7 +28,7 @@ export class CharResolver {
   ): Promise<CharResponse> {
     try {
       const char = await Character.find({ where: { user: email } });
-      if (char) {
+      if (char.length > 0) {
         console.log(char);
         return { errors: null, character: [...char] };
       } else {
