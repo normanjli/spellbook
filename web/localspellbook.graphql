@@ -72,8 +72,10 @@ input Char_SpellObject {
 
 type Mutation {
   addChar(options: CharObject!): CharResponse
+  deleteChar(charSpellId: Float!): String
   register(options: UserObject!): UserResponse
   createNote(options: NoteObject!): NoteResponse
+  deleteNote(noteId: Float!): String
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse
 }
 

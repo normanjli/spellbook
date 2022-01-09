@@ -56,4 +56,16 @@ export class NoteResolver {
       return { errors: err?.message, note: undefined };
     }
   }
+  @Mutation(() => String, { nullable: true })
+  async deleteNote(
+    @Arg("noteId") noteId: number,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      Char_Spell.delete(noteId);
+      return "Success";
+    } catch (err) {
+      return "Something went wrong";
+    }
+  }
 }

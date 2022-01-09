@@ -49,4 +49,16 @@ export class Char_SpellResolver {
       return { errors: err?.message, char_spell: undefined };
     }
   }
+  @Mutation(() => String, { nullable: true })
+  async deleteChar(
+    @Arg("charSpellId") charSpellId: number,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      Char_Spell.delete(charSpellId);
+      return "Success";
+    } catch (err) {
+      return "Something went wrong";
+    }
+  }
 }

@@ -14,9 +14,9 @@ import { CharObject, MyContext } from "../types";
 @ObjectType()
 class CharResponse {
   @Field(() => String, { nullable: true })
-  errors?: string;
+  errors?: string | null;
   @Field(() => Character, { nullable: true })
-  character?: Character;
+  character?: Character[] | null | Character;
 }
 
 @Resolver()
@@ -24,15 +24,16 @@ export class CharResolver {
   @Query(() => CharResponse, { nullable: true })
   async myChars(@Arg("email") email: String, @Ctx() { req }: MyContext) {
     try {
-      const char = await Character.find({ where: { userId: email } });
+      const char = await Character.find({ where: { user: email } });
       if (char) {
         console.log(char);
-        return { errors: null, character: char };
+        return { errors: null, character: [...char] };
       } else {
         return { errors: "Add some Characters", character: null };
       }
     } catch (err) {
-      return { errors: err?.message, character: undefined };
+      console.log(err.message);
+      return { errors: err?.message, character: null };
     }
   }
   @Mutation(() => CharResponse, { nullable: true })
@@ -48,12 +49,24 @@ export class CharResolver {
         char.class = options.class;
         char.user = user.email;
         char.save();
-        return { errors: undefined, character: char };
+        return { errors: null, character: [char] };
       } else {
-        return { errors: "something went wrong", character: undefined };
+        return { errors: "something went wrong", character: null };
       }
     } catch (err) {
-      return { errors: err?.message, character: undefined };
+      return { errors: err?.message, character: null };
+    }
+  }
+  @Mutation(() => String, { nullable: true })
+  async deleteChar(
+    @Arg("charId") charId: number,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      Character.delete(charId);
+      return "Success";
+    } catch (err) {
+      return "Something went wrong";
     }
   }
 }

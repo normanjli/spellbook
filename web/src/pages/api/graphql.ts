@@ -1,18 +1,19 @@
 import { ApolloGateway } from "@apollo/gateway";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-micro";
-import { readFileSync } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import "reflect-metadata";
 
-const supergraphSdl = readFileSync("./supergraph.graphql").toString();
-
+const gateway = new ApolloGateway();
 const apolloServer = new ApolloServer({
-  gateway: new ApolloGateway({
-    supergraphSdl,
-  }),
+  gateway,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
 });
+//when changes are made to project make sure grab sdl file from studio apollo and run this
+// rover subgraph publish federation-v1qron
+//   --routing-url http://localhost:4000/graphql
+//   --schema localspellbook.graphql
+//   --name local
 
 const startServer = apolloServer.start();
 

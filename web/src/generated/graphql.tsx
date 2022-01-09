@@ -12662,6 +12662,8 @@ export type Mutation = {
   addChar?: Maybe<CharResponse>;
   addChar_Spell?: Maybe<Char_SpellResponse>;
   createNote?: Maybe<NoteResponse>;
+  deleteChar?: Maybe<Scalars['String']>;
+  deleteNote?: Maybe<Scalars['String']>;
   register?: Maybe<UserResponse>;
 };
 
@@ -12678,6 +12680,16 @@ export type MutationAddChar_SpellArgs = {
 
 export type MutationCreateNoteArgs = {
   options: NoteObject;
+};
+
+
+export type MutationDeleteCharArgs = {
+  charSpellId: Scalars['Float'];
+};
+
+
+export type MutationDeleteNoteArgs = {
+  noteId: Scalars['Float'];
 };
 
 
