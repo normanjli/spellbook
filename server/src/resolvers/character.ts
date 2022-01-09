@@ -15,14 +15,17 @@ import { CharObject, MyContext } from "../types";
 class CharResponse {
   @Field(() => String, { nullable: true })
   errors?: string | null;
-  @Field(() => Character, { nullable: true })
-  character?: Character[] | null | Character;
+  @Field(() => [Character], { nullable: true })
+  character?: Character[] | null;
 }
 
 @Resolver()
 export class CharResolver {
   @Query(() => CharResponse, { nullable: true })
-  async myChars(@Arg("email") email: String, @Ctx() { req }: MyContext) {
+  async myChars(
+    @Arg("email") email: String,
+    @Ctx() { req }: MyContext
+  ): Promise<CharResponse> {
     try {
       const char = await Character.find({ where: { user: email } });
       if (char) {

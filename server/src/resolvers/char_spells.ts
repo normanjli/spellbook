@@ -14,7 +14,7 @@ import { Char_SpellObject, MyContext } from "../types";
 class Char_SpellResponse {
   @Field(() => String, { nullable: true })
   errors?: string;
-  @Field(() => Char_Spell, { nullable: true })
+  @Field(() => [Char_Spell], { nullable: true })
   char_spell?: Char_Spell[];
 }
 
@@ -22,14 +22,18 @@ class Char_SpellResponse {
 export class Char_SpellResolver {
   @Query(() => Char_SpellResponse, { nullable: true })
   async getCharSpells(
-    @Arg("options") options: Char_SpellObject,
+    @Arg("options") options: number,
     @Ctx() { req }: MyContext
   ): Promise<Char_SpellResponse> {
     try {
       const charSpell = await Char_Spell.find({
-        where: { character: options.charId },
+        where: { character: options },
       });
-      return { errors: undefined, char_spell: charSpell };
+      if (charSpell.length > 0) {
+        return { errors: undefined, char_spell: [...charSpell] };
+      } else {
+        return { errors: "Add some Spells", char_spell: undefined };
+      }
     } catch (err) {
       return { errors: err?.message, char_spell: undefined };
     }
