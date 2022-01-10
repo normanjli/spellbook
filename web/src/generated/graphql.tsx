@@ -178,7 +178,7 @@ export type CharObject = {
 
 export type CharResponse = {
   __typename?: 'CharResponse';
-  character?: Maybe<Character>;
+  character?: Maybe<Array<Character>>;
   errors?: Maybe<Scalars['String']>;
 };
 
@@ -198,7 +198,7 @@ export type Char_SpellObject = {
 
 export type Char_SpellResponse = {
   __typename?: 'Char_SpellResponse';
-  char_spell?: Maybe<Char_Spell>;
+  char_spell?: Maybe<Array<Char_Spell>>;
   errors?: Maybe<Scalars['String']>;
 };
 
@@ -12663,7 +12663,9 @@ export type Mutation = {
   addChar_Spell?: Maybe<Char_SpellResponse>;
   createNote?: Maybe<NoteResponse>;
   deleteChar?: Maybe<Scalars['String']>;
+  deleteCharSpell?: Maybe<Scalars['String']>;
   deleteNote?: Maybe<Scalars['String']>;
+  editChar?: Maybe<Scalars['String']>;
   register?: Maybe<UserResponse>;
 };
 
@@ -12684,12 +12686,22 @@ export type MutationCreateNoteArgs = {
 
 
 export type MutationDeleteCharArgs = {
+  charId: Scalars['Float'];
+};
+
+
+export type MutationDeleteCharSpellArgs = {
   charSpellId: Scalars['Float'];
 };
 
 
 export type MutationDeleteNoteArgs = {
   noteId: Scalars['Float'];
+};
+
+
+export type MutationEditCharArgs = {
+  options: UpdateCharObject;
 };
 
 
@@ -12716,7 +12728,7 @@ export type NoteObject = {
 export type NoteResponse = {
   __typename?: 'NoteResponse';
   errors?: Maybe<Scalars['String']>;
-  note?: Maybe<Note>;
+  note?: Maybe<Array<Note>>;
 };
 
 export type Proficiency = {
@@ -12966,7 +12978,7 @@ export type QueryFeaturesArgs = {
 
 
 export type QueryGetCharSpellsArgs = {
-  options: Char_SpellObject;
+  options: Scalars['Float'];
 };
 
 
@@ -13056,7 +13068,7 @@ export type QueryMyCharsArgs = {
 
 
 export type QueryMyNotesArgs = {
-  options: NoteObject;
+  options: Scalars['Float'];
 };
 
 
@@ -15184,6 +15196,11 @@ export type TraitTrait_SpecificSubtrait_OptionsFrom = {
   url?: Maybe<Scalars['String']>;
 };
 
+export type UpdateCharObject = {
+  charId: Scalars['Float'];
+  name: Scalars['String'];
+};
+
 export type User = {
   __typename?: 'User';
   character: Array<Scalars['Float']>;
@@ -15224,21 +15241,35 @@ export type AddCharMutationVariables = Exact<{
 }>;
 
 
-export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', id: number, name: string, class: string } | null | undefined } | null | undefined };
+export type AddCharMutation = { __typename?: 'Mutation', addChar?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: Array<{ __typename?: 'Character', id: number, name: string, class: string }> | null | undefined } | null | undefined };
 
 export type AddChar_SpellMutationVariables = Exact<{
   options: Char_SpellObject;
 }>;
 
 
-export type AddChar_SpellMutation = { __typename?: 'Mutation', addChar_Spell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: { __typename?: 'Char_Spell', id: number, character: number, spell_id: string } | null | undefined } | null | undefined };
+export type AddChar_SpellMutation = { __typename?: 'Mutation', addChar_Spell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, character: number, spell_id: string }> | null | undefined } | null | undefined };
 
 export type CreateNoteMutationVariables = Exact<{
   options: NoteObject;
 }>;
 
 
-export type CreateNoteMutation = { __typename?: 'Mutation', createNote?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: { __typename?: 'Note', id: number, char_spell: number, title: string, text: string } | null | undefined } | null | undefined };
+export type CreateNoteMutation = { __typename?: 'Mutation', createNote?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: Array<{ __typename?: 'Note', id: number, char_spell: number, title: string, text: string }> | null | undefined } | null | undefined };
+
+export type DeleteCharMutationVariables = Exact<{
+  charId: Scalars['Float'];
+}>;
+
+
+export type DeleteCharMutation = { __typename?: 'Mutation', deleteChar?: string | null | undefined };
+
+export type EditCharMutationVariables = Exact<{
+  options: UpdateCharObject;
+}>;
+
+
+export type EditCharMutation = { __typename?: 'Mutation', editChar?: string | null | undefined };
 
 export type RegisterMutationVariables = Exact<{
   options: UserObject;
@@ -15259,14 +15290,14 @@ export type MyCharsQueryVariables = Exact<{
 }>;
 
 
-export type MyCharsQuery = { __typename?: 'Query', myChars?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: { __typename?: 'Character', id: number, name: string, class: string } | null | undefined } | null | undefined };
+export type MyCharsQuery = { __typename?: 'Query', myChars?: { __typename?: 'CharResponse', errors?: string | null | undefined, character?: Array<{ __typename?: 'Character', id: number, name: string, class: string }> | null | undefined } | null | undefined };
 
 export type MyNotesQueryVariables = Exact<{
-  options: NoteObject;
+  options: Scalars['Float'];
 }>;
 
 
-export type MyNotesQuery = { __typename?: 'Query', myNotes?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: { __typename?: 'Note', id: number, char_spell: number, title: string, text: string } | null | undefined } | null | undefined };
+export type MyNotesQuery = { __typename?: 'Query', myNotes?: { __typename?: 'NoteResponse', errors?: string | null | undefined, note?: Array<{ __typename?: 'Note', id: number, char_spell: number, title: string, text: string }> | null | undefined } | null | undefined };
 
 export const RegularCharFragmentDoc = gql`
     fragment RegularChar on Character {
@@ -15332,6 +15363,24 @@ export const CreateNoteDocument = gql`
 
 export function useCreateNoteMutation() {
   return Urql.useMutation<CreateNoteMutation, CreateNoteMutationVariables>(CreateNoteDocument);
+};
+export const DeleteCharDocument = gql`
+    mutation DeleteChar($charId: Float!) {
+  deleteChar(charId: $charId)
+}
+    `;
+
+export function useDeleteCharMutation() {
+  return Urql.useMutation<DeleteCharMutation, DeleteCharMutationVariables>(DeleteCharDocument);
+};
+export const EditCharDocument = gql`
+    mutation EditChar($options: UpdateCharObject!) {
+  editChar(options: $options)
+}
+    `;
+
+export function useEditCharMutation() {
+  return Urql.useMutation<EditCharMutation, EditCharMutationVariables>(EditCharDocument);
 };
 export const RegisterDocument = gql`
     mutation Register($options: UserObject!) {
@@ -15412,7 +15461,7 @@ export function useMyCharsQuery(options: Omit<Urql.UseQueryArgs<MyCharsQueryVari
   return Urql.useQuery<MyCharsQuery>({ query: MyCharsDocument, ...options });
 };
 export const MyNotesDocument = gql`
-    query MyNotes($options: NoteObject!) {
+    query MyNotes($options: Float!) {
   myNotes(options: $options) {
     errors
     note {

@@ -1,4 +1,4 @@
-query MyNotes($options: NoteObject!) {
+query MyNotes($options: Float!) {
   myNotes(options: $options) {
     errors
     note {

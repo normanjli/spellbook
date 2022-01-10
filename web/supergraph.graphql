@@ -141,7 +141,7 @@ input CharObject {
 }
 
 type CharResponse {
-  character: Character
+  character: [Character!]
   errors: String
 }
 
@@ -159,7 +159,7 @@ input Char_SpellObject {
 }
 
 type Char_SpellResponse {
-  char_spell: Char_Spell
+  char_spell: [Char_Spell!]
   errors: String
 }
 
@@ -12498,6 +12498,9 @@ type Mutation {
   addChar(options: CharObject!): CharResponse @join__field(graph: LOCALSPELLBOOK)
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse @join__field(graph: LOCALSPELLBOOK)
   createNote(options: NoteObject!): NoteResponse @join__field(graph: LOCALSPELLBOOK)
+  deleteChar(charId: Float!): String @join__field(graph: LOCALSPELLBOOK)
+  deleteCharSpell(charSpellId: Float!): String @join__field(graph: LOCALSPELLBOOK)
+  deleteNote(noteId: Float!): String @join__field(graph: LOCALSPELLBOOK)
   register(options: UserObject!): UserResponse @join__field(graph: LOCALSPELLBOOK)
 }
 
@@ -12518,7 +12521,7 @@ input NoteObject {
 
 type NoteResponse {
   errors: String
-  note: Note
+  note: [Note!]
 }
 
 type Proficiency {
@@ -12575,7 +12578,7 @@ type Query {
   feats(filter: FilterFindManyFeatInput, limit: Int = 100, skip: Int, sort: SortFindManyFeatInput): [Feat!]! @join__field(graph: _5EDNDAPI)
   feature(filter: FilterFindOneFeatureInput, skip: Int, sort: SortFindOneFeatureInput): Feature @join__field(graph: _5EDNDAPI)
   features(filter: FilterFindManyFeatureInput, limit: Int = 100, skip: Int, sort: SortFindManyFeatureInput): [Feature!]! @join__field(graph: _5EDNDAPI)
-  getCharSpells(options: Char_SpellObject!): Char_SpellResponse @join__field(graph: LOCALSPELLBOOK)
+  getCharSpells(options: Float!): Char_SpellResponse @join__field(graph: LOCALSPELLBOOK)
   language(filter: FilterFindOneLanguageInput, skip: Int, sort: SortFindOneLanguageInput): Language @join__field(graph: _5EDNDAPI)
   languages(filter: FilterFindManyLanguageInput, limit: Int = 100, skip: Int, sort: SortFindManyLanguageInput): [Language!]! @join__field(graph: _5EDNDAPI)
   level(filter: FilterFindOneLevelInput, skip: Int, sort: SortFindOneLevelInput): Level @join__field(graph: _5EDNDAPI)
@@ -12588,7 +12591,7 @@ type Query {
   monster(filter: FilterFindOneMonsterInput, skip: Int, sort: SortFindOneMonsterInput): Monster @join__field(graph: _5EDNDAPI)
   monsters(filter: FilterFindManyMonsterInput, limit: Int = 100, skip: Int, sort: SortFindManyMonsterInput): [Monster!]! @join__field(graph: _5EDNDAPI)
   myChars(email: String!): CharResponse @join__field(graph: LOCALSPELLBOOK)
-  myNotes(options: NoteObject!): NoteResponse @join__field(graph: LOCALSPELLBOOK)
+  myNotes(options: Float!): NoteResponse @join__field(graph: LOCALSPELLBOOK)
   proficiencies(filter: FilterFindManyProficiencyInput, limit: Int = 100, skip: Int, sort: SortFindManyProficiencyInput): [Proficiency!]! @join__field(graph: _5EDNDAPI)
   proficiency(filter: FilterFindOneProficiencyInput, skip: Int, sort: SortFindOneProficiencyInput): Proficiency @join__field(graph: _5EDNDAPI)
   race(filter: FilterFindOneRaceInput, skip: Int, sort: SortFindOneRaceInput): Race @join__field(graph: _5EDNDAPI)

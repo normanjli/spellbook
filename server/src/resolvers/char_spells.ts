@@ -13,9 +13,9 @@ import { Char_SpellObject, MyContext } from "../types";
 @ObjectType()
 class Char_SpellResponse {
   @Field(() => String, { nullable: true })
-  errors?: string;
+  errors?: string | null;
   @Field(() => [Char_Spell], { nullable: true })
-  char_spell?: Char_Spell[];
+  char_spell?: Char_Spell[] | null;
 }
 
 @Resolver()
@@ -30,12 +30,12 @@ export class Char_SpellResolver {
         where: { character: options },
       });
       if (charSpell.length > 0) {
-        return { errors: undefined, char_spell: [...charSpell] };
+        return { errors: null, char_spell: [...charSpell] };
       } else {
-        return { errors: "Add some Spells", char_spell: undefined };
+        return { errors: "Add some Spells", char_spell: null };
       }
     } catch (err) {
-      return { errors: err?.message, char_spell: undefined };
+      return { errors: err?.message, char_spell: null };
     }
   }
   @Mutation(() => Char_SpellResponse, { nullable: true })
@@ -54,7 +54,7 @@ export class Char_SpellResolver {
     }
   }
   @Mutation(() => String, { nullable: true })
-  async deleteChar(
+  async deleteCharSpell(
     @Arg("charSpellId") charSpellId: number,
     @Ctx() { req }: MyContext
   ): Promise<String> {

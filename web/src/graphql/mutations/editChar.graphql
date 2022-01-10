@@ -1,0 +1,3 @@
+mutation EditChar($options: UpdateCharObject!) {
+  editChar(options: $options)
+}

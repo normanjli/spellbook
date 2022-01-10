@@ -1,0 +1,3 @@
+mutation DeleteChar($charId: Float!) {
+  deleteChar(charId: $charId)
+}

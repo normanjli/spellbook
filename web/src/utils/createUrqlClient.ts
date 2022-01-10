@@ -1,33 +1,63 @@
-// import { cacheExchange } from "@urql/exchange-graphcache";
+import { cacheExchange } from "@urql/exchange-graphcache";
+import {
+  AddCharMutation,
+  EditCharMutation,
+  MyCharsDocument,
+  MyCharsQuery,
+} from "src/generated/graphql";
 import { dedupExchange, fetchExchange } from "urql";
-// import { RegisterDocument, RegisterMutation } from "../generated/graphql";
-// import { betterUpdateQuery } from "./betterUpdateQuery";
+import { betterUpdateQuery } from "./betterUpdateQuery";
 export const createUrqlClient = (ssrExchange: any) => {
   return {
     url: "http://localhost:3000/api/graphql",
     fetchOptions: { credentials: "include" } as const,
     exchanges: [
       dedupExchange,
-      // cacheExchange({
-      //   updates: {
-      //     Mutation: {
-      //       register: (results, args, cache, info) => {
-      //         betterUpdateQuery<RegisterMutation>(
-      //           cache,
-      //           { query: RegisterDocument },
-      //           results,
-      //           (result, query) => {
-      //             if (result.register.errors) {
-      //               return query;
-      //             } else {
-      //               return { me: result.register.user };
-      //             }
-      //           }
-      //         );
-      //       },
-      //     },
-      //   },
-      // }),
+      cacheExchange({
+        keys: { CharResponse: ({ __typename }) => __typename },
+        updates: {
+          Mutation: {
+            addChar: (results, args, cache, info) => {
+              betterUpdateQuery<AddCharMutation, MyCharsQuery>(
+                cache,
+                { query: MyCharsDocument },
+                results,
+                (result, query) => {
+                  if (result.addChar?.errors) {
+                    return query;
+                  } else {
+                    return {
+                      myChars: {
+                        errors: "",
+                        character: result.addChar?.character,
+                      },
+                    };
+                  }
+                }
+              );
+            },
+            // editChar: (results, args, cache, info) => {
+            //   betterUpdateQuery<EditCharMutation, MyCharsQuery>(
+            //     cache,
+            //     { query: MyCharsDocument },
+            //     results,
+            //     (result, query) => {
+            //       if (result.editChar?.errors) {
+            //         return query;
+            //       } else {
+            //         return {
+            //           myChars: {
+            //             errors: "",
+            //             character: result.editChar?.character,
+            //           },
+            //         };
+            //       }
+            //     }
+            //   );
+            // },
+          },
+        },
+      }),
       ssrExchange,
       fetchExchange,
     ],

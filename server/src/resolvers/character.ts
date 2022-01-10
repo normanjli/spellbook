@@ -9,7 +9,7 @@ import {
 } from "type-graphql";
 import { Character } from "../entity/Character";
 import { User } from "../entity/User";
-import { CharObject, MyContext } from "../types";
+import { CharObject, MyContext, UpdateCharObject } from "../types";
 
 @ObjectType()
 class CharResponse {
@@ -51,8 +51,13 @@ export class CharResolver {
         char.name = options.name;
         char.class = options.class;
         char.user = user.email;
-        char.save();
-        return { errors: null, character: [char] };
+        await char.save();
+        return {
+          errors: null,
+          character: [
+            ...(await Character.find({ where: { user: user.email } })),
+          ],
+        };
       } else {
         return { errors: "something went wrong", character: null };
       }
@@ -68,6 +73,18 @@ export class CharResolver {
     try {
       Character.delete(charId);
       return "Success";
+    } catch (err) {
+      return "Something went wrong";
+    }
+  }
+  @Mutation(() => String, { nullable: true })
+  async editChar(
+    @Arg("options") options: UpdateCharObject,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      await Character.update(options.charId, { name: options.name });
+      return options.name;
     } catch (err) {
       return "Something went wrong";
     }

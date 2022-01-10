@@ -44,3 +44,10 @@ export class NoteObject {
   @Field()
   title: string;
 }
+@InputType()
+export class UpdateCharObject {
+  @Field()
+  charId: number;
+  @Field()
+  name: string;
+}
