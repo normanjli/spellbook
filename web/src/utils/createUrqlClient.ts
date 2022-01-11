@@ -1,7 +1,6 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import {
   AddCharMutation,
-  EditCharMutation,
   MyCharsDocument,
   MyCharsQuery,
 } from "src/generated/graphql";
@@ -36,25 +35,6 @@ export const createUrqlClient = (ssrExchange: any) => {
                 }
               );
             },
-            // editChar: (results, args, cache, info) => {
-            //   betterUpdateQuery<EditCharMutation, MyCharsQuery>(
-            //     cache,
-            //     { query: MyCharsDocument },
-            //     results,
-            //     (result, query) => {
-            //       if (result.editChar?.errors) {
-            //         return query;
-            //       } else {
-            //         return {
-            //           myChars: {
-            //             errors: "",
-            //             character: result.editChar?.character,
-            //           },
-            //         };
-            //       }
-            //     }
-            //   );
-            // },
           },
         },
       }),

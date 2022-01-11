@@ -24,13 +24,13 @@ const SideBar: React.FC<sideBarProps> = ({ ...children }) => {
         ref={btnRef.current}
         bg={"tomato"}
         onClick={onOpen}
-        position={"sticky"}
-        top={"95vh"}
+        position={"fixed"}
+        top={"90vh"}
         left={"1em"}
         zIndex={1}
+        display={{ md: "none" }}
       >
         <FaPlus />
-        <Box ml={"0.5em"}>Add a Character</Box>
       </Button>
       <Drawer
         isOpen={isOpen}
@@ -51,7 +51,7 @@ const SideBar: React.FC<sideBarProps> = ({ ...children }) => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" form={"addChar"}>
+            <Button colorScheme="blue" form={"addChar"} type={"submit"}>
               Submit
             </Button>
           </DrawerFooter>

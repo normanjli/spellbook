@@ -16,7 +16,9 @@ query GetClass($filter: FilterFindOneClassInput) {
           name
         }
         damage_at_character_level
-        damage_at_slot_level
+        damage_at_slot_level{
+          
+        }
       }
       dc {
         dc_success

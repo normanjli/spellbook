@@ -71,7 +71,7 @@ export class CharResolver {
     @Ctx() { req }: MyContext
   ): Promise<String> {
     try {
-      Character.delete(charId);
+      await Character.delete(charId);
       return "Success";
     } catch (err) {
       return "Something went wrong";

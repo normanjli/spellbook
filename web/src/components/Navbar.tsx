@@ -18,10 +18,13 @@ const Navbar: React.FC<NavbarProps> = ({ location }) => {
     >
       <Flex justifyContent="space-between" margin={"auto"} w={"80vw"}>
         <Flex>
-          <FaStroopwafel />
           <Link href="/">Spellbook</Link>
         </Flex>
-        <Heading>{location}</Heading>
+        {location !== "Browsing Spells" ? (
+          <Heading display={{ base: "none", md: "flex" }}>{location}</Heading>
+        ) : (
+          ""
+        )}
         <Menu></Menu>
       </Flex>
     </Heading>

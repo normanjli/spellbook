@@ -8,7 +8,7 @@ const Index: NextPage = () => {
   return (
     <>
       <Navbar location="Home"></Navbar>
-      <Center flexDir={"column"} bg={"gray.100"} h={"100vh"} w={"100%"}>
+      <Center flexDir={"column"} h={"100vh"} w={"100%"}>
         <Heading mt="1em" size={"md"}>
           This is a DND 5th Edition spellbook tracking app.
         </Heading>

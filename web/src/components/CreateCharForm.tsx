@@ -1,41 +1,91 @@
-import { Center } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Input,
+  RadioGroup,
+  Stack,
+  useRadioGroup,
+} from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 import { useAddCharMutation } from "src/generated/graphql";
 import { InputField } from "./InputField";
+import RadioCard from "./RadioCard";
 interface createCharFormProps {}
 const CreateCharForm: React.FC<createCharFormProps> = () => {
   const [, addChar] = useAddCharMutation();
   const { data, status } = useSession();
+  const [dndClass, setDndClass] = useState("Other");
+  const options = [
+    "Barbarian",
+    "Bard",
+    "Cleric",
+    "Druid",
+    "Monk",
+    "Paladin",
+    "Ranger",
+    "Rogue",
+    "Sorcerer",
+    "Warlock",
+    "Wizard",
+    "Other",
+  ];
+
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "class",
+    defaultValue: "Other",
+    onChange: setDndClass,
+  });
+  const group = getRootProps();
   return (
-    <div>
-      <Center flexDir={"column"}>
-        <Formik
-          initialValues={{ name: "", class: "" }}
-          onSubmit={async (values, { setErrors }) => {
-            if (data?.user && status === "authenticated") {
-              const char = await addChar({
-                options: {
-                  name: values.name,
-                  class: !values.class ? "other" : values.class,
-                  user: data.user.email as string,
-                },
-              });
-              if (char.error !== undefined) {
-                setErrors(char.error);
-              }
-            } else {
-              setErrors({ name: "something broke" });
+    <Center flexDir={"column"} h="90%">
+      <Formik
+        initialValues={{ name: "", class: dndClass }}
+        onSubmit={async (values, { setErrors }) => {
+          if (data?.user && status === "authenticated") {
+            const char = await addChar({
+              options: {
+                name: values.name,
+                class: dndClass,
+                user: data.user.email as string,
+              },
+            });
+            if (char.error !== undefined) {
+              setErrors(char.error);
             }
-          }}
-        >
-          <Form id="addChar">
-            <InputField
-              name="name"
-              placeholder="Character Name"
-              label="Character Name"
-            ></InputField>
+          } else {
+            setErrors({ name: "something broke" });
+          }
+        }}
+      >
+        <Form id="addChar">
+          <InputField
+            name="name"
+            placeholder="Character Name"
+            label="Character Name"
+          ></InputField>
+          <RadioGroup
+            onChange={setDndClass}
+            value={dndClass}
+            display={{ base: "none", md: "inline" }}
+          >
+            <Flex flexDir={"column"}>
+              <Stack {...group}>
+                {options.map((value) => {
+                  const radio = getRadioProps({ value });
+                  return (
+                    <RadioCard key={value} {...radio}>
+                      {value}
+                    </RadioCard>
+                  );
+                })}
+              </Stack>
+            </Flex>
+          </RadioGroup>
+          <Box display={{ base: "inline", md: "none" }}>
             <Field
               mt="3"
               as="select"
@@ -56,10 +106,11 @@ const CreateCharForm: React.FC<createCharFormProps> = () => {
               <option value="warlock">Warlock</option>
               <option value="other">Other</option>
             </Field>
-          </Form>
-        </Formik>
-      </Center>
-    </div>
+          </Box>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Formik>
+    </Center>
   );
 };
 

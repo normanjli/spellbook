@@ -59,7 +59,7 @@ export class NoteResolver {
     @Ctx() { req }: MyContext
   ): Promise<String> {
     try {
-      Char_Spell.delete(noteId);
+      await Char_Spell.delete(noteId);
       return "Success";
     } catch (err) {
       return "Something went wrong";

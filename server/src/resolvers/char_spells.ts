@@ -47,7 +47,7 @@ export class Char_SpellResolver {
       const charSpell = new Char_Spell();
       charSpell.character = options.charId;
       charSpell.spell_id = options.spellName;
-      charSpell.save();
+      await charSpell.save();
       return { errors: undefined, char_spell: [charSpell] };
     } catch (err) {
       return { errors: err?.message, char_spell: undefined };

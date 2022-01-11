@@ -20,6 +20,7 @@ const Login = () => {
   const [, register] = useRegisterMutation();
   const route = useRouter();
   useEffect(() => {
+    console.log("dong");
     if (status === "authenticated") {
       const options = {
         email: session?.user?.email as string,
@@ -32,7 +33,7 @@ const Login = () => {
         console.log(err);
       }
     }
-  }, [status]);
+  }, [status, register, route, session]);
   const userRegister = async (
     e: React.MouseEvent,
     id: "github" | "google" | "discord"
@@ -87,4 +88,4 @@ const Login = () => {
     </Box>
   );
 };
-export default withUrqlClient(createUrqlClient, { ssr: false })(Login);
+export default withUrqlClient(createUrqlClient, { ssr: true })(Login);

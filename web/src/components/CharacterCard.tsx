@@ -7,11 +7,10 @@ import {
   Heading,
   Spacer,
   Spinner,
-  useEditableState,
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaBook, FaBookOpen, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import {
   useDeleteCharMutation,
   useEditCharMutation,
@@ -79,8 +78,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
                 <FaTimes />
               </Button>
               <Center gap="2em">
-                <FaBookOpen size={"15em"} />
-                <Heading>
+                <Heading fontSize={{ base: "15px", md: "20px", lg: "30px" }}>
                   <Editable
                     defaultValue={e.name}
                     display={"flex"}
