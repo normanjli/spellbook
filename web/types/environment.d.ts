@@ -22,3 +22,13 @@ namespace NodeJS {
     SECRET: string;
   }
 }
+interface CharObj {
+  className: string;
+  index: number;
+  id: number;
+}
+
+type CharContext = {
+  character?: CharObj;
+  updateCharFocus: (className: string, index: number, id: number) => void;
+};

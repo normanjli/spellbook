@@ -8,14 +8,17 @@ import {
   Spinner,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { FaBookOpen, FaTimes } from "react-icons/fa";
+import { CharacterContext } from "src/context/characterContext";
 import {
   useDeleteCharMutation,
   useEditCharMutation,
 } from "src/generated/graphql";
 import { Card } from "./Card";
 import EditableControls from "./EditableControls";
+
 interface CharacterCardProps {
   charList:
     | {
@@ -36,6 +39,8 @@ interface CharacterCardProps {
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
+  const { updateCharFocus } = useContext(CharacterContext) as CharContext;
+  const route = useRouter();
   const [, deleteChar] = useDeleteCharMutation();
   const [, editChar] = useEditCharMutation();
   const toast = useToast();
@@ -75,6 +80,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
             >
               <FaTimes />
             </Button>
+            {/* <Link href="/spellbooks"> */}
+            <FaBookOpen
+              size={"10em"}
+              onClick={() => {
+                updateCharFocus(e.class, i, e.id);
+                route.push("/spellbooks");
+              }}
+            />
+            {/* </Link> */}
             <Center gap="2em">
               <Heading fontSize={{ base: "15px", md: "20px", lg: "30px" }}>
                 <Editable
