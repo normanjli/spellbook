@@ -1,8 +1,8 @@
 import {
-  useEditableControls,
   ButtonGroup,
-  IconButton,
   Flex,
+  IconButton,
+  useEditableControls,
 } from "@chakra-ui/react";
 import { FaCheck, FaEdit, FaTimes } from "react-icons/fa";
 

@@ -26,7 +26,9 @@ export class Note extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => Number)
-  @ManyToOne(() => Char_Spell, (char_spell) => char_spell.id)
+  @ManyToOne(() => Char_Spell, (char_spell) => char_spell.id, {
+    onDelete: "CASCADE",
+  })
   @JoinColumn()
   char_spell: Char_Spell["id"];
 

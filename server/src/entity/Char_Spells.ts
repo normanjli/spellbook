@@ -6,10 +6,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Character } from "./Character";
+import { Note } from "./Note";
 @ObjectType()
 @Entity()
 export class Char_Spell extends BaseEntity {
@@ -26,9 +28,13 @@ export class Char_Spell extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => Number)
-  @ManyToOne(() => Character, () => Number)
+  @ManyToOne(() => Character, () => Number, { onDelete: "CASCADE" })
   @JoinColumn()
   character: Character["id"];
+
+  @Field(() => Number)
+  @OneToMany(() => Note, (note) => note.id, { cascade: true })
+  note?: Note[];
 
   @Field()
   @Column()

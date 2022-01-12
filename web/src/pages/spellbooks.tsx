@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { withUrqlClient } from "next-urql";
 import React from "react";
-import CharSpellbook from "src/components/CharSpellBook";
+import CharSpellbook from "src/components/CharSpellbook";
 import Navbar from "src/components/Navbar";
 import { createUrqlClient } from "src/utils/createUrqlClient";
 

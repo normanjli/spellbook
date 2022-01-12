@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Char_Spell } from "./Char_Spells";
 import { User } from "./User";
 @ObjectType()
 @Entity()
@@ -27,6 +29,12 @@ export class Character extends BaseEntity {
   @Field(() => String)
   @ManyToOne(() => User, (user) => user.email)
   user: User["email"];
+
+  @Field(() => Number)
+  @OneToMany(() => Char_Spell, (charspell) => charspell.id, {
+    cascade: true,
+  })
+  charspell?: Char_Spell[];
 
   @Field()
   @Column()

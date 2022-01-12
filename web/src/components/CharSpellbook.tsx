@@ -59,7 +59,7 @@ const CharSpellbook: React.FC = () => {
       <TabPanels>
         {charList?.myChars?.character?.map((character) => {
           return (
-            <TabPanel>
+            <TabPanel key={character.id}>
               {!fetching && classSpells ? (
                 <SpellAccordion data={classSpells} />
               ) : (

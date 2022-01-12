@@ -8,7 +8,7 @@ const BrowseSpells: NextPage = () => {
   return (
     <>
       <Navbar location="Browsing Spells"></Navbar>
-      <SpellTabs options={undefined} />
+      <SpellTabs />
     </>
   );
 };

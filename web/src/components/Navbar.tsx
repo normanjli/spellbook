@@ -1,7 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
-import { FaStroopwafel } from "react-icons/fa";
 import Menu from "./Menu";
 interface NavbarProps {
   location: String;

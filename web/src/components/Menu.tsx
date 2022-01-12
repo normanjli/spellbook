@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import React, { ReactChild, useEffect, useState } from "react";
-import { FaBars, FaChevronDown, FaHamburger } from "react-icons/fa";
+import { FaBars, FaChevronDown } from "react-icons/fa";
 const NavMenu: React.FC = () => {
   const { status } = useSession();
   const [links, setLinks] = useState<ReactChild[]>([]);

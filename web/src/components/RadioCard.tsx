@@ -1,4 +1,4 @@
-import { useRadio, Box } from "@chakra-ui/react";
+import { Box, useRadio } from "@chakra-ui/react";
 
 const RadioCard: React.FC = (props) => {
   const { getInputProps, getCheckboxProps } = useRadio(props as any);

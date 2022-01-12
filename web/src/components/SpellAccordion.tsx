@@ -23,7 +23,7 @@ const SpellAccordion: React.FC<SpellAccordionProps> = ({ data }) => {
       {data.class?.spells
         .sort((a, b) => (a.level as number) - (b.level as number))
         .map((spell) => (
-          <AccordionItem>
+          <AccordionItem key={spell.name}>
             <AccordionButton>
               <Heading flex="1" textAlign="left" size="md" key={spell.name}>
                 <Box>{spell.name}</Box>
