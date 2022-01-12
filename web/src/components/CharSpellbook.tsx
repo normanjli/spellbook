@@ -9,12 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { useGetClassQuery, useMyCharsQuery } from "src/generated/graphql";
+import {
+  useGetCharSpellsQuery,
+  useGetClassQuery,
+  useMyCharsQuery,
+} from "src/generated/graphql";
 import SpellAccordion from "./SpellAccordion";
 
 const CharSpellbook: React.FC = () => {
   const { data: session, status } = useSession();
   const [dndClass, setDndClass] = useState("");
+  const [charId, setCharId] = useState<number>();
   const [{ data: classSpells, fetching }, getClassSpells] = useGetClassQuery({
     variables: { filter: { name: dndClass } },
     pause: true,
@@ -23,24 +28,29 @@ const CharSpellbook: React.FC = () => {
     variables: { email: session?.user?.email as string },
     pause: true,
   });
+  const [, getCharSpells] = useGetCharSpellsQuery({
+    variables: { options: charId as number },
+    pause: true,
+  });
   useEffect(() => {
     if (status === "authenticated") {
       getMyChars();
     }
   }, [status, getMyChars]);
-  const refreshSpells = async (className: string) => {
-    setDndClass(className);
-    await getClassSpells();
-  };
+  useEffect(() => {
+    getCharSpells();
+    getClassSpells();
+  }, [charId, dndClass]);
+
   return (
     <Tabs
-      // orientation="vertical"
       size="lg"
       align="center"
       position={"relative"}
       top="5em"
       variant={"enclosed"}
       isFitted={true}
+      isLazy
     >
       <TabList>
         {charList?.myChars?.character
@@ -48,7 +58,9 @@ const CharSpellbook: React.FC = () => {
               <Tab
                 key={character.id}
                 onClick={() => {
-                  refreshSpells(character.class);
+                  setDndClass(character.class);
+                  setCharId(character.id);
+                  console.log(charId, dndClass);
                 }}
               >
                 {`${character.name} the ${character.class}`}

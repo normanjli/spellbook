@@ -15278,6 +15278,13 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'UserResponse', errors?: string | null | undefined, user?: { __typename?: 'User', name: string, email: string } | null | undefined } | null | undefined };
 
+export type GetCharSpellsQueryVariables = Exact<{
+  options: Scalars['Float'];
+}>;
+
+
+export type GetCharSpellsQuery = { __typename?: 'Query', getCharSpells?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, character: number, spell_id: string }> | null | undefined } | null | undefined };
+
 export type GetClassQueryVariables = Exact<{
   filter?: InputMaybe<FilterFindOneClassInput>;
 }>;
@@ -15395,6 +15402,22 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const GetCharSpellsDocument = gql`
+    query GetCharSpells($options: Float!) {
+  getCharSpells(options: $options) {
+    errors
+    char_spell {
+      id
+      character
+      spell_id
+    }
+  }
+}
+    `;
+
+export function useGetCharSpellsQuery(options: Omit<Urql.UseQueryArgs<GetCharSpellsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCharSpellsQuery>({ query: GetCharSpellsDocument, ...options });
 };
 export const GetClassDocument = gql`
     query GetClass($filter: FilterFindOneClassInput) {

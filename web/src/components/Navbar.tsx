@@ -12,7 +12,7 @@ const Navbar: React.FC<NavbarProps> = ({ location }) => {
       zIndex={1}
       position="fixed"
       w={"full"}
-      padding={".5em"}
+      padding={".2em"}
       bg={"tomato"}
     >
       <Flex justifyContent="space-between" margin={"auto"} w={"80vw"}>

@@ -12,8 +12,10 @@ import {
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 import CreateCharForm from "./CreateCharForm";
-interface sideBarProps {}
-const SideBar: React.FC<sideBarProps> = ({ ...children }) => {
+interface sideBarProps {
+  dndClass: string;
+}
+const SideBar: React.FC<sideBarProps> = ({ dndClass }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -43,7 +45,7 @@ const SideBar: React.FC<sideBarProps> = ({ ...children }) => {
           <DrawerHeader>Add Characters</DrawerHeader>
 
           <DrawerBody>
-            <CreateCharForm />
+            <CreateCharForm dndClass={dndClass} />
           </DrawerBody>
 
           <DrawerFooter>

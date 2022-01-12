@@ -1,44 +1,19 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  RadioGroup,
-  Stack,
-  useRadioGroup,
-} from "@chakra-ui/react";
+import { Box, Button, Center } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React from "react";
 import { useAddCharMutation } from "src/generated/graphql";
 import { InputField } from "./InputField";
-import RadioCard from "./RadioCard";
-interface createCharFormProps {}
-const CreateCharForm: React.FC<createCharFormProps> = () => {
+interface createCharFormProps {
+  dndClass: string;
+}
+const CreateCharForm: React.FC<createCharFormProps> = ({
+  children,
+  dndClass,
+}) => {
   const [, addChar] = useAddCharMutation();
   const { data, status } = useSession();
-  const [dndClass, setDndClass] = useState("Other");
-  const options = [
-    "Barbarian",
-    "Bard",
-    "Cleric",
-    "Druid",
-    "Monk",
-    "Paladin",
-    "Ranger",
-    "Rogue",
-    "Sorcerer",
-    "Warlock",
-    "Wizard",
-    "Other",
-  ];
 
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "class",
-    defaultValue: "Other",
-    onChange: setDndClass,
-  });
-  const group = getRootProps();
   return (
     <Center flexDir={"column"} h="90%">
       <Formik
@@ -48,7 +23,7 @@ const CreateCharForm: React.FC<createCharFormProps> = () => {
             const char = await addChar({
               options: {
                 name: values.name,
-                class: dndClass,
+                class: dndClass ? dndClass : values.class,
                 user: data.user.email as string,
               },
             });
@@ -66,44 +41,22 @@ const CreateCharForm: React.FC<createCharFormProps> = () => {
             placeholder="Character Name"
             label="Character Name"
           ></InputField>
-          <RadioGroup
-            onChange={setDndClass}
-            value={dndClass}
-            display={{ base: "none", md: "inline" }}
-          >
-            <Flex flexDir={"column"}>
-              <Stack {...group}>
-                {options.map((value) => {
-                  const radio = getRadioProps({ value });
-                  return (
-                    <RadioCard key={value} {...radio}>
-                      {value}
-                    </RadioCard>
-                  );
-                })}
-              </Stack>
-            </Flex>
-          </RadioGroup>
+          {children}
           <Box display={{ base: "inline", md: "none" }}>
-            <Field
-              mt="3"
-              as="select"
-              name="class"
-              placeholder="Class"
-              defaultValue="Class"
-            >
-              <option value="barbarian">Barbarian</option>
-              <option value="cleric">Cleric</option>
-              <option value="bard">Bard</option>
-              <option value="druid">Druid</option>
-              <option value="paladin">Paladin</option>
-              <option value="monk">Monk</option>
-              <option value="rogue">Rogue</option>
-              <option value="ranger">Ranger</option>
-              <option value="sorcerer">Sorcerer</option>
-              <option value="wizard">Wizard</option>
-              <option value="warlock">Warlock</option>
-              <option value="other">Other</option>
+            <Field mt="3" as="select" name="class" placeholder="Class">
+              <option value="Barbarian">Barbarian</option>
+              <option value="Bard">Bard</option>
+              <option value="Cleric">Cleric</option>
+              <option value="Druid">Druid</option>
+              <option value="Fighter">Fighter</option>
+              <option value="Monk">Monk</option>
+              <option value="Paladin">Paladin</option>
+              <option value="Ranger">Ranger</option>
+              <option value="Rogue">Rogue</option>
+              <option value="Sorcerer">Sorcerer</option>
+              <option value="Warlock">Warlock</option>
+              <option value="Wizard">Wizard</option>
+              <option value="Other">Other</option>
             </Field>
           </Box>
           <Button type="submit">Submit</Button>

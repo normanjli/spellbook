@@ -25,12 +25,13 @@ const SpellTabs: React.FC = () => {
   return (
     <Tabs
       // orientation="vertical"
-      size="lg"
+      size={"lg"}
       align="center"
       position={"relative"}
-      top="5em"
+      top="4em"
       variant={"enclosed"}
       isFitted={true}
+      isLazy
     >
       <TabList>
         <Tab

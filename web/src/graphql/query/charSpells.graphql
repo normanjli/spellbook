@@ -1,0 +1,10 @@
+query GetCharSpells($options: Float!) {
+  getCharSpells(options: $options) {
+    errors
+    char_spell {
+      id
+      character
+      spell_id
+    }
+  }
+}

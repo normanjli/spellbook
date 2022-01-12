@@ -13,7 +13,10 @@ export const createUrqlClient = (ssrExchange: any) => {
     exchanges: [
       dedupExchange,
       cacheExchange({
-        keys: { CharResponse: ({ __typename }) => __typename },
+        keys: {
+          CharResponse: ({ __typename }) => __typename,
+          Char_SpellResponse: ({ __typename }) => __typename,
+        },
         updates: {
           Mutation: {
             addChar: (results, args, cache, info) => {
@@ -27,6 +30,7 @@ export const createUrqlClient = (ssrExchange: any) => {
                   } else {
                     return {
                       myChars: {
+                        __typename: "CharResponse",
                         errors: "",
                         character: result.addChar?.character,
                       },
