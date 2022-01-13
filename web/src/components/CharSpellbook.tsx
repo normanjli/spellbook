@@ -17,22 +17,17 @@ import {
 import { useSession } from "next-auth/react";
 import React, { memo, useContext, useEffect, useState } from "react";
 import { CharacterContext } from "src/context/characterContext";
-import {
-  useGetCharSpellsQuery,
-  useGetClassQuery,
-  useMyCharsQuery,
-} from "src/generated/graphql";
+import { useGetClassQuery, useMyCharsQuery } from "src/generated/graphql";
 import CharSpellAccordion from "./CharSpellAccordion";
 import SpellAccordion from "./SpellAccordion";
 
 const CharSpellboo: React.FC = () => {
   const { data: session, status } = useSession();
-  const { character } = useContext(CharacterContext) as CharContext;
+  const { character: contextChar } = useContext(
+    CharacterContext
+  ) as CharContext;
   const [dndClass, setDndClass] = useState<string>(
-    character?.className ? character?.className : ""
-  );
-  const [charId, setCharId] = useState<number>(
-    character?.id ? character?.id : NaN
+    contextChar?.className ? contextChar?.className : ""
   );
   const [{ data: classSpells, fetching }, getClassSpells] = useGetClassQuery({
     variables: { filter: { name: dndClass } },
@@ -42,24 +37,18 @@ const CharSpellboo: React.FC = () => {
     variables: { email: session?.user?.email as string },
     pause: true,
   });
-  const [{ data: charSpells }, getCharSpells] = useGetCharSpellsQuery({
-    variables: { options: charId as number },
-    pause: true,
-  });
   useEffect(() => {
     if (status === "authenticated") {
       getMyChars();
     }
   }, [status, getMyChars]);
   useEffect(() => {
-    if (charId && dndClass) {
-      getCharSpells();
+    if (dndClass) {
       getClassSpells();
-    } else if (charList?.myChars?.character && !charId && !dndClass) {
-      setCharId(charList.myChars?.character[0].id);
+    } else if (charList?.myChars?.character && !dndClass) {
       setDndClass(charList.myChars.character[0].class);
     }
-  }, [charId, dndClass, charList]);
+  }, [dndClass, charList]);
 
   return (
     <Tabs
@@ -70,7 +59,7 @@ const CharSpellboo: React.FC = () => {
       variant={"enclosed"}
       isFitted={true}
       isLazy
-      defaultIndex={character ? character.index : 0}
+      defaultIndex={contextChar ? contextChar.index : 0}
     >
       <TabList>
         {charList?.myChars?.character ? (
@@ -79,7 +68,6 @@ const CharSpellboo: React.FC = () => {
               key={character.id}
               onClick={() => {
                 setDndClass(character.class);
-                setCharId(character.id);
               }}
             >
               {`${character.name} the ${character.class}`}
@@ -107,14 +95,10 @@ const CharSpellboo: React.FC = () => {
                       <AccordionIcon />
                     </AccordionButton>
                     <AccordionPanel>
-                      {charSpells?.getCharSpells?.char_spell ? (
-                        <CharSpellAccordion
-                          charSpells={charSpells as any}
-                          classSpells={classSpells}
-                        />
-                      ) : (
-                        <Heading>Add Some Spells yo</Heading>
-                      )}
+                      <CharSpellAccordion
+                        charId={character.id}
+                        classSpells={classSpells}
+                      />
                     </AccordionPanel>
                   </AccordionItem>
                   <AccordionItem>

@@ -1,29 +1,37 @@
-import { Accordion } from "@chakra-ui/react";
-import React, { memo, useEffect, useState } from "react";
-import { GetCharSpellsQuery, GetClassQuery } from "../generated/graphql";
+import { Accordion, Button, Heading } from "@chakra-ui/react";
+import React, { memo, useMemo } from "react";
+import { GetClassQuery, useGetCharSpellsQuery } from "../generated/graphql";
 import SpellLevelAccordionPanel from "./SpellLevelAccordionPanel";
 
 interface SpellAccordionProps {
-  charSpells: GetCharSpellsQuery;
-  classSpells: GetClassQuery;
+  charId: number;
+  classSpells: GetClassQuery | undefined;
 }
 const charSpellAcc: React.FC<SpellAccordionProps> = ({
-  charSpells,
+  charId,
   classSpells,
 }) => {
-  const [data, setData] = useState<GetClassQuery>();
-  useEffect(() => {
-    const flatArray = charSpells.getCharSpells?.char_spell?.map(
-      (e) => e.spell_id
-    ) as string[];
-    setData({
-      class: {
-        spells: classSpells.class?.spells.filter((spell) => {
-          return !!flatArray.includes(spell.name as string);
-        }) as any,
-      },
+  const [{ data: charSpells, fetching: charSpellFetching }, getCharSpells] =
+    useGetCharSpellsQuery({
+      variables: { options: charId },
+      requestPolicy: "cache-and-network",
     });
-  }, [charSpells, classSpells]);
+  const data = useMemo(() => {
+    if (charSpells?.getCharSpells?.char_spell && classSpells?.class?.spells) {
+      const flatArray = charSpells.getCharSpells?.char_spell?.map(
+        (e) => e.spell_id
+      ) as string[];
+      return {
+        class: {
+          spells: classSpells.class?.spells.filter((spell) => {
+            return !!flatArray.includes(spell.name as string);
+          }),
+        },
+      };
+    } else {
+      return undefined;
+    }
+  }, [charSpells, classSpells, charSpellFetching]);
   if (data) {
     return (
       <Accordion allowMultiple allowToggle>
@@ -80,7 +88,11 @@ const charSpellAcc: React.FC<SpellAccordionProps> = ({
       </Accordion>
     );
   } else {
-    return <>try again dummy</>;
+    return (
+      <Button onClick={getCharSpells}>
+        <Heading>Refresh the Spellbook</Heading>;
+      </Button>
+    );
   }
 };
 const CharSpellAccordion = memo(charSpellAcc);

@@ -1,5 +1,4 @@
 fragment RegularChar_Spell on Char_Spell {
   id
-  character
   spell_id
 }

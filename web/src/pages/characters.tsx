@@ -4,6 +4,7 @@ import {
   Heading,
   Link,
   RadioGroup,
+  Spinner,
   Stack,
   useRadioGroup,
 } from "@chakra-ui/react";
@@ -22,7 +23,7 @@ import Navbar from "../components/Navbar";
 
 const Characters: NextPage = () => {
   const { data: session } = useSession();
-  const [{ data: charList }] = useMyCharsQuery({
+  const [{ data: charList, fetching }] = useMyCharsQuery({
     variables: { email: session?.user?.email as string },
   });
   const [dndClass, setDndClass] = useState("Other");
@@ -93,6 +94,10 @@ const Characters: NextPage = () => {
         <Flex flexDir={"column"} gap="1em">
           {charList?.myChars?.character ? (
             <CharacterCard charList={charList?.myChars} />
+          ) : fetching ? (
+            <Center h={"90vh"}>
+              <Spinner size="xl" />
+            </Center>
           ) : session?.user ? (
             <Center h={"90vh"}>
               <Heading size="sm">Add a Character!</Heading>

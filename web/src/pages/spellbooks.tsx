@@ -5,7 +5,7 @@ import CharSpellbook from "../components/CharSpellbook";
 import Navbar from "src/components/Navbar";
 import { createUrqlClient } from "src/utils/createUrqlClient";
 
-const CreateCharacter: NextPage = () => {
+const CharacterSpellbook: NextPage = () => {
   return (
     <>
       <Navbar location={"Spellbooks"}></Navbar>
@@ -14,4 +14,9 @@ const CreateCharacter: NextPage = () => {
   );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(CreateCharacter);
+export default withUrqlClient(createUrqlClient, { ssr: true })(
+  CharacterSpellbook
+);
+
+//todo
+//fix form controller for adding spells

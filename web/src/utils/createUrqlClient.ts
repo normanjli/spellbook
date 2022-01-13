@@ -18,7 +18,7 @@ export const createUrqlClient = (ssrExchange: any) => {
       cacheExchange({
         keys: {
           CharResponse: ({ __typename }) => __typename,
-          Char_SpellResponse: ({ __typename }) => __typename,
+          Char_SpellResponse: () => null,
         },
         updates: {
           Mutation: {
@@ -54,7 +54,7 @@ export const createUrqlClient = (ssrExchange: any) => {
                     return {
                       getCharSpells: {
                         __typename: "Char_SpellResponse",
-                        errors: "",
+                        errors: null,
                         char_spell: result.addChar_Spell?.char_spell,
                       },
                     };

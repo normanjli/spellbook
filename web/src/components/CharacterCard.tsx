@@ -5,7 +5,15 @@ import {
   EditableInput,
   EditablePreview,
   Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spinner,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -39,10 +47,13 @@ interface CharacterCardProps {
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const { updateCharFocus } = useContext(CharacterContext) as CharContext;
   const route = useRouter();
-  const [, deleteChar] = useDeleteCharMutation();
   const [, editChar] = useEditCharMutation();
+  const [, deleteChar] = useDeleteCharMutation();
+
   const toast = useToast();
   const errorMsg = {
     title: "Something Went Wrong",
@@ -61,34 +72,56 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
               left=".25em"
               size="sm"
               bg={"unset"}
-              onClick={async () => {
-                if (charList.character) {
-                  charList.character.splice(i, 1);
-                }
-                try {
-                  await deleteChar({ charId: e.id });
-                  toast({
-                    title: "Successfully Deleted!",
-                    description: `Deleted ${e.name} the ${e.class}`,
-                    duration: 3000,
-                    isClosable: true,
-                  });
-                } catch (err) {
-                  toast(errorMsg);
-                }
-              }}
+              onClick={onOpen}
             >
               <FaTimes />
             </Button>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay></ModalOverlay>
+              <ModalContent>
+                <ModalHeader>Are you sure you want to do this?</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  This characters data will be deleted. Any notes, and saved
+                  spells will be gone forever.
+                </ModalBody>
+                <ModalFooter>
+                  <Button colorScheme="blue" mr={3} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={async () => {
+                      if (charList.character) {
+                        charList.character.splice(i, 1);
+                      }
+                      try {
+                        await deleteChar({ charId: e.id });
+                        toast({
+                          title: "Successfully Deleted!",
+                          description: `Deleted ${e.name} the ${e.class}`,
+                          duration: 3000,
+                          isClosable: true,
+                        });
+                      } catch (err) {
+                        toast(errorMsg);
+                      }
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
             <Center
               onClick={() => {
                 updateCharFocus(e.class, i, e.id);
                 route.push("/spellbooks");
               }}
+              _hover={{ cursor: "pointer" }}
             >
               <FaBookOpen size={"6em"} />
             </Center>
-
             <Center gap="2em">
               <Heading fontSize={{ base: "15px", md: "20px", lg: "30px" }}>
                 <Editable

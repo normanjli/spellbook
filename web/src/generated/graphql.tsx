@@ -15234,7 +15234,7 @@ export type WeaponProperty = {
 
 export type RegularCharFragment = { __typename?: 'Character', id: number, name: string, class: string };
 
-export type RegularChar_SpellFragment = { __typename?: 'Char_Spell', id: number, character: number, spell_id: string };
+export type RegularChar_SpellFragment = { __typename?: 'Char_Spell', id: number, spell_id: string };
 
 export type RegularUserFragment = { __typename?: 'User', name: string, email: string };
 
@@ -15250,7 +15250,7 @@ export type AddChar_SpellMutationVariables = Exact<{
 }>;
 
 
-export type AddChar_SpellMutation = { __typename?: 'Mutation', addChar_Spell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, character: number, spell_id: string }> | null | undefined } | null | undefined };
+export type AddChar_SpellMutation = { __typename?: 'Mutation', addChar_Spell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, spell_id: string }> | null | undefined } | null | undefined };
 
 export type CreateNoteMutationVariables = Exact<{
   options: NoteObject;
@@ -15325,7 +15325,6 @@ export const RegularCharFragmentDoc = gql`
 export const RegularChar_SpellFragmentDoc = gql`
     fragment RegularChar_Spell on Char_Spell {
   id
-  character
   spell_id
 }
     `;

@@ -17,7 +17,7 @@ import SpellPopover from "./SpellPopover";
 interface SpellLevelAccordionPanelProps {
   level: number;
   data: GetClassQuery;
-  charSpells: GetCharSpellsQuery | "no";
+  charSpells: GetCharSpellsQuery | undefined;
 }
 const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
   level,
@@ -35,7 +35,7 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
       <AccordionPanel>
         {data.class?.spells
           .filter((spell) => spell.level === level)
-          .sort((a, b) => (a.level as number) - (b.level as number))
+          .sort((a, b): any => (a.name as string) > (b.name as string))
           .map((spell) => (
             <AccordionItem key={spell.name}>
               <AccordionButton>
@@ -157,11 +157,11 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
                     )}
                   </Flex>
                   <Flex h={"100%"} justifySelf={"center"} m="auto">
-                    {charSpells !== "no" ? (
+                    {charSpells?.getCharSpells?.char_spell !== undefined ? (
                       <NotePopover
                         spellName={spell.name as string}
                         charSpell={
-                          charSpells.getCharSpells?.char_spell?.filter(
+                          charSpells?.getCharSpells?.char_spell?.filter(
                             (e) => e.spell_id === spell.name
                           ) as any
                         }
