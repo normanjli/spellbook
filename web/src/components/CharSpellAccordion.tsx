@@ -7,15 +7,14 @@ interface SpellAccordionProps {
   charId: number;
   classSpells: GetClassQuery | undefined;
 }
-const charSpellAcc: React.FC<SpellAccordionProps> = ({
+const CharSpellAcc: React.FC<SpellAccordionProps> = ({
   charId,
   classSpells,
 }) => {
-  const [{ data: charSpells, fetching: charSpellFetching }, getCharSpells] =
-    useGetCharSpellsQuery({
-      variables: { options: charId },
-      requestPolicy: "cache-and-network",
-    });
+  const [{ data: charSpells }, getCharSpells] = useGetCharSpellsQuery({
+    variables: { options: charId },
+    requestPolicy: "cache-and-network",
+  });
   const data = useMemo(() => {
     if (charSpells?.getCharSpells?.char_spell && classSpells?.class?.spells) {
       const flatArray = charSpells.getCharSpells?.char_spell?.map(
@@ -31,7 +30,7 @@ const charSpellAcc: React.FC<SpellAccordionProps> = ({
     } else {
       return undefined;
     }
-  }, [charSpells, classSpells, charSpellFetching]);
+  }, [charSpells, classSpells]);
   if (data) {
     return (
       <Accordion allowMultiple allowToggle>
@@ -95,5 +94,5 @@ const charSpellAcc: React.FC<SpellAccordionProps> = ({
     );
   }
 };
-const CharSpellAccordion = memo(charSpellAcc);
+const CharSpellAccordion = memo(CharSpellAcc);
 export default CharSpellAccordion;

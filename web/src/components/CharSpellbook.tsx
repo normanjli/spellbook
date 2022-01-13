@@ -48,7 +48,7 @@ const CharSpellboo: React.FC = () => {
     } else if (charList?.myChars?.character && !dndClass) {
       setDndClass(charList.myChars.character[0].class);
     }
-  }, [dndClass, charList]);
+  }, [dndClass, charList, getClassSpells]);
 
   return (
     <Tabs

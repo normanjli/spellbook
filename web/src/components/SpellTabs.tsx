@@ -11,7 +11,7 @@ import React, { memo, useState } from "react";
 import { useGetClassQuery } from "src/generated/graphql";
 import SpellAccordion from "./SpellAccordion";
 
-const spellT: React.FC = () => {
+const SpellT: React.FC = () => {
   const [dndClass, setDndClass] = useState("Bard");
   const [{ data, fetching }, getClassSpells] = useGetClassQuery({
     variables: { filter: { name: dndClass } },
@@ -185,5 +185,5 @@ const spellT: React.FC = () => {
     </Tabs>
   );
 };
-const SpellTabs = memo(spellT);
+const SpellTabs = memo(SpellT);
 export default SpellTabs;

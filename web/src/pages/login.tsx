@@ -59,7 +59,8 @@ const Login = () => {
               bg={"#5865F2"}
               color="white"
               variant="outline"
-              onClick={(e) => userRegister(e, "discord")}
+              // onClick={(e) => userRegister(e, "discord")}
+              isDisabled
             >
               <FaDiscord />
               <Text m={"1em"}>Login with Discord</Text>
@@ -68,7 +69,8 @@ const Login = () => {
               bg={"tomato"}
               color="currentColor"
               variant="outline"
-              onClick={(e) => userRegister(e, "google")}
+              // onClick={(e) => userRegister(e, "google")}
+              isDisabled
             >
               <FaGoogle />
               <Text m={"1em"}>Login with Google</Text>
