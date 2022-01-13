@@ -10,14 +10,18 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
-import { GetClassQuery } from "src/generated/graphql";
+import React, { memo } from "react";
+import { GetCharSpellsQuery, GetClassQuery } from "src/generated/graphql";
+import NotePopover from "./NotePopover";
+import SpellPopover from "./SpellPopover";
 interface SpellLevelAccordionPanelProps {
   level: number;
   data: GetClassQuery;
+  charSpells: GetCharSpellsQuery | "no";
 }
-const SpellLevelAccordionPanel: React.FC<SpellLevelAccordionPanelProps> = ({
+const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
   level,
+  charSpells,
   data,
 }) => {
   return (
@@ -50,7 +54,7 @@ const SpellLevelAccordionPanel: React.FC<SpellLevelAccordionPanelProps> = ({
                   <Text
                     noOfLines={10}
                     w={"30%"}
-                    overflowY={"scroll"}
+                    overflowY={"auto"}
                     textAlign={"left"}
                     whiteSpace={"pre-line"}
                   >
@@ -152,6 +156,23 @@ const SpellLevelAccordionPanel: React.FC<SpellLevelAccordionPanelProps> = ({
                       ""
                     )}
                   </Flex>
+                  <Flex h={"100%"} justifySelf={"center"} m="auto">
+                    {charSpells !== "no" ? (
+                      <NotePopover
+                        spellName={spell.name as string}
+                        charSpell={
+                          charSpells.getCharSpells?.char_spell?.filter(
+                            (e) => e.spell_id === spell.name
+                          ) as any
+                        }
+                      ></NotePopover>
+                    ) : (
+                      <SpellPopover
+                        spellName={spell.name as string}
+                        className={data.class?.name as string}
+                      ></SpellPopover>
+                    )}
+                  </Flex>
                 </Flex>
               </AccordionPanel>
             </AccordionItem>
@@ -160,5 +181,5 @@ const SpellLevelAccordionPanel: React.FC<SpellLevelAccordionPanelProps> = ({
     </AccordionItem>
   );
 };
-
+const SpellLevelAccordionPanel = memo(SpellLevelAccordionPan);
 export default SpellLevelAccordionPanel;

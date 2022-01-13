@@ -1,8 +1,8 @@
 type Query {
   myChars(email: String!): CharResponse
-  me(email: String!): User
-  myNotes(options: Float!): NoteResponse
   getCharSpells(options: Float!): Char_SpellResponse
+  myNotes(options: Float!): NoteResponse
+  me(email: String!): User
 }
 
 type CharResponse {
@@ -15,6 +15,7 @@ type Character {
   createdAt: DateTime!
   updatedAt: DateTime!
   user: String!
+  charspell: Float!
   name: String!
   class: String!
 }
@@ -24,12 +25,18 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-type User {
-  name: String!
-  email: String!
-  character: [Float!]!
+type Char_SpellResponse {
+  errors: String
+  char_spell: [Char_Spell!]
+}
+
+type Char_Spell {
+  id: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
+  character: Float!
+  note: Float!
+  spell_id: String!
 }
 
 type NoteResponse {
@@ -46,28 +53,23 @@ type Note {
   text: String!
 }
 
-type Char_SpellResponse {
-  errors: String
-  char_spell: [Char_Spell!]
-}
-
-type Char_Spell {
-  id: Float!
+type User {
+  name: String!
+  email: String!
+  character: [Float!]!
   createdAt: DateTime!
   updatedAt: DateTime!
-  character: Float!
-  spell_id: String!
 }
 
 type Mutation {
   addChar(options: CharObject!): CharResponse
   deleteChar(charId: Float!): String
   editChar(options: UpdateCharObject!): String
-  register(options: UserObject!): UserResponse
-  createNote(options: NoteObject!): NoteResponse
-  deleteNote(noteId: Float!): String
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse
   deleteCharSpell(charSpellId: Float!): String
+  createNote(options: NoteObject!): NoteResponse
+  deleteNote(noteId: Float!): String
+  register(options: UserObject!): UserResponse
 }
 
 input CharObject {
@@ -81,14 +83,9 @@ input UpdateCharObject {
   name: String!
 }
 
-type UserResponse {
-  errors: String
-  user: User
-}
-
-input UserObject {
-  email: String!
-  name: String!
+input Char_SpellObject {
+  charId: Float!
+  spellName: String!
 }
 
 input NoteObject {
@@ -97,7 +94,12 @@ input NoteObject {
   title: String!
 }
 
-input Char_SpellObject {
-  charId: Float!
-  spellName: String!
+type UserResponse {
+  errors: String
+  user: User
+}
+
+input UserObject {
+  email: String!
+  name: String!
 }

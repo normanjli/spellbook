@@ -24,11 +24,10 @@ export class NoteResolver {
   @Query(() => NoteResponse, { nullable: true })
   async myNotes(@Arg("options") options: number, @Ctx() { req }: MyContext) {
     try {
-      const note = await Char_Spell.find({
-        where: { spell_id: options },
+      const note = await Note.find({
+        where: { char_spell: options },
       });
       if (note.length > 0) {
-        console.log(note);
         return { errors: null, note: [...note] };
       } else {
         return { errors: "Add some Notes", note: null };
@@ -48,7 +47,14 @@ export class NoteResolver {
       note.text = options.text;
       note.char_spell = options.char_spellId;
       await note.save();
-      return { errors: undefined, note: [note] };
+      return {
+        errors: undefined,
+        note: [
+          ...(await Note.find({
+            where: { char_spell: options },
+          })),
+        ],
+      };
     } catch (err) {
       return { errors: err?.message, note: undefined };
     }

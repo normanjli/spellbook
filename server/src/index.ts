@@ -4,14 +4,15 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import { CharResolver } from "./resolvers/character";
+import { Char_SpellResolver } from "./resolvers/char_spells";
+import { NoteResolver } from "./resolvers/notes";
 import { UserResolver } from "./resolvers/user";
 import { MyContext } from "./types";
 import express = require("express");
-import { NoteResolver } from "./resolvers/notes";
-import { Char_SpellResolver } from "./resolvers/char_spells";
 
 const main = async () => {
-  await createConnection();
+  const typeClient = await createConnection();
+  await typeClient.runMigrations();
   const app = express();
   app.use(
     cors({

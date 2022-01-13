@@ -4,8 +4,8 @@ import * as React from "react";
 export const Card = (props: BoxProps) => (
   <Box
     bg={useColorModeValue("white", "gray.700")}
-    py="8"
-    px={"10"}
+    py="6"
+    px={"6"}
     shadow="base"
     rounded={{ sm: "lg" }}
     {...props}

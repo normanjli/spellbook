@@ -3,7 +3,6 @@ query GetCharSpells($options: Float!) {
     errors
     char_spell {
       id
-      character
       spell_id
     }
   }

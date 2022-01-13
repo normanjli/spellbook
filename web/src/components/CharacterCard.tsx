@@ -80,15 +80,15 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
             >
               <FaTimes />
             </Button>
-            {/* <Link href="/spellbooks"> */}
-            <FaBookOpen
-              size={"10em"}
+            <Center
               onClick={() => {
                 updateCharFocus(e.class, i, e.id);
                 route.push("/spellbooks");
               }}
-            />
-            {/* </Link> */}
+            >
+              <FaBookOpen size={"6em"} />
+            </Center>
+
             <Center gap="2em">
               <Heading fontSize={{ base: "15px", md: "20px", lg: "30px" }}>
                 <Editable

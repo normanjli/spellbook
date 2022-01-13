@@ -22,8 +22,13 @@ const CreateCharForm: React.FC<createCharFormProps> = ({
           if (data?.user && status === "authenticated") {
             const char = await addChar({
               options: {
-                name: values.name,
-                class: dndClass ? dndClass : values.class,
+                name: values.name.trim(),
+                class:
+                  dndClass !== "Other"
+                    ? dndClass
+                    : values.class !== "Other"
+                    ? values.class
+                    : "Other",
                 user: data.user.email as string,
               },
             });
@@ -59,7 +64,9 @@ const CreateCharForm: React.FC<createCharFormProps> = ({
               <option value="Other">Other</option>
             </Field>
           </Box>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" isDisabled={status !== "authenticated"}>
+            Submit
+          </Button>
         </Form>
       </Formik>
     </Center>

@@ -187,6 +187,7 @@ export type Char_Spell = {
   character: Scalars['Float'];
   createdAt: Scalars['DateTime'];
   id: Scalars['Float'];
+  note: Scalars['Float'];
   spell_id: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -204,6 +205,7 @@ export type Char_SpellResponse = {
 
 export type Character = {
   __typename?: 'Character';
+  charspell: Scalars['Float'];
   class: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['Float'];
@@ -15283,7 +15285,14 @@ export type GetCharSpellsQueryVariables = Exact<{
 }>;
 
 
-export type GetCharSpellsQuery = { __typename?: 'Query', getCharSpells?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, character: number, spell_id: string }> | null | undefined } | null | undefined };
+export type GetCharSpellsQuery = { __typename?: 'Query', getCharSpells?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, spell_id: string }> | null | undefined } | null | undefined };
+
+export type CharSpellFromDndApiQueryVariables = Exact<{
+  filter?: InputMaybe<FilterFindOneSpellInput>;
+}>;
+
+
+export type CharSpellFromDndApiQuery = { __typename?: 'Query', spell?: { __typename?: 'Spell', name?: string | null | undefined, attack_type?: string | null | undefined, casting_time?: string | null | undefined, components?: Array<string | null | undefined> | null | undefined, concentration?: boolean | null | undefined, desc?: Array<string | null | undefined> | null | undefined, duration?: string | null | undefined, heal_at_slot_level?: any | null | undefined, higher_level?: Array<string | null | undefined> | null | undefined, level?: number | null | undefined, material?: string | null | undefined, range?: string | null | undefined, ritual?: boolean | null | undefined, area_of_effect?: { __typename?: 'SpellArea_of_effect', size?: number | null | undefined, type?: string | null | undefined } | null | undefined, damage?: { __typename?: 'SpellDamage', damage_at_character_level?: any | null | undefined, damage_at_slot_level?: any | null | undefined, damage_type?: { __typename?: 'SpellDamageDamage_type', name?: string | null | undefined } | null | undefined } | null | undefined, dc?: { __typename?: 'SpellDc', dc_success?: string | null | undefined, desc?: string | null | undefined, dc_type?: { __typename?: 'SpellDcDc_type', name?: string | null | undefined } | null | undefined } | null | undefined, school?: { __typename?: 'MagicSchool', name?: string | null | undefined } | null | undefined, subclasses?: Array<{ __typename?: 'SpellSubclasses', name?: string | null | undefined } | null | undefined> | null | undefined } | null | undefined };
 
 export type GetClassQueryVariables = Exact<{
   filter?: InputMaybe<FilterFindOneClassInput>;
@@ -15409,7 +15418,6 @@ export const GetCharSpellsDocument = gql`
     errors
     char_spell {
       id
-      character
       spell_id
     }
   }
@@ -15418,6 +15426,53 @@ export const GetCharSpellsDocument = gql`
 
 export function useGetCharSpellsQuery(options: Omit<Urql.UseQueryArgs<GetCharSpellsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetCharSpellsQuery>({ query: GetCharSpellsDocument, ...options });
+};
+export const CharSpellFromDndApiDocument = gql`
+    query charSpellFromDndApi($filter: FilterFindOneSpellInput) {
+  spell(filter: $filter) {
+    name
+    area_of_effect {
+      size
+      type
+    }
+    attack_type
+    casting_time
+    components
+    concentration
+    damage {
+      damage_type {
+        name
+      }
+      damage_at_character_level
+      damage_at_slot_level
+    }
+    dc {
+      dc_success
+      dc_type {
+        name
+      }
+      desc
+    }
+    desc
+    duration
+    heal_at_slot_level
+    higher_level
+    level
+    material
+    range
+    ritual
+    school {
+      name
+    }
+    subclasses {
+      name
+    }
+  }
+}
+    `;
+
+export function useCharSpellFromDndApiQuery(options: Omit<Urql.UseQueryArgs<CharSpellFromDndApiQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<CharSpellFromDndApiQuery>({ query: CharSpellFromDndApiDocument, ...options });
 };
 export const GetClassDocument = gql`
     query GetClass($filter: FilterFindOneClassInput) {

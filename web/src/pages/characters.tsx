@@ -1,6 +1,8 @@
 import {
   Center,
   Flex,
+  Heading,
+  Link,
   RadioGroup,
   Stack,
   useRadioGroup,
@@ -8,8 +10,9 @@ import {
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { withUrqlClient } from "next-urql";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CharacterCard from "src/components/CharacterCard";
+import ClassPreview from "src/components/ClassPreview";
 import CreateCharForm from "src/components/CreateCharForm";
 import RadioCard from "src/components/RadioCard";
 import SideBar from "src/components/SideBar";
@@ -18,18 +21,12 @@ import { createUrqlClient } from "src/utils/createUrqlClient";
 import Navbar from "../components/Navbar";
 
 const Characters: NextPage = () => {
-  const { data: session, status } = useSession();
-  const [{ data: charList }, getChars] = useMyCharsQuery({
+  const { data: session } = useSession();
+  const [{ data: charList }] = useMyCharsQuery({
     variables: { email: session?.user?.email as string },
-    pause: true,
   });
   const [dndClass, setDndClass] = useState("Other");
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      getChars();
-    }
-  }, [status, getChars]);
   const options = [
     "Barbarian",
     "Bard",
@@ -52,6 +49,7 @@ const Characters: NextPage = () => {
     onChange: setDndClass,
   });
   const group = getRootProps();
+
   return (
     <>
       <Navbar location="Characters"></Navbar>
@@ -89,11 +87,22 @@ const Characters: NextPage = () => {
             </RadioGroup>
           </CreateCharForm>
         </Flex>
+        <Center m="auto" display={{ base: "none", lg: "flex" }}>
+          <ClassPreview className={dndClass} />
+        </Center>
         <Flex flexDir={"column"} gap="1em">
-          {!charList?.myChars?.errors ? (
+          {charList?.myChars?.character ? (
             <CharacterCard charList={charList?.myChars} />
+          ) : session?.user ? (
+            <Center h={"90vh"}>
+              <Heading size="sm">Add a Character!</Heading>
+            </Center>
           ) : (
-            "Add some Characters"
+            <Center h={"90vh"}>
+              <Heading size="sm">
+                <Link href="/login">Login to add characters</Link>
+              </Heading>
+            </Center>
           )}
         </Flex>
       </Center>

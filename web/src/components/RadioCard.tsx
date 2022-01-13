@@ -23,8 +23,8 @@ const RadioCard: React.FC = (props) => {
         _focus={{
           boxShadow: "outline",
         }}
-        px={{ base: 2, md: 5 }}
-        py={{ base: 1, md: 3 }}
+        px={{ base: 2, md: 4 }}
+        py={{ base: 1, md: 2 }}
       >
         {props.children}
       </Box>

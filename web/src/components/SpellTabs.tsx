@@ -7,11 +7,11 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useGetClassQuery } from "src/generated/graphql";
 import SpellAccordion from "./SpellAccordion";
 
-const SpellTabs: React.FC = () => {
+const spellT: React.FC = () => {
   const [dndClass, setDndClass] = useState("Bard");
   const [{ data, fetching }, getClassSpells] = useGetClassQuery({
     variables: { filter: { name: dndClass } },
@@ -185,5 +185,5 @@ const SpellTabs: React.FC = () => {
     </Tabs>
   );
 };
-
+const SpellTabs = memo(spellT);
 export default SpellTabs;

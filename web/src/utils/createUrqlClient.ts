@@ -1,6 +1,9 @@
 import { cacheExchange } from "@urql/exchange-graphcache";
 import {
   AddCharMutation,
+  AddChar_SpellMutation,
+  GetCharSpellsDocument,
+  GetCharSpellsQuery,
   MyCharsDocument,
   MyCharsQuery,
 } from "src/generated/graphql";
@@ -33,6 +36,26 @@ export const createUrqlClient = (ssrExchange: any) => {
                         __typename: "CharResponse",
                         errors: "",
                         character: result.addChar?.character,
+                      },
+                    };
+                  }
+                }
+              );
+            },
+            addCharSpell: (results, args, cache, info) => {
+              betterUpdateQuery<AddChar_SpellMutation, GetCharSpellsQuery>(
+                cache,
+                { query: GetCharSpellsDocument },
+                results,
+                (result, query) => {
+                  if (result.addChar_Spell?.errors) {
+                    return query;
+                  } else {
+                    return {
+                      getCharSpells: {
+                        __typename: "Char_SpellResponse",
+                        errors: "",
+                        char_spell: result.addChar_Spell?.char_spell,
                       },
                     };
                   }

@@ -52,9 +52,6 @@ const SideBar: React.FC<sideBarProps> = ({ dndClass }) => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" form={"addChar"} type={"submit"}>
-              Submit
-            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
