@@ -96,6 +96,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ charList }) => {
                         charList.character.splice(i, 1);
                       }
                       try {
+                        onClose();
                         await deleteChar({ charId: e.id });
                         toast({
                           title: "Successfully Deleted!",
