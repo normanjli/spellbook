@@ -92,7 +92,6 @@ export default NextAuth({
     async signIn({ user, account, profile, email, credentials }) {
       const isAllowedToSignIn = true;
       if (isAllowedToSignIn) {
-        console.log(user);
         return true;
       } else {
         // Return false to display a default error message
