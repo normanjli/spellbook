@@ -51,7 +51,7 @@ export class NoteResolver {
         errors: undefined,
         note: [
           ...(await Note.find({
-            where: { char_spell: options },
+            where: { char_spell: options.char_spellId },
           })),
         ],
       };
