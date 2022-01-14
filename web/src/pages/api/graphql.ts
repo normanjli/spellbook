@@ -4,7 +4,7 @@ import { ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import "reflect-metadata";
 
-const gateway = new ApolloGateway({ experimental_pollInterval: 30000 });
+const gateway = new ApolloGateway();
 const apolloServer = new ApolloServer({
   gateway,
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground],

@@ -11,7 +11,7 @@ import { dedupExchange, fetchExchange } from "urql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
 export const createUrqlClient = (ssrExchange: any) => {
   return {
-    url: "http://localhost:3000/api/graphql",
+    url: process.env.NEXT_PUBLIC_API_URL,
     fetchOptions: { credentials: "include" } as const,
     exchanges: [
       dedupExchange,

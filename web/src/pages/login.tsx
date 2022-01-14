@@ -20,7 +20,6 @@ const Login = () => {
   const [, register] = useRegisterMutation();
   const route = useRouter();
   useEffect(() => {
-    console.log("dong");
     if (status === "authenticated") {
       const options = {
         email: session?.user?.email as string,

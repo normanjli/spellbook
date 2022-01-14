@@ -1,23 +1,41 @@
-type Query {
-  myChars(email: String!): CharResponse
-  getCharSpells(options: Float!): Char_SpellResponse
-  myNotes(options: Float!): NoteResponse
-  me(email: String!): User
+input CharObject {
+  name: String!
+  class: String!
+  user: String!
 }
 
 type CharResponse {
-  errors: String
   character: [Character!]
+  errors: String
+}
+
+type Char_Spell {
+  character: Float!
+  createdAt: DateTime!
+  id: Float!
+  note: Float!
+  spell_id: String!
+  updatedAt: DateTime!
+}
+
+input Char_SpellObject {
+  charId: Float!
+  spellName: String!
+}
+
+type Char_SpellResponse {
+  char_spell: [Char_Spell!]
+  errors: String
 }
 
 type Character {
-  id: Float!
+  charspell: Float!
+  class: String!
   createdAt: DateTime!
+  id: Float!
+  name: String!
   updatedAt: DateTime!
   user: String!
-  charspell: Float!
-  name: String!
-  class: String!
 }
 
 """
@@ -25,67 +43,24 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-type Char_SpellResponse {
-  errors: String
-  char_spell: [Char_Spell!]
-}
-
-type Char_Spell {
-  id: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  character: Float!
-  note: Float!
-  spell_id: String!
-}
-
-type NoteResponse {
-  errors: String
-  note: [Note!]
-}
-
-type Note {
-  id: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  char_spell: Float!
-  title: String!
-  text: String!
-}
-
-type User {
-  name: String!
-  email: String!
-  character: [Float!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type Mutation {
   addChar(options: CharObject!): CharResponse
-  deleteChar(charId: Float!): String
-  editChar(options: UpdateCharObject!): String
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse
-  deleteCharSpell(charSpellId: Float!): String
   createNote(options: NoteObject!): NoteResponse
+  deleteChar(charId: Float!): String
+  deleteCharSpell(charSpellId: Float!): String
   deleteNote(noteId: Float!): String
+  editChar(options: UpdateCharObject!): String
   register(options: UserObject!): UserResponse
 }
 
-input CharObject {
-  name: String!
-  class: String!
-  user: String!
-}
-
-input UpdateCharObject {
-  charId: Float!
-  name: String!
-}
-
-input Char_SpellObject {
-  charId: Float!
-  spellName: String!
+type Note {
+  char_spell: Float!
+  createdAt: DateTime!
+  id: Float!
+  text: String!
+  title: String!
+  updatedAt: DateTime!
 }
 
 input NoteObject {
@@ -94,12 +69,37 @@ input NoteObject {
   title: String!
 }
 
-type UserResponse {
+type NoteResponse {
   errors: String
-  user: User
+  note: [Note!]
+}
+
+type Query {
+  getCharSpells(options: Float!): Char_SpellResponse
+  me(email: String!): User
+  myChars(email: String!): CharResponse
+  myNotes(options: Float!): NoteResponse
+}
+
+input UpdateCharObject {
+  charId: Float!
+  name: String!
+}
+
+type User {
+  character: [Float!]!
+  createdAt: DateTime!
+  email: String!
+  name: String!
+  updatedAt: DateTime!
 }
 
 input UserObject {
   email: String!
   name: String!
+}
+
+type UserResponse {
+  errors: String
+  user: User
 }

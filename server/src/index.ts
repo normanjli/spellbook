@@ -1,3 +1,4 @@
+import "dotenv-safe/config";
 import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
 import "reflect-metadata";
@@ -11,12 +12,20 @@ import { MyContext } from "./types";
 import express = require("express");
 
 const main = async () => {
-  const typeClient = await createConnection();
+  const port = process.env.PORT;
+  const typeClient = await createConnection({
+    type: "postgres",
+    url: process.env.DATABASE_URL,
+    synchronize: false,
+    logging: true,
+    entities: ["dist/**/*.js"],
+    migrations: ["dist/migration/**/*.js"],
+  });
   await typeClient.runMigrations();
   const app = express();
   app.use(
     cors({
-      origin: [`http://localhost:3000`, "https://studio.apollographql.com"],
+      origin: [process.env.CORS_ORIGIN, "https://studio.apollographql.com"],
       credentials: true,
     })
   );
@@ -37,6 +46,6 @@ const main = async () => {
     cors: false,
     path: "/graphql",
   });
-  app.listen(4000, () => console.log("server up on 4000"));
+  app.listen(parseInt(port), () => console.log(`server up on ${port}`));
 };
 main();

@@ -46,3 +46,5 @@ yarn-error.log*
 *.tsbuildinfo
 .5edndschema.graphql
 .supergraph.graphql
+server/.env
+server/.env.production

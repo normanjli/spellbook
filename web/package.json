@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "supergraph": "rover supergraph compose --config ./supergraph-config.yaml > supergraph.graphql",
-    "federate": "rover subgraph publish federation-v1qron   --routing-url http://localhost:4000/graphql   --schema localspellbook.graphql   --name local"
+    "federate": "rover subgraph publish federation-v1qron   --routing-url https://spellbookapi.normanli.dev/graphql   --schema localspellbook.graphql   --name local"
   },
   "dependencies": {
     "@apollo/gateway": "^0.45.0",
