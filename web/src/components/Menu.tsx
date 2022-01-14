@@ -1,4 +1,5 @@
 import {
+  Button,
   Flex,
   Heading,
   Link,
@@ -7,7 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React, { ReactChild, useEffect, useState } from "react";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 const NavMenu: React.FC = () => {
@@ -28,6 +29,15 @@ const NavMenu: React.FC = () => {
         <Link key="spellbooks" href={"/spellbooks"}>
           Spellbooks
         </Link>,
+        <Button
+          as={Link}
+          key="logout"
+          onClick={() => {
+            signOut();
+          }}
+        >
+          Logout
+        </Button>,
       ]);
     }
   }, [status]);
