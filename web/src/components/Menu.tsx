@@ -9,9 +9,11 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React, { ReactChild, useEffect, useState } from "react";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 const NavMenu: React.FC = () => {
+  const route = useRouter();
   const { status } = useSession();
   const [links, setLinks] = useState<ReactChild[]>([]);
   useEffect(() => {
@@ -32,8 +34,9 @@ const NavMenu: React.FC = () => {
         <Button
           as={Link}
           key="logout"
-          onClick={() => {
-            signOut();
+          onClick={async () => {
+            await signOut();
+            route.reload();
           }}
         >
           Logout
