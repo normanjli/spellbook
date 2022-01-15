@@ -3,7 +3,6 @@ mutation CreateNote($options: NoteObject!) {
     errors
     note {
       id
-      char_spell
       title
       text
     }

@@ -51,3 +51,12 @@ export class UpdateCharObject {
   @Field()
   name: string;
 }
+@InputType()
+export class UpdateNoteObject {
+  @Field()
+  noteId: number;
+  @Field()
+  text?: string;
+  @Field()
+  title?: string;
+}

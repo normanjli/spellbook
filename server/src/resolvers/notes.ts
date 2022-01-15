@@ -1,6 +1,6 @@
 import { Char_Spell } from "../entity/Char_Spells";
 import { Note } from "../entity/Note";
-import { MyContext, NoteObject } from "../types";
+import { MyContext, NoteObject, UpdateNoteObject } from "../types";
 import {
   Arg,
   Ctx,
@@ -57,6 +57,21 @@ export class NoteResolver {
       };
     } catch (err) {
       return { errors: err?.message, note: undefined };
+    }
+  }
+  @Mutation(() => String, { nullable: true })
+  async upateNote(
+    @Arg("options") options: UpdateNoteObject,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      await Note.update(options.noteId, {
+        text: options.text,
+        title: options.title,
+      });
+      return "Success";
+    } catch (err) {
+      return err.message;
     }
   }
   @Mutation(() => String, { nullable: true })

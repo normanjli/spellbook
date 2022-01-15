@@ -60,6 +60,7 @@ const CharSpellboo: React.FC = () => {
       isFitted={true}
       isLazy
       defaultIndex={contextChar ? contextChar.index : 0}
+      minW={"20em"}
     >
       <TabList>
         {charList?.myChars?.character ? (

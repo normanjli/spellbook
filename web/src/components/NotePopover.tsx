@@ -17,27 +17,23 @@ import React, { memo } from "react";
 import { FaStickyNote } from "react-icons/fa";
 import { useCreateNoteMutation } from "src/generated/graphql";
 
-interface SpellPopoverProps {
-  spellName: string | undefined;
-  charSpell: any;
+interface NotePopoverProps {
+  charSpell: [
+    {
+      __typename?: "Char_Spell" | undefined;
+      id: number;
+      spell_id: string;
+    }
+  ];
 }
-const SpellPop: React.FC<SpellPopoverProps> = ({ spellName, charSpell }) => {
+const NotePop: React.FC<NotePopoverProps> = ({ charSpell }) => {
   const { data: session, status } = useSession();
   const [, addNote] = useCreateNoteMutation();
   const toast = useToast();
   return (
     <Popover preventOverflow={false}>
       <PopoverTrigger>
-        <Button
-          onClick={() => console.log(charSpell)}
-          bg="unset"
-          h="fit-content"
-          w="fit-content"
-          px={1}
-          py={1}
-        >
-          <FaStickyNote size="6em" />
-        </Button>
+        <Button>Add a Note</Button>
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
@@ -114,5 +110,5 @@ const SpellPop: React.FC<SpellPopoverProps> = ({ spellName, charSpell }) => {
   );
 };
 
-const NotePopover = memo(SpellPop);
+const NotePopover = memo(NotePop);
 export default NotePopover;

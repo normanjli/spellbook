@@ -88,6 +88,8 @@ const SpellPop: React.FC<SpellPopoverProps> = ({ spellName, className }) => {
                     toast({
                       title: "Something went wrong",
                       description: err.message,
+                      duration: 3000,
+                      isClosable: true,
                     });
                   }
                 }

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { memo } from "react";
 import { GetCharSpellsQuery, GetClassQuery } from "src/generated/graphql";
-import NotePopover from "./NotePopover";
+import NoteReader from "./NoteReader";
 import SpellPopover from "./SpellPopover";
 interface SpellLevelAccordionPanelProps {
   level: number;
@@ -50,10 +50,12 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
                   textAlign={"left"}
                   justifyContent={"flex-start"}
                   gap={"2em"}
+                  flexDir={{ base: "column", md: "row" }}
+                  minW={"20em"}
                 >
                   <Text
                     noOfLines={10}
-                    w={"30%"}
+                    w={{ base: "100%", md: "30%" }}
                     overflowY={"auto"}
                     textAlign={"left"}
                     whiteSpace={"pre-line"}
@@ -62,8 +64,8 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
                       e?.replace("***", "\n\n").replace(".***", ":")
                     )}
                   </Text>
-                  <Flex flexDir={"column"} w={"40%"}>
-                    <Flex gap={"5em"}>
+                  <Flex flexDir={"column"} w={{ base: "full", md: "40%" }}>
+                    <Flex gap={{ base: ".5em", md: "5em" }}>
                       <Stack w={"50%"}>
                         <Text>Level: {spell.level}</Text>
                         <Text>School: {spell.school?.name}</Text>
@@ -158,14 +160,13 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
                   </Flex>
                   <Flex h={"100%"} justifySelf={"center"} m="auto">
                     {charSpells?.getCharSpells?.char_spell !== undefined ? (
-                      <NotePopover
-                        spellName={spell.name as string}
+                      <NoteReader
                         charSpell={
                           charSpells?.getCharSpells?.char_spell?.filter(
                             (e) => e.spell_id === spell.name
                           ) as any
                         }
-                      ></NotePopover>
+                      ></NoteReader>
                     ) : (
                       <SpellPopover
                         spellName={spell.name as string}

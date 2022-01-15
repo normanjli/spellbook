@@ -1,0 +1,3 @@
+mutation DeleteCharSpell($charSpellId: Float!) {
+  deleteCharSpell(charSpellId: $charSpellId)
+}

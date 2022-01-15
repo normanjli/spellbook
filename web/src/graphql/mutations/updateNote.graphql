@@ -1,0 +1,3 @@
+mutation UpateNote($options: UpdateNoteObject!) {
+  upateNote(options: $options)
+}

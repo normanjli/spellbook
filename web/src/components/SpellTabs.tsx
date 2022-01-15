@@ -32,6 +32,7 @@ const SpellT: React.FC = () => {
       variant={"enclosed"}
       isFitted={true}
       isLazy
+      minW={"20em"}
     >
       <TabList>
         <Tab

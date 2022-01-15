@@ -2,10 +2,13 @@ import { cacheExchange } from "@urql/exchange-graphcache";
 import {
   AddCharMutation,
   AddChar_SpellMutation,
+  CreateNoteMutation,
   GetCharSpellsDocument,
   GetCharSpellsQuery,
   MyCharsDocument,
   MyCharsQuery,
+  MyNotesDocument,
+  MyNotesQuery,
 } from "src/generated/graphql";
 import { dedupExchange, fetchExchange } from "urql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
@@ -18,7 +21,8 @@ export const createUrqlClient = (ssrExchange: any) => {
       cacheExchange({
         keys: {
           CharResponse: ({ __typename }) => __typename,
-          Char_SpellResponse: () => null,
+          Char_SpellResponse: ({ __typename }) => __typename,
+          NoteResponse: ({ __typename }) => __typename,
         },
         updates: {
           Mutation: {
@@ -56,6 +60,25 @@ export const createUrqlClient = (ssrExchange: any) => {
                         __typename: "Char_SpellResponse",
                         errors: null,
                         char_spell: result.addChar_Spell?.char_spell,
+                      },
+                    };
+                  }
+                }
+              );
+            },
+            addNote: (results, args, cache, info) => {
+              betterUpdateQuery<CreateNoteMutation, MyNotesQuery>(
+                cache,
+                { query: MyNotesDocument },
+                results,
+                (result, query) => {
+                  if (result.createNote?.errors) {
+                    return query;
+                  } else {
+                    return {
+                      myNotes: {
+                        errors: null,
+                        note: result.createNote?.note,
                       },
                     };
                   }
