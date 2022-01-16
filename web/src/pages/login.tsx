@@ -22,13 +22,15 @@ const Login = () => {
   const route = useRouter();
   const toast = useToast();
   useEffect(() => {
-    if (status === "authenticated") {
-      const options = {
-        email: session?.user?.email as string,
-        name: session?.user?.name as string,
-      };
+    if (session?.user?.email && session?.user?.name) {
       try {
-        (async () => await register({ options }))();
+        (async () =>
+          await register({
+            options: {
+              email: session?.user?.email as string,
+              name: session?.user?.name as string,
+            },
+          }))();
         toast({ title: "Success", isClosable: true, duration: 1000 });
         setTimeout(() => route.push("/"), 1500);
       } catch (err) {
