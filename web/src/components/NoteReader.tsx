@@ -8,6 +8,7 @@ import {
   EditablePreview,
   Flex,
   Heading,
+  IconButton,
   Link,
   Modal,
   ModalBody,
@@ -22,7 +23,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaStickyNote } from "react-icons/fa";
+import { FaPen, FaTimes } from "react-icons/fa";
 import {
   useDeleteCharSpellMutation,
   useDeleteNoteMutation,
@@ -51,7 +52,8 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
   const [, deleteCharSpell] = useDeleteCharSpellMutation();
   return (
     <>
-      <Button
+      <IconButton
+        aria-label="edit notes"
         as={Link}
         bg="unset"
         h="fit-content"
@@ -62,10 +64,17 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
           getNotes();
           onOpen();
         }}
-      >
-        <FaStickyNote size="5em" />
-      </Button>
-      <CloseButton
+        icon={<FaPen size={"3em"} />}
+      ></IconButton>
+      <IconButton
+        aria-label="delete note"
+        as={Link}
+        bg="unset"
+        h="fit-content"
+        w="fit-content"
+        px={1}
+        py={1}
+        icon={<FaTimes size="3em" />}
         onClick={async () =>
           deleteCharSpell({
             charSpellId: charSpell[0].id,

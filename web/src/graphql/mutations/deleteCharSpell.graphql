@@ -1,3 +1,8 @@
 mutation DeleteCharSpell($charSpellId: Float!) {
-  deleteCharSpell(charSpellId: $charSpellId)
+  deleteCharSpell(charSpellId: $charSpellId) {
+    errors
+    char_spell {
+      ...RegularChar_Spell
+    }
+  }
 }

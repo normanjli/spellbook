@@ -12665,8 +12665,9 @@ export type Mutation = {
   addChar_Spell?: Maybe<Char_SpellResponse>;
   createNote?: Maybe<NoteResponse>;
   deleteChar?: Maybe<Scalars['String']>;
-  deleteCharSpell?: Maybe<Scalars['String']>;
+  deleteCharSpell?: Maybe<Char_SpellResponse>;
   deleteNote?: Maybe<Scalars['String']>;
+  deleteUser?: Maybe<Scalars['String']>;
   editChar?: Maybe<Scalars['String']>;
   register?: Maybe<UserResponse>;
   upateNote?: Maybe<Scalars['String']>;
@@ -12700,6 +12701,11 @@ export type MutationDeleteCharSpellArgs = {
 
 export type MutationDeleteNoteArgs = {
   noteId: Scalars['Float'];
+};
+
+
+export type MutationDeleteUserArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -15283,7 +15289,7 @@ export type DeleteCharSpellMutationVariables = Exact<{
 }>;
 
 
-export type DeleteCharSpellMutation = { __typename?: 'Mutation', deleteCharSpell?: string | null | undefined };
+export type DeleteCharSpellMutation = { __typename?: 'Mutation', deleteCharSpell?: { __typename?: 'Char_SpellResponse', errors?: string | null | undefined, char_spell?: Array<{ __typename?: 'Char_Spell', id: number, spell_id: string }> | null | undefined } | null | undefined };
 
 export type DeleteNoteMutationVariables = Exact<{
   noteId: Scalars['Float'];
@@ -15291,6 +15297,13 @@ export type DeleteNoteMutationVariables = Exact<{
 
 
 export type DeleteNoteMutation = { __typename?: 'Mutation', deleteNote?: string | null | undefined };
+
+export type DeleteUserMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: string | null | undefined };
 
 export type EditCharMutationVariables = Exact<{
   options: UpdateCharObject;
@@ -15422,9 +15435,14 @@ export function useDeleteCharMutation() {
 };
 export const DeleteCharSpellDocument = gql`
     mutation DeleteCharSpell($charSpellId: Float!) {
-  deleteCharSpell(charSpellId: $charSpellId)
+  deleteCharSpell(charSpellId: $charSpellId) {
+    errors
+    char_spell {
+      ...RegularChar_Spell
+    }
+  }
 }
-    `;
+    ${RegularChar_SpellFragmentDoc}`;
 
 export function useDeleteCharSpellMutation() {
   return Urql.useMutation<DeleteCharSpellMutation, DeleteCharSpellMutationVariables>(DeleteCharSpellDocument);
@@ -15437,6 +15455,15 @@ export const DeleteNoteDocument = gql`
 
 export function useDeleteNoteMutation() {
   return Urql.useMutation<DeleteNoteMutation, DeleteNoteMutationVariables>(DeleteNoteDocument);
+};
+export const DeleteUserDocument = gql`
+    mutation DeleteUser($email: String!) {
+  deleteUser(email: $email)
+}
+    `;
+
+export function useDeleteUserMutation() {
+  return Urql.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument);
 };
 export const EditCharDocument = gql`
     mutation EditChar($options: UpdateCharObject!) {

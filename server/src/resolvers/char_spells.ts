@@ -74,16 +74,24 @@ export class Char_SpellResolver {
       };
     }
   }
-  @Mutation(() => String, { nullable: true })
+  @Mutation(() => Char_SpellResponse, { nullable: true })
   async deleteCharSpell(
     @Arg("charSpellId") charSpellId: number,
     @Ctx() { req }: MyContext
-  ): Promise<String> {
+  ): Promise<Char_SpellResponse> {
     try {
+      const charSpell = await Char_Spell.findOne(charSpellId);
       Char_Spell.delete(charSpellId);
-      return "Success";
+      return {
+        errors: undefined,
+        char_spell: [
+          ...(await Char_Spell.find({
+            where: { character: charSpell?.character },
+          })),
+        ],
+      };
     } catch (err) {
-      return "Something went wrong";
+      return { errors: err?.message, char_spell: undefined };
     }
   }
 }

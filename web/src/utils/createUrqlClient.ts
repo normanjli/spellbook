@@ -3,6 +3,7 @@ import {
   AddCharMutation,
   AddChar_SpellMutation,
   CreateNoteMutation,
+  DeleteCharSpellMutation,
   GetCharSpellsDocument,
   GetCharSpellsQuery,
   MyCharsDocument,
@@ -79,6 +80,25 @@ export const createUrqlClient = (ssrExchange: any) => {
                       myNotes: {
                         errors: null,
                         note: result.createNote?.note,
+                      },
+                    };
+                  }
+                }
+              );
+            },
+            deleteCharSpell: (results, args, cache, info) => {
+              betterUpdateQuery<DeleteCharSpellMutation, GetCharSpellsQuery>(
+                cache,
+                { query: GetCharSpellsDocument },
+                results,
+                (result, query) => {
+                  if (result.deleteCharSpell?.errors) {
+                    return query;
+                  } else {
+                    return {
+                      getCharSpells: {
+                        errors: null,
+                        char_spell: result.deleteCharSpell?.char_spell,
                       },
                     };
                   }

@@ -66,11 +66,12 @@ type Mutation {
   deleteChar(charId: Float!): String
   editChar(options: UpdateCharObject!): String
   addChar_Spell(options: Char_SpellObject!): Char_SpellResponse
-  deleteCharSpell(charSpellId: Float!): String
+  deleteCharSpell(charSpellId: Float!): Char_SpellResponse
   createNote(options: NoteObject!): NoteResponse
   upateNote(options: UpdateNoteObject!): String
   deleteNote(noteId: Float!): String
   register(options: UserObject!): UserResponse
+  deleteUser(email: String!): String
 }
 
 input CharObject {

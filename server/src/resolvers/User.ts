@@ -55,4 +55,16 @@ export class UserResolver {
       return { errors: err?.message, user: undefined };
     }
   }
+  @Mutation(() => String, { nullable: true })
+  async deleteUser(
+    @Arg("email") email: string,
+    @Ctx() { req }: MyContext
+  ): Promise<String> {
+    try {
+      await User.delete(email);
+      return "Success";
+    } catch (err) {
+      return "something went wrong";
+    }
+  }
 }
