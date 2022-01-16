@@ -29,7 +29,6 @@ const Login = () => {
               name: session?.user?.name as string,
             },
           });
-          console.log("success");
           route.replace("/");
         })();
       } catch (err) {
@@ -43,7 +42,6 @@ const Login = () => {
   ) => {
     e.preventDefault();
     await signIn(id);
-    // console.log(res);
   };
   return (
     <Box
