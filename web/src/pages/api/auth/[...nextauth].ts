@@ -76,7 +76,7 @@ export default NextAuth({
     // signOut: '/auth/signout', // Displays form with sign out button
     // error: "/login", // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
-    // newUser: null // If set, new users will be directed here on first sign in
+    newUser: "/login", // If set, new users will be directed here on first sign in
   },
 
   // Callbacks are asynchronous functions you can use to control what happens
@@ -84,7 +84,7 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return `${baseUrl}/login`;
+      return baseUrl;
     },
     async session({ session, token, user }) {
       return session;
