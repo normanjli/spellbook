@@ -2,7 +2,7 @@ import { Box, Center, Heading, Link } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { withUrqlClient } from "next-urql";
-import { Head } from "next/document";
+import Head from "next/head";
 import { useEffect } from "react";
 import { useRegisterMutation } from "src/generated/graphql";
 import { createUrqlClient } from "src/utils/createUrqlClient";
