@@ -1,7 +1,8 @@
-import { Box, Center, Heading } from "@chakra-ui/react";
+import { Box, Center, Heading, Link } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { withUrqlClient } from "next-urql";
+import { Head } from "next/document";
 import { useEffect } from "react";
 import { useRegisterMutation } from "src/generated/graphql";
 import { createUrqlClient } from "src/utils/createUrqlClient";
@@ -28,6 +29,32 @@ const Index: NextPage = () => {
   }, [status, register, session]);
   return (
     <>
+      <Head>
+        <title>Spellbook App</title>
+        <meta name="description" content="5th edition Spellbook tracker">
+          <meta property="og:url" content="https://spellbook.normanli.dev" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Spellbook App" />
+          <meta
+            property="og:description"
+            content="5th edition Spellbook tracker"
+          />
+          <meta
+            property="og:image"
+            content="https://cdn.discordapp.com/attachments/855272186272808991/932343814574723152/unknown.png"
+          />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Spellbook App" />
+          <meta
+            name="twitter:description"
+            content="5th edition Spellbook tracker"
+          />
+          <meta
+            name="twitter:image"
+            content="https://cdn.discordapp.com/attachments/855272186272808991/932343814574723152/unknown.png"
+          />
+        </meta>
+      </Head>
       <Navbar location="Home"></Navbar>
       <Center flexDir={"column"} h={"100vh"} w={"100%"}>
         <Heading mt="1em" size={"md"}>
@@ -36,8 +63,11 @@ const Index: NextPage = () => {
         <Box textAlign={"center"} mt="1em">
           This app is built with Nextjs, React, TypeScript, graphql, typeorm,
           Apollo, Urql, and Chakra-UI.
-          <br /> It queries an external endpoint for the DND 5th Edition API for
-          data.
+          <br /> It queries an external endpoint for the{" "}
+          <Link href="https://www.dnd5eapi.co/" isExternal={true}>
+            DND 5th Edition API
+          </Link>{" "}
+          for data.
         </Box>
       </Center>
     </>
