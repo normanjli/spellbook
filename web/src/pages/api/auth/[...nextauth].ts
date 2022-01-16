@@ -72,11 +72,11 @@ export default NextAuth({
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: "/login", // Displays signin buttons
-    // signOut: '/auth/signout', // Displays form with sign out button
+    signIn: "/", // Displays signin buttons
+    signOut: "/", // Displays form with sign out button
     // error: "/login", // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
-    newUser: "/register", // If set, new users will be directed here on first sign in
+    // newUser: "/register", // If set, new users will be directed here on first sign in
   },
 
   // Callbacks are asynchronous functions you can use to control what happens
@@ -84,7 +84,7 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async redirect({ url, baseUrl }) {
-      return `${baseUrl}/register`;
+      return baseUrl;
     },
     async session({ session, token, user }) {
       return session;

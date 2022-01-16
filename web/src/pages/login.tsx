@@ -41,7 +41,7 @@ const Login = () => {
     id: "github" | "google" | "discord"
   ) => {
     e.preventDefault();
-    await signIn(id);
+    await signIn(id, { callbackUrl: "http://localhost:3000/register" });
   };
   return (
     <Box
