@@ -24,15 +24,16 @@ const Login = () => {
   useEffect(() => {
     if (session?.user?.email && session?.user?.name) {
       try {
-        (async () =>
+        (async () => {
           await register({
             options: {
               email: session?.user?.email as string,
               name: session?.user?.name as string,
             },
-          }))();
+          });
+          route.push("/");
+        })();
         toast({ title: "Success", isClosable: true, duration: 1000 });
-        setTimeout(() => route.push("/"), 1500);
       } catch (err) {
         console.log(err);
       }
