@@ -5,7 +5,6 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  useToast,
 } from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/react";
 import { withUrqlClient } from "next-urql";
@@ -20,7 +19,6 @@ const Login = () => {
   const { data: session, status } = useSession();
   const [, register] = useRegisterMutation();
   const route = useRouter();
-  const toast = useToast();
   useEffect(() => {
     if (session?.user?.email && session?.user?.name) {
       try {
@@ -31,9 +29,9 @@ const Login = () => {
               name: session?.user?.name as string,
             },
           });
+          console.log("success");
           route.replace("/");
         })();
-        toast({ title: "Success", isClosable: true, duration: 1000 });
       } catch (err) {
         console.log(err);
       }
