@@ -31,7 +31,7 @@ const Login = () => {
               name: session?.user?.name as string,
             },
           });
-          route.push("/");
+          route.replace("/");
         })();
         toast({ title: "Success", isClosable: true, duration: 1000 });
       } catch (err) {

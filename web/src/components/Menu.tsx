@@ -36,14 +36,14 @@ const NavMenu: React.FC = () => {
           key="logout"
           onClick={async () => {
             await signOut();
-            route.reload();
+            route.replace("/");
           }}
         >
           Logout
         </Button>,
       ]);
     }
-  }, [status]);
+  }, [status, route]);
 
   return (
     <>
