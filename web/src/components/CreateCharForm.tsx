@@ -1,5 +1,5 @@
-import { Box, Button, Center } from "@chakra-ui/react";
-import { Field, Form, Formik } from "formik";
+import { Button, Center } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { useAddCharMutation } from "src/generated/graphql";
@@ -13,7 +13,6 @@ const CreateCharForm: React.FC<createCharFormProps> = ({
 }) => {
   const [, addChar] = useAddCharMutation();
   const { data, status } = useSession();
-
   return (
     <Center flexDir={"column"} h="90%">
       <Formik
@@ -47,23 +46,6 @@ const CreateCharForm: React.FC<createCharFormProps> = ({
             label="Character Name"
           ></InputField>
           {children}
-          <Box display={{ base: "inline", md: "none" }}>
-            <Field mt="3" as="select" name="class" placeholder="Class">
-              <option value="Barbarian">Barbarian</option>
-              <option value="Bard">Bard</option>
-              <option value="Cleric">Cleric</option>
-              <option value="Druid">Druid</option>
-              <option value="Fighter">Fighter</option>
-              <option value="Monk">Monk</option>
-              <option value="Paladin">Paladin</option>
-              <option value="Ranger">Ranger</option>
-              <option value="Rogue">Rogue</option>
-              <option value="Sorcerer">Sorcerer</option>
-              <option value="Warlock">Warlock</option>
-              <option value="Wizard">Wizard</option>
-              <option value="Other">Other</option>
-            </Field>
-          </Box>
           <Button type="submit" isDisabled={status !== "authenticated"}>
             Submit
           </Button>

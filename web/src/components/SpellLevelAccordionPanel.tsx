@@ -24,19 +24,20 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
   charSpells,
   data,
 }) => {
-  return (
-    <AccordionItem>
-      <AccordionButton>
-        <Heading flex="1" textAlign="left" size="md" key={0}>
-          <Box>Level {level} spells</Box>
-        </Heading>
-        <AccordionIcon />
-      </AccordionButton>
-      <AccordionPanel>
-        {data.class?.spells
-          .filter((spell) => spell.level === level)
-          .sort((a, b): any => (a.name as string) > (b.name as string))
-          .map((spell) => (
+  const spells = data.class?.spells
+    .filter((spell) => spell.level === level)
+    .sort((a, b): any => (a.name as string) > (b.name as string));
+  if (spells && spells.length > 0) {
+    return (
+      <AccordionItem>
+        <AccordionButton>
+          <Heading flex="1" textAlign="left" size="md" key={0}>
+            <Box>Level {level} spells</Box>
+          </Heading>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel>
+          {spells.map((spell) => (
             <AccordionItem key={spell.name}>
               <AccordionButton>
                 <Heading flex="1" textAlign="left" size="md" key={spell.name}>
@@ -178,9 +179,12 @@ const SpellLevelAccordionPan: React.FC<SpellLevelAccordionPanelProps> = ({
               </AccordionPanel>
             </AccordionItem>
           ))}
-      </AccordionPanel>
-    </AccordionItem>
-  );
+        </AccordionPanel>
+      </AccordionItem>
+    );
+  } else {
+    return <></>;
+  }
 };
 const SpellLevelAccordionPanel = memo(SpellLevelAccordionPan);
 export default SpellLevelAccordionPanel;

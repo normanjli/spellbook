@@ -1,0 +1,54 @@
+{
+  "Barbarian": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/342/420/618/636272680339895080.png",
+    "desc": "Barbarians are defined by their rage: unbridled, unquenchable, and unthinking fury. More than a mere emotion, their anger is the ferocity of a cornered predator, the unrelenting assault of a storm, the churning turmoil of the sea. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength."
+  },
+  "Bard": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/369/420/618/636272705936709430.png",
+    "desc": "Whether scholar, skald, or scoundrel, a bard weaves magic through words and music to inspire allies, demoralize foes, manipulate minds, create illusions, and even heal wounds."
+  },
+  "Cleric": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/371/420/618/636272706155064423.png",
+    "desc": "Clerics are intermediaries between the mortal world and the distant planes of the gods. As varied as the gods they serve, clerics strive to embody the handiwork of their deities. No ordinary priest, a cleric is imbued with divine magic."
+  },
+  "Druid": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/346/420/618/636272691461725405.png",
+    "desc": "Druids are an embodiment of nature's resilience, cunning, and fury. They claim no mastery over nature. Instead, they see themselves as extensions of nature's indomitable will."
+  },
+  "Fighter": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/359/420/618/636272697874197438.png",
+    "desc": "Fighters all share an unparalleled mastery with weapons and armor, and a thorough knowledge of the skills of combat. And they are well acquainted with death, both meting it out and staring it defiantly in the face."
+  },
+  "Monk": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/489/420/618/636274646181411106.png",
+    "desc": "Monks are united in their ability to magically harness the energy that flows in their bodies. Whether channeled as a striking display of combat prowess or a subtler focus of defensive ability and speed, this energy infuses all that a monk does."
+  },
+  "Paladin": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/365/420/618/636272701937419552.png",
+    "desc": "Paladins are united by their oaths to stand against the forces of evil. Their oath is a powerful bond. It is a source of power that turns a devout warrior into a blessed champion."
+  },
+  "Ranger": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/367/420/618/636272702826438096.png",
+    "desc": "Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild, amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch."
+  },
+  "Rogue": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/384/420/618/636272820319276620.png",
+    "desc": "Rogues rely on skill, stealth, and a knack for finding the solution to just about any problem, demonstrating a resourcefulness and versatility that is the cornerstone of any successful adventuring party."
+  },
+  "Sorcerer": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/485/420/618/636274643818663058.png",
+    "desc": "Sorcerers carry a magical birthright conferred upon them by an exotic bloodline. One can't study sorcery as one learns a language, any more than one can learn to live a legendary life. No one chooses sorcery; the power chooses the sorcerer."
+  },
+  "Warlock": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/375/420/618/636272708661726603.png",
+    "desc": "Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular. "
+  },
+  "Wizard": {
+    "img": "https://www.dndbeyond.com/avatars/thumbnails/6/357/420/618/636272696881281556.png",
+    "desc": "Wizards are supreme magic-users, defined and united as a class by the spells they cast. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds."
+  },
+  "Other": {
+    "img": "",
+    "desc": "Maybe you have a custom class! Or you need the freedom to add any spell to you spellcaster. Select this class when making your character "
+  }
+}

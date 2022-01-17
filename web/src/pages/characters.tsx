@@ -65,7 +65,7 @@ const Characters: NextPage = () => {
         padding={"1em"}
         paddingTop={"4em"}
       >
-        <SideBar dndClass={dndClass}></SideBar>
+        <SideBar></SideBar>
         <Flex display={{ base: "none", md: "flex" }}>
           <CreateCharForm dndClass={dndClass}>
             <RadioGroup
@@ -88,8 +88,8 @@ const Characters: NextPage = () => {
             </RadioGroup>
           </CreateCharForm>
         </Flex>
-        <Center m="auto" display={{ base: "none", lg: "flex" }}>
-          <ClassPreview className={dndClass} />
+        <Center mt="15vh" display={{ base: "none", md: "flex", lg: "flex" }}>
+          <ClassPreview className={dndClass as any} />
         </Center>
         <Flex flexDir={"column"} gap="1em">
           {charList?.myChars?.character ? (

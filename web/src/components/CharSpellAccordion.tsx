@@ -86,6 +86,8 @@ const CharSpellAcc: React.FC<SpellAccordionProps> = ({
         />
       </Accordion>
     );
+  } else if (charSpells?.getCharSpells?.errors?.includes("Add")) {
+    return <Heading>Add some Spells!</Heading>;
   } else {
     return (
       <Button onClick={getCharSpells}>

@@ -23,13 +23,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaPen, FaTimes } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
 import {
   useDeleteCharSpellMutation,
   useDeleteNoteMutation,
   useMyNotesQuery,
   useUpateNoteMutation,
 } from "src/generated/graphql";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 import EditableControls from "./EditableControls";
 import NotePopover from "./NotePopover";
 interface NoteReaderProps {
@@ -50,6 +51,11 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
   const toast = useToast();
   const [, updateNote] = useUpateNoteMutation();
   const [, deleteCharSpell] = useDeleteCharSpellMutation();
+  const delCharSpellFn = (id: number) => {
+    deleteCharSpell({
+      charSpellId: id,
+    });
+  };
   return (
     <>
       <IconButton
@@ -66,21 +72,7 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
         }}
         icon={<FaPen size={"3em"} />}
       ></IconButton>
-      <IconButton
-        aria-label="delete note"
-        as={Link}
-        bg="unset"
-        h="fit-content"
-        w="fit-content"
-        px={1}
-        py={1}
-        icon={<FaTimes size="3em" />}
-        onClick={async () =>
-          deleteCharSpell({
-            charSpellId: charSpell[0].id,
-          })
-        }
-      />
+      <DeleteConfirmModal deleteFn={delCharSpellFn} id={charSpell[0].id} />
       <Modal
         size={"6xl"}
         scrollBehavior="inside"

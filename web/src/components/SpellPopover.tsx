@@ -95,34 +95,41 @@ const SpellPop: React.FC<SpellPopoverProps> = ({ spellName, className }) => {
                 }
               }}
             >
-              {(props) => (
-                <Form>
-                  <Box>
-                    <Field as="select" name="characterId" placeholder="id">
-                      {charList ? (
-                        charList.data?.myChars?.character
-                          ?.filter((character) => character.class === className)
-                          .map((e) => (
-                            <option
-                              key={e.id}
-                              value={e.id}
-                              onClick={() => {
-                                setCharId(e.id);
-                              }}
-                            >
-                              {e.name} the {e.class}
-                            </option>
-                          ))
-                      ) : (
-                        <Spinner />
-                      )}
-                    </Field>
-                  </Box>
-                  <Button isLoading={props.isSubmitting} type="submit">
-                    <FaPlus />
-                  </Button>
-                </Form>
-              )}
+              {(props) => {
+                return (
+                  <Form>
+                    <Box>
+                      <Field as="select" name="characterId" placeholder="id">
+                        {charList ? (
+                          charList.data?.myChars?.character
+                            ?.filter((character) => {
+                              return (
+                                character.class === className ||
+                                character.class === "Other"
+                              );
+                            })
+                            .map((e) => (
+                              <option
+                                key={e.id}
+                                value={e.id}
+                                onClick={() => {
+                                  setCharId(e.id);
+                                }}
+                              >
+                                {e.name} the {e.class}
+                              </option>
+                            ))
+                        ) : (
+                          <Spinner />
+                        )}
+                      </Field>
+                    </Box>
+                    <Button isLoading={props.isSubmitting} type="submit">
+                      <FaPlus />
+                    </Button>
+                  </Form>
+                );
+              }}
             </Formik>
           ) : (
             <Link href={"/login"}>Login to add to your spell books!</Link>
