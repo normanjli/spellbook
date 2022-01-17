@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CloseButton,
   Divider,
   Editable,
   EditableInput,
@@ -45,7 +44,7 @@ interface NoteReaderProps {
 const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [, deleteNote] = useDeleteNoteMutation();
-  const [{ data: charNotes }, getNotes] = useMyNotesQuery({
+  const [{ data: charNotes, fetching }, getNotes] = useMyNotesQuery({
     variables: { options: charSpell[0].id },
   });
   const toast = useToast();
@@ -84,9 +83,9 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
           <ModalHeader>{charSpell[0].spell_id} Notes</ModalHeader>
           <ModalCloseButton size={"6xl"} />
           <ModalBody>
-            {!charNotes?.myNotes?.note ? (
+            {fetching ? (
               <Spinner size="xl" />
-            ) : (
+            ) : charNotes?.myNotes?.note ? (
               <Flex flexDir={"column"} gap={"1em"}>
                 {charNotes.myNotes.note.map((note, i) => {
                   return (
@@ -136,11 +135,11 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                             <EditableControls />
                           </Editable>
                         </Heading>
-                        <CloseButton
-                          onClick={async () => {
+                        <DeleteConfirmModal
+                          deleteFn={async (id: number) => {
                             try {
                               const res = await deleteNote({
-                                noteId: note.id,
+                                noteId: id,
                               });
                               if (res.error?.message) {
                                 return toast({
@@ -166,6 +165,7 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                               });
                             }
                           }}
+                          id={note.id}
                         />
                       </Flex>
                       <Divider />
@@ -218,6 +218,8 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                   );
                 })}
               </Flex>
+            ) : (
+              <Text>Add some notes!</Text>
             )}
           </ModalBody>
           <ModalFooter>
