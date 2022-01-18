@@ -46,6 +46,7 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
   const [, deleteNote] = useDeleteNoteMutation();
   const [{ data: charNotes, fetching }, getNotes] = useMyNotesQuery({
     variables: { options: charSpell[0].id },
+    requestPolicy: "network-only",
   });
   const toast = useToast();
   const [, updateNote] = useUpateNoteMutation();

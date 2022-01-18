@@ -35,6 +35,7 @@ const CharSpellboo: React.FC = () => {
   });
   const [{ data: charList }, getMyChars] = useMyCharsQuery({
     variables: { email: session?.user?.email as string },
+    requestPolicy: "network-only",
     pause: true,
   });
   useEffect(() => {
