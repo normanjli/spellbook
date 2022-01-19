@@ -28,7 +28,10 @@ export class Char_Spell extends BaseEntity {
   updatedAt: Date;
 
   @Field(() => Number)
-  @ManyToOne(() => Character, () => Number, { onDelete: "CASCADE" })
+  @ManyToOne(() => Character, () => Number, {
+    onDelete: "CASCADE",
+    eager: true,
+  })
   @JoinColumn()
   character: Character["id"];
 

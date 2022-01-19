@@ -28,6 +28,7 @@ export class Note extends BaseEntity {
   @Field(() => Number)
   @ManyToOne(() => Char_Spell, (char_spell) => char_spell.id, {
     onDelete: "CASCADE",
+    eager: true,
   })
   @JoinColumn()
   char_spell: Char_Spell["id"];

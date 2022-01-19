@@ -51,7 +51,11 @@ export class Char_SpellResolver {
       ) {
         return {
           errors: "Character already has this spell",
-          char_spell: undefined,
+          char_spell: [
+            ...(await Char_Spell.find({
+              where: { character: options.charId },
+            })),
+          ],
         };
       } else {
         const charSpell = new Char_Spell();
@@ -81,7 +85,8 @@ export class Char_SpellResolver {
   ): Promise<Char_SpellResponse> {
     try {
       const charSpell = await Char_Spell.findOne(charSpellId);
-      Char_Spell.delete(charSpellId);
+      console.log(charSpell);
+      await Char_Spell.delete(charSpellId);
       return {
         errors: undefined,
         char_spell: [

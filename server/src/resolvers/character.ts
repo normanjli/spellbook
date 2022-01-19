@@ -29,13 +29,11 @@ export class CharResolver {
     try {
       const char = await Character.find({ where: { user: email } });
       if (char.length > 0) {
-        console.log(char);
         return { errors: null, character: [...char] };
       } else {
         return { errors: "Add some Characters", character: null };
       }
     } catch (err) {
-      console.log(err.message);
       return { errors: err?.message, character: null };
     }
   }
