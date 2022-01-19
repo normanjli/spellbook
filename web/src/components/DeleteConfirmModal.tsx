@@ -12,7 +12,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 interface DelConfirmProps {
   deleteFn: any;
@@ -21,6 +21,7 @@ interface DelConfirmProps {
 const DeleteConfirmModal: React.FC<DelConfirmProps> = ({ deleteFn, id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
   const errorMsg = {
     title: "Something Went Wrong",
     description: `Try again`,
@@ -54,18 +55,22 @@ const DeleteConfirmModal: React.FC<DelConfirmProps> = ({ deleteFn, id }) => {
               Cancel
             </Button>
             <Button
+              isLoading={loading}
               variant="ghost"
               onClick={async () => {
+                setLoading(true);
                 try {
-                  onClose();
                   await deleteFn(id);
                   toast({
                     title: "Successfully Deleted!",
                     duration: 3000,
                     isClosable: true,
                   });
+                  onClose();
                 } catch (err) {
                   toast(errorMsg);
+                } finally {
+                  setLoading(false);
                 }
               }}
             >
