@@ -138,33 +138,9 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                         </Heading>
                         <DeleteConfirmModal
                           deleteFn={async (id: number) => {
-                            try {
-                              const res = await deleteNote({
-                                noteId: id,
-                              });
-                              if (res.error?.message) {
-                                return toast({
-                                  title: "error",
-                                  description: res.error.message,
-                                  duration: 3000,
-                                  isClosable: true,
-                                });
-                              } else {
-                                charNotes.myNotes?.note?.splice(i, 1);
-                                return toast({
-                                  title: `Successfully deleted note`,
-                                  duration: 3000,
-                                  isClosable: true,
-                                });
-                              }
-                            } catch (err) {
-                              return toast({
-                                title: "Something went wrong",
-                                description: err.message,
-                                duration: 3000,
-                                isClosable: true,
-                              });
-                            }
+                            await deleteNote({
+                              noteId: id,
+                            });
                           }}
                           id={note.id}
                         />
