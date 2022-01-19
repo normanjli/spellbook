@@ -138,9 +138,13 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                         </Heading>
                         <DeleteConfirmModal
                           deleteFn={async (id: number) => {
-                            await deleteNote({
+                            let res = await deleteNote({
                               noteId: id,
                             });
+                            charNotes.myNotes?.note?.splice(i, 1);
+                            if (res.data?.deleteNote) {
+                              throw res.data.deleteNote;
+                            }
                           }}
                           id={note.id}
                         />

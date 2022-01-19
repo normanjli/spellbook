@@ -1,6 +1,3 @@
-import { Char_Spell } from "../entity/Char_Spells";
-import { Note } from "../entity/Note";
-import { MyContext, NoteObject, UpdateNoteObject } from "../types";
 import {
   Arg,
   Ctx,
@@ -10,6 +7,8 @@ import {
   Query,
   Resolver,
 } from "type-graphql";
+import { Note } from "../entity/Note";
+import { MyContext, NoteObject, UpdateNoteObject } from "../types";
 
 @ObjectType()
 class NoteResponse {
@@ -80,7 +79,7 @@ export class NoteResolver {
     @Ctx() { req }: MyContext
   ): Promise<String> {
     try {
-      await Char_Spell.delete(noteId);
+      await Note.delete(noteId);
       return "Success";
     } catch (err) {
       return "Something went wrong";
