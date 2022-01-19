@@ -51,8 +51,8 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
   const toast = useToast();
   const [, updateNote] = useUpateNoteMutation();
   const [, deleteCharSpell] = useDeleteCharSpellMutation();
-  const delCharSpellFn = (id: number) => {
-    deleteCharSpell({
+  const delCharSpellFn = async (id: number) => {
+    await deleteCharSpell({
       charSpellId: id,
     });
   };
@@ -138,13 +138,10 @@ const NoteReader: React.FC<NoteReaderProps> = ({ charSpell }) => {
                         </Heading>
                         <DeleteConfirmModal
                           deleteFn={async (id: number) => {
-                            let res = await deleteNote({
+                            charNotes.myNotes?.note?.splice(i, 1);
+                            await deleteNote({
                               noteId: id,
                             });
-                            charNotes.myNotes?.note?.splice(i, 1);
-                            if (res.data?.deleteNote) {
-                              throw res.data.deleteNote;
-                            }
                           }}
                           id={note.id}
                         />
