@@ -1,0 +1,82 @@
+version: "3.8"
+
+services:
+  # gateway:
+  #   image: deployment-tracker-gateway-api
+  #   build: "./deployment-tracker-gateway-api"
+  #   environment:
+  #     - DEPLOYMENT_TRACKER_APP_API_URL=http://app-api:5001/graphql
+  #     - DEPLOYMENT_TRACKER_INTEGRATION_GITHUB_URL=http://github-integration-api:5002/graphql
+  #     - DEPLOYMENT_TRACKER_INTEGRATION_ATLASSIAN_URL=http://atlassian-integration-api:5003/graphql
+  #   volumes:
+  #     - "./deployment-tracker-gateway-api:/app"
+  #   ports:
+  #     - "5000:5000"
+  #   links:
+  #     - app-api
+  #     - github-integration-api
+  #     - atlassian-integration-api
+  #   depends_on:
+  #     - app-api
+  #     - github-integration-api
+  #     - atlassian-integration-api
+
+  # app-api:
+  #   image: deployment-tracker-app-api
+  #   build: "./deployment-tracker-app-api"
+  #   volumes:
+  #     - "./deployment-tracker-app-api:/app"
+  #   ports:
+  #     - "5001:5001"
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+
+  # github-integration-api:
+  #   image: deployment-tracker-integration-github
+  #   build: "./deployment-tracker-integration-github"
+  #   volumes:
+  #     - "./deployment-tracker-integration-github:/app"
+  #   ports:
+  #     - "5002:5002"
+  #   links:
+  #     - dynamodb
+  #   depends_on:
+  #     - dynamodb
+
+  # atlassian-integration-api:
+  #   image: deployment-tracker-integration-atlassian
+  #   build: "./deployment-tracker-integration-atlassian"
+  #   volumes:
+  #     - "./deployment-tracker-integration-atlassian:/app"
+  #   ports:
+  #     - "5003:5003"
+  #   links:
+  #     - dynamodb
+  #   depends_on:
+  #     - dynamodb
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: spellbookdb
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "53603:53603"
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: password
+
+
